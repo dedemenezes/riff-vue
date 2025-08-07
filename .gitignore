@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+src/assets/poc-poster.jpg
+src/assets/poc-poster.jpg:Zone.Identifier
+src/components/ListCard.vue

@@ -1,43 +1,29 @@
-<script setup>
-import { ref } from "vue";
-
-defineProps({
-  msg: String,
-});
-
-const count = ref(0);
+<script setup lang="ts">
+import BaseButton from './buttons/BaseButton.vue';
 </script>
 
 <template>
-  <h1>{{ msg }}</h1>
+  <div class="bg-gradient-to-r from-magenta-600/40 to-orange-600/40 p-4">
+    <div class="container mx-auto sm:max-w-full md:max-w-4xl">
+      <div class="flex flex-col gap-12">
+        <div class="flex flex-col gap-6">
+          <h2 class="font-[family-name:var(--header-font)] text-[40px] font-semibold leading-[48px]">Retrospectiva 2024</h2>
+          <div class="h-[280px] md:h-[769px] w-full bg-black rounded-2xl"></div>
+        </div>
+        <div class="flex shrink-0 items-center">
+          <p class="text-[32px] font-semibold leading-[38.4px] max-w-[360px]"
+             style="text-shadow: 10px 10px 35px rgba(82, 81, 81, 0.10);">Receba nossos informativos e fique por dentro das novidades do Festival do Rio</p>
+          <BaseButton text="RioMarket" />
 
-  <div class="card">
-    <button type="button" @click="count++">count is {{ count }}</button>
-    <p>
-      Edit
-      <code>components/HelloWorld.vue</code> to test HMR
-    </p>
+
+        </div>
+      </div>
+
+    </div>
   </div>
-
-  <p>
-    Check out
-    <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank"
-      >create-vue</a
-    >, the official Vue + Vite starter
-  </p>
-  <p>
-    Learn more about IDE Support for Vue in the
-    <a
-      href="https://vuejs.org/guide/scaling-up/tooling.html#ide-support"
-      target="_blank"
-      >Vue Docs Scaling up Guide</a
-    >.
-  </p>
-  <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
+  <img src="../assets/pda-grad.svg" class="w-full" alt="">
 </template>
 
 <style scoped>
-.read-the-docs {
-  color: #888;
-}
+
 </style>

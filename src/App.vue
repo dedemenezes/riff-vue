@@ -1,18 +1,22 @@
-<script setup></script>
+<script setup>
+  import HelloWorld from './components/HelloWorld.vue';
+  import { useFetch } from "./services/fetch.js";
+
+  const { data, error } = useFetch('https://api.themoviedb.org/3/discover/movie', {
+  headers: {
+    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0Y2MyMDIxNzM4ZGQxOTVmMmJhMjJlYTU4YTczMTM2OCIsIm5iZiI6MTYyMjkyMDYyMy44NjksInN1YiI6IjYwYmJjZGFmNjc4MjU5MDAyYWM0OWM1ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pvqC7a4-Rs2201GV2QKyisBLf8wfA01U4qQAfiYqagg',
+    'accept': 'application/json'
+  }
+})
+console.log(data);
+console.log(data);
+console.log(error);
+console.log(error.value);
+
+</script>
 
 <template>
-  <div class="container mx-auto max-w-9xl bg-green-100">
-    <div class="flex w-full gap-[1rem] justify-center mb-3">
-      <a href="https://vite.dev" target="_blank">
-        <img src="/vite.svg" class="logo" alt="Vite logo" />
-      </a>
-      <a href="https://vuejs.org/" target="_blank"
-      ><img src="./assets/vue.svg" class="logo vue" alt="Vue logo"
-      /></a>
-    </div>
-    <h1 class="text-violet-900 text-center">Welcome</h1>
-
+  <div class="container mx-auto max-w-7xl">
   </div>
+  <HelloWorld />
 </template>
-
-<style scoped></style>
