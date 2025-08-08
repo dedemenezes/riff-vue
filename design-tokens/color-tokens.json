@@ -1,0 +1,141 @@
+{
+  "background": {
+    "brand": {
+      "primary":"{laranja.600}",
+      "primary-hover":"{laranja.400}",
+      "secondary":"{magenta.600}",
+      "secondary-hover":"{magenta.400}",
+      "tertiary":"{amarelo.600}",
+      "tertiary-hover":"{amarelo.400}"
+    },
+    "neutral": {
+      "primary": "{neutrals.100}",
+      "primary-hover": "{neutrals.200}",
+      "secondary": "{neutrals.300}",
+      "secondary-hover": "{neutrals.400}",
+      "white": "{white-transp.1000}",
+      "btns": "{neutrals.900}",
+      "btns-hover": "{neutrals.800}"
+    },
+    "success": {
+      "DEFAULT": "{verde.600}",
+      "hover": "{verde.800}",
+      "secondary": "{verde.100}",
+      "secondary-hover": "{verde.200}"
+    },
+    "warning": {
+      "DEFAULT": "{amarelo.800}",
+      "hover": "{amarelo.600}",
+      "secondary": "{amarelo.400}",
+      "secondary-hover": "{amarelo.200}"
+    },
+    "danger": {
+      "DEFAULT": "{vermelho.600}",
+      "hover": "{vermelho.400}",
+      "secondary": "{vermelho.200}",
+      "secondary-hover": "{vermelho.100}"
+    },
+    "disabled": {
+      "DEFAULT": "{neutrals.300}"
+    }
+  },
+  "text": {
+    "brand": {
+      "primary": "{laranja.600}",
+      "secondary": "{magenta.600}",
+      "tertiary": "{amarelo.800}",
+      "accent": "{violeta.600}"
+    },
+    "neutral": {
+      "DEFAULT": "{neutrals.900}",
+      "plus": "{neutrals.800}",
+      "secondary": "{neutrals.700}",
+      "tertiary": "{white-transp.1000}"
+    },
+    "success": {
+      "DEFAULT": "{verde.1000}",
+      "secondary": "{verde.700}",
+      "tertiary": "{verde.100}"
+    },
+    "warning": {
+      "DEFAULT": "{amarelo.800}",
+      "secondary": "{amarelo.1000}",
+      "tertiary": "{amarelo.200}"
+    },
+    "danger": {
+      "DEFAULT": "{vermelho.400}",
+      "secondary": "{vermelho.600}",
+      "tertiary": "{vermelho.100}"
+    },
+    "disabled": {
+      "dark": "{neutrals.600}",
+      "light": "{neutrals.300}"
+    }
+  },
+  "border": {
+    "brand": {
+      "primary": "{laranja.600}",
+      "primary-light": "{laranja.200}",
+      "secondary": "{magenta.600}",
+      "secondary-light": "{magenta.200}"
+    },
+    "netrual": {
+      "dark": "{neutrals.900}",
+      "medium": "{neutrals.600}",
+      "light": "{neutrals.300}",
+      "white": "{white-transp.1000}"
+    },
+    "success": {
+      "DEFAULT": "{verde.800}",
+      "secondary": "{verde.600}",
+      "tertiary": "{verde.100}"
+    },
+    "warning": {
+      "DEFAULT": "{amarelo.800}",
+      "secondary": "{amarelo.600}",
+      "tertiary": "{amarelo.200}"
+    },
+    "danger": {
+      "DEFAULT": "{vermelho.600}",
+      "secondary": "{vermelho.400}",
+      "tertiary": "{vermelho.100}"
+    },
+    "disabled": {
+      "DEFAULT": "{neutrals.300}"
+    }
+  },
+  "icons": {
+    "brand": {
+      "primary": "{laranja.800}",
+      "primary-medium": "{laranja.600}",
+      "primary-light": "{laranja.300}",
+      "secondary": "{magenta.800}",
+      "secondary-medium": "{magenta.600}",
+      "secondary-light": "{magenta.300}"
+    },
+    "netrual": {
+      "dark": "{neutrals.900}",
+      "medium": "{neutrals.600}",
+      "light": "{neutrals.300}",
+      "white": "{white-transp.1000}"
+    },
+    "success": {
+      "DEFAULT": "{verde.600}",
+      "secondary": "{verde.800}",
+      "tertiary": "{verde.100}"
+    },
+    "warning": {
+      "DEFAULT": "{amarelo.800}",
+      "secondary": "{amarelo.600}",
+      "tertiary": "{amarelo.200}"
+    },
+    "danger": {
+      "DEFAULT": "{vermelho.600}",
+      "secondary": "{vermelho.400}",
+      "tertiary": "{vermelho.100}"
+    },
+    "disabled": {
+      "DEFAULT": "{neutrals.340}"
+    }
+  }
+}
