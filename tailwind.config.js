@@ -33,6 +33,15 @@ export default {
       fontWeight: {
         regular: '400',
       },
+      screens: {
+        xs: '375px',   // Mobile (iPhone-ish)
+        sm: '640px',   // Small tablets / large phones
+        md: '768px',   // Tablets portrait
+        lg: '1024px',  // Tablets landscape / small laptop
+        xl: '1280px',  // Desktop
+        '2xl': '1440px', // Large desktop
+        '3xl': '1920px'  // Full HD monitors
+      }
     },
     fontSize: {
       xs: "0.75rem",
