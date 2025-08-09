@@ -1,14 +1,14 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   headers: { Accept: 'application/json'}
 })
 
 apiClient.interceptors.request.use((config) => {
   const token = import.meta.env.VITE_TMDB_TOKEN
   if(token) {
-    config.headers.Authorization = `${token}`
+    config.headers.Authorization = `Bearer ${token}`
   }
   return config
 })
