@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { fetchMovies } from "./services/api/movies.js";
-import SponsorHeader from "./components/SponsorHeader.vue";
+import SponsorHeader from "./components/shared/SponsorHeader.vue";
 
 const movies = ref(null);
 
