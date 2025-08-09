@@ -1,22 +1,16 @@
 <script setup>
-  import HelloWorld from './components/HelloWorld.vue';
-  import { useFetch } from "./services/fetch.js";
-
-  const { data, error } = useFetch('https://api.themoviedb.org/3/discover/movie', {
-  headers: {
-    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0Y2MyMDIxNzM4ZGQxOTVmMmJhMjJlYTU4YTczMTM2OCIsIm5iZiI6MTYyMjkyMDYyMy44NjksInN1YiI6IjYwYmJjZGFmNjc4MjU5MDAyYWM0OWM1ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pvqC7a4-Rs2201GV2QKyisBLf8wfA01U4qQAfiYqagg',
-    'accept': 'application/json'
-  }
-})
-console.log(data);
-console.log(data);
-console.log(error);
-console.log(error.value);
-
+  // import ListCard from "./components/ListCard.vue";
 </script>
 
 <template>
   <div class="container mx-auto max-w-7xl">
   </div>
   <HelloWorld />
+  <div class="container mx-auto max-w-9xl bg-green-300 hover:bg-green-900 transition-colors">
+    <h1 class="font-heading font-regular text-text-danger-tertiary text-center text-3xl">Welcome</h1>
+    <!-- <ListCard /> -->
+     <button class="-m-150 font-body py-100 px-150 bg-laranja-600 border-4 border-magenta-800 text-neutrals-100 rounded focus:outline ring-amarelo-800 focus:ring-2 focus:ring-offset-2">RioMarket</button>
+  </div>
+
+  <button class="px-200 py-150 bg-amarelo-200 blur-sm rounded-200 focus:outline focus:outline-offset-4 focus:outline-verde-200 ...">Button A</button>
 </template>

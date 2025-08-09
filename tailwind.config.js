@@ -1,52 +1,59 @@
 /** @type {import('tailwindcss').Config} */
+
+import * as colorPrimitives from "./design-tokens/color-primitives.json";
+
 export default {
   content: ["./src/**/*.{vue,js,ts}"],
   theme: {
     extend: {
-      colors: {
-        "laranja": {
-          200: '#FFE1C3',
-          400: '#FFB46A',
-          600: '#FF7F00',
-          800: '#C06103',
-          1000: '#8A4805'
-        },
-        "magenta": {
-          200: '#FFD4E9',
-          400: '#FF6FB7',
-          600: '#FF007F',
-          800: '#B20059',
-          1000: '#6A0035'
-        },
-        "vermelho": {
-          200: '#FFCCCC',
-          400: '#FF7E7E',
-          600: '#FF0000',
-          800: '#A30000',
-          1000: '#5E0000'
-        },
-        "violeta": {
-          200: '#DA9FE0',
-          400: '#BF68C8',
-          600: '#7F008C',
-          800: '#580161',
-          1000: '#2D0032'
-        },
-        "amarelo": {
-          200: '#FFF8DF',
-          400: '#FFECAB',
-          600: '#FFDB5C',
-          800: '#FFC700',
-          1000: '#D4A500'
-        },
-        "verde": {
-          200: '#CAFFCF',
-          400: '#9EF4A6',
-          600: '#1BBC2B',
-          800: '#11861D',
-          1000: '#094A0F'
-        },
+      colors: colorPrimitives,
+      spacing: {
+        "50": "0.125rem",  // "2px"
+        "100": "0.25rem", // "4px"
+        "150": "0.375rem", // "6px"
+        "200": "0.5rem", // "8px"
+        "300": "0.75rem", // "12px"
+        "400": "1rem", // "16px"
+        "600": "1.5rem", // "24px"
+        "800": "2rem", // "32px"
+        "1200": "3rem", // "48px"
+        "1600": "4rem", // "64px"
+        "2400": "6rem", // "96px"
+        "4000": "9.375rem", // "150px"
+      },
+      borderRadius: {
+        "100": "0.25rem",
+        "200": "0.5rem",
+        "400": "1rem",
+      },
+      fontFamily: {
+        heading: ['Fira Sans', 'sans-serif'],
+        body: ['Inter', 'sans-serif'],
+      },
+      fontWeight: {
+        regular: '400',
+      },
+      screens: {
+        xs: '375px',   // Mobile (iPhone-ish)
+        sm: '640px',   // Small tablets / large phones
+        md: '768px',   // Tablets portrait
+        lg: '1024px',  // Tablets landscape / small laptop
+        xl: '1280px',  // Desktop
+        '2xl': '1440px', // Large desktop
+        '3xl': '1920px'  // Full HD monitors
       }
+    },
+    fontSize: {
+      xs: "0.75rem",
+      sm: '0.875rem',
+      md: "1rem",
+      lg: "1.25rem",
+      xl: '1.5rem',
+      '2xl': '2rem',
+      '3xl': '2.5rem',
+      '4xl': '3rem',
+      '5xl': '4rem',
+      "6xl": "4.5rem"
     }
   },
   plugins: [],
