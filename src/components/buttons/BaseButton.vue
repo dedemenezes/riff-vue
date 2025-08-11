@@ -13,7 +13,8 @@ const props = defineProps({
 </script>
 
 <template>
-  <button class="flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold leading-[19.6px] transition-colors duration-200" :class="colors">
+  <button class="flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold leading-[19.6px] transition-colors duration-200"
+          :class="colors">
     {{ props.text }}
     <img src="../../assets/Vector.svg" alt="carret" class="w-full">
   </button>
