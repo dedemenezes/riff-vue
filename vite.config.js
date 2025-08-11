@@ -4,6 +4,8 @@ import vue from "@vitejs/plugin-vue";
 export default defineConfig({
   plugins: [vue()],
   resolve: {
-    alias: { '@assets': '/src/assets' }
+    alias: {
+      '@assets': '/src/assets',
+      '@my_components': '/src/components' }
   }
 });
