@@ -2,12 +2,10 @@
 import { ref } from "vue";
 
 import BaseButton from "../buttons/BaseButton.vue"
+import LanguageSwitcher from "../navbar/LanguageSwitcher.vue";
 
+// v-model for LanguageSwitcher
 const currentLanguage = ref('pt')
-
-const switchLanguage = (lang) => {
-  currentLanguage.value = lang
-}
 
 // Controls menu visibility
 const isMobileMenuOpen = ref(false);
@@ -57,29 +55,7 @@ const closeMenu = () => {
     <!-- navbar actions -->
     <div class="hidden md:flex items-center gap-1200">
       <img src="../../assets/search-icon.svg" alt="Lupa" aria-hidden="true" />
-      <div class="languages flex items-center gap-400 text-neutrals-700"
-           aria-label="language selection">
-        <button
-          class="font-body text-sm font-semibold leading-[19.6px] uppercase"
-          :class="{ 'text-neutrals-900': currentLanguage === 'pt' }"
-          @click="switchLanguage('pt')"
-          aria-label="Switch to PT-BR"
-        >
-          pt
-        </button>
-
-        <img src="../../assets/divisor.svg" alt="Divisor" aria-hidden="true" />
-
-        <button
-          class="font-body text-sm font-semibold leading-[19.6px] uppercase"
-          :class="{ 'text-neutrals-900': currentLanguage === 'en' }"
-          @click="switchLanguage('en')"
-          aria-label="Switch to EN-US"
-        >
-          en
-        </button>
-
-      </div>
+      <LanguageSwitcher :langs="['pt', 'en']" v-model="currentLanguage" />
       <BaseButton text="RioMarket"
                   colors="text-white bg-vermelho-600 hover:bg-vermelho-400 focus:outline-2 focus:outline-offset-2 focus:outline-vermelho-400 active:bg-vermelho-400"/>
     </div>
@@ -92,25 +68,8 @@ const closeMenu = () => {
       <!-- Close Button -->
       <div class="flex justify-between p-400">
         <img src="../../assets/festival-logo-mobile.svg" alt="Logo Festival do Rio">
-        <div class="languages flex items-center gap-400 text-neutrals-700">
-          <button
-            class="font-body text-sm font-semibold leading-[19.6px] uppercase"
-            :class="{ 'text-neutrals-900': currentLanguage === 'pt' }"
-            @click="switchLanguage('pt')"
-          >
-            pt
-          </button>
 
-          <img src="../../assets/divisor.svg" alt="Divisor" />
-
-          <button
-            class="font-body text-sm font-semibold leading-[19.6px] uppercase"
-            :class="{ 'text-neutrals-900': currentLanguage === 'en' }"
-            @click="switchLanguage('en')"
-          >
-            en
-          </button>
-        </div>
+        <LanguageSwitcher :langs="['pt', 'en']" v-model="currentLanguage" />
         <button @click="closeMenu" class="text-neutrals-900">
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none">
             <path d="M9.29379 9.79183C9.38668 9.69871 9.49703 9.62482 9.61852 9.57441C9.74001 9.524 9.87025 9.49805 10.0018 9.49805C10.1333 9.49805 10.2636 9.524 10.3851 9.57441C10.5065 9.62482 10.6169 9.69871 10.7098 9.79183L16.0018 15.0858L21.2938 9.79183C21.3868 9.69886 21.4971 9.62511 21.6186 9.57479C21.7401 9.52447 21.8703 9.49857 22.0018 9.49857C22.1333 9.49857 22.2635 9.52447 22.385 9.57479C22.5064 9.62511 22.6168 9.69886 22.7098 9.79183C22.8028 9.88481 22.8765 9.99519 22.9268 10.1167C22.9771 10.2381 23.003 10.3683 23.003 10.4998C23.003 10.6313 22.9771 10.7615 22.9268 10.883C22.8765 11.0045 22.8028 11.1149 22.7098 11.2078L17.4158 16.4998L22.7098 21.7918C22.8028 21.8848 22.8765 21.9952 22.9268 22.1167C22.9771 22.2381 23.003 22.3683 23.003 22.4998C23.003 22.6313 22.9771 22.7615 22.9268 22.883C22.8765 23.0045 22.8028 23.1149 22.7098 23.2078C22.6168 23.3008 22.5064 23.3746 22.385 23.4249C22.2635 23.4752 22.1333 23.5011 22.0018 23.5011C21.8703 23.5011 21.7401 23.4752 21.6186 23.4249C21.4971 23.3746 21.3868 23.3008 21.2938 23.2078L16.0018 17.9138L10.7098 23.2078C10.6168 23.3008 10.5064 23.3746 10.385 23.4249C10.2635 23.4752 10.1333 23.5011 10.0018 23.5011C9.8703 23.5011 9.7401 23.4752 9.61862 23.4249C9.49714 23.3746 9.38676 23.3008 9.29379 23.2078C9.20081 23.1149 9.12706 23.0045 9.07674 22.883C9.02642 22.7615 9.00052 22.6313 9.00052 22.4998C9.00052 22.3683 9.02642 22.2381 9.07674 22.1167C9.12706 21.9952 9.20081 21.8848 9.29379 21.7918L14.5878 16.4998L9.29379 11.2078C9.20066 11.1149 9.12677 11.0046 9.07636 10.8831C9.02595 10.7616 9 10.6314 9 10.4998C9 10.3683 9.02595 10.2381 9.07636 10.1166C9.12677 9.99508 9.20066 9.88473 9.29379 9.79183Z" fill="#3B3935"/>
