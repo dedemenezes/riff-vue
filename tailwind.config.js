@@ -33,6 +33,18 @@ export default {
       fontWeight: {
         regular: '400',
       },
+      fontSize: {
+        xs: "0.75rem",
+        sm: '0.875rem',
+        md: "1rem",
+        lg: "1.25rem",
+        xl: '1.5rem',
+        '2xl': '2rem',
+        '3xl': '2.5rem',
+        '4xl': '3rem',
+        '5xl': '4rem',
+        "6xl": "4.5rem"
+      },
       screens: {
         xs: '375px',   // Mobile (iPhone-ish)
         sm: '640px',   // Small tablets / large phones
@@ -42,18 +54,6 @@ export default {
         '2xl': '1440px', // Large desktop
         '3xl': '1920px'  // Full HD monitors
       }
-    },
-    fontSize: {
-      xs: "0.75rem",
-      sm: '0.875rem',
-      md: "1rem",
-      lg: "1.25rem",
-      xl: '1.5rem',
-      '2xl': '2rem',
-      '3xl': '2.5rem',
-      '4xl': '3rem',
-      '5xl': '4rem',
-      "6xl": "4.5rem"
     }
   },
   plugins: [],
