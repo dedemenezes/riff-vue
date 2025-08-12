@@ -1,11 +1,11 @@
-
 <script setup>
-  const { width, height, className, viewbox } = defineProps({
-    width: { type: String, default: "20" },
-    height: { type: String, default: "20" },
-    className: { type: String, default: "text-neutrals-1000" },
-    viewbox: { type: String, default: "0 0 20 20"}
-  })
+const { width, height, className, viewbox } = defineProps({
+  width: { type: String, default: "20" },
+  height: { type: String, default: "20" },
+  className: { type: String, default: "text-neutrals-1000" },
+  viewbox: { type: String, default: "0 0 20 20" },
+  title: { type: String, default: "" }
+});
 </script>
 
 <template>
@@ -15,10 +15,12 @@
     :width="width"
     :height="height"
     :viewBox="viewbox"
-    fill="none">
-      <slot name="path" />
+    fill="none"
+    :aria-hidden="!title"
+  >
+    <title v-if="title">{{ title }}</title>
+    <slot />
   </svg>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
