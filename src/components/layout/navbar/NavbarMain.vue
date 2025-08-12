@@ -1,10 +1,10 @@
 <script setup>
 import { ref } from "vue";
 
-import BaseButton from "@my_components/buttons/BaseButton.vue"
-import LanguageSwitcher from "@my_components/navbar/LanguageSwitcher.vue";
-import MobileMenu from "@my_components/navbar/MobileMenu.vue";
-import IconSearch from "@my_components/icons/IconSearch.vue";
+import BaseButton from "@my_components/ui/buttons/BaseButton.vue"
+import LanguageSwitcher from "@my_components/layout/navbar/LanguageSwitcher.vue";
+import MobileMenu from "@my_components/layout/navbar/MobileMenu.vue";
+import { IconSearch } from "@/components/ui/icons";
 
 // v-model for LanguageSwitcher
 const currentLanguage = ref('pt')

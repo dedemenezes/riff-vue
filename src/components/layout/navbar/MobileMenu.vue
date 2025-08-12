@@ -1,8 +1,8 @@
 <script setup>
   import { ref } from "vue"
 
-  import AccordionGroup from "@my_components/accordion/AccordionGroup.vue";
-  import LanguageSwitcher from "@my_components/navbar/LanguageSwitcher.vue";
+  import AccordionGroup from "@my_components/ui/accordion/AccordionGroup.vue";
+  import LanguageSwitcher from "@my_components/layout/navbar/LanguageSwitcher.vue";
 
   // Controls menu visibility
   const isMobileMenuOpen = ref(false);

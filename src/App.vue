@@ -1,37 +1,53 @@
 <script setup>
+import { XMLParser } from "fast-xml-parser";
 import { ref, onMounted } from "vue";
-import { fetchMovies } from "./services/api/movies.js";
-import SponsorHeader from "./components/shared/SponsorHeader.vue";
-import NavbarMain from "./components/navbar/NavbarMain.vue";
-import NavbarSecundary from "./components/navbar/NavbarSecundary.vue";
-import IconCheck from "./components/icons/IconCheck.vue";
-import IconSearch from "./components/icons/IconSearch.vue";
-import IconDash from "./components/icons/IconDash.vue";
-import IconCarretUp from "./components/icons/IconCarretUp.vue";
-import IconInfo from "./components/icons/IconInfo.vue";
-import IconPin from "./components/icons/IconPin.vue";
-import IconChange from "./components/icons/IconChange.vue";
-import IconNewUser from "./components/icons/IconNewUser.vue";
-import IconClose from "./components/icons/IconClose.vue";
-import IconClock from "./components/icons/IconClock.vue";
-import IconChevronLeft from "./components/icons/IconChevronLeft.vue";
-import IconChevronRight from "./components/icons/IconChevronRight.vue";
-import IconLink from "./components/icons/IconLink.vue";
-import IconFilter from "./components/icons/IconFilter.vue";
-import IconPlus from "./components/icons/IconPlus.vue";
-import IconProgram from "./components/icons/IconProgram.vue";
-import IconMenu from "./components/icons/IconMenu.vue";
+// import { fetchMovies } from "./services/api/movies.js";
+import SponsorHeader from "./components/layout/headers/SponsorHeader.vue";
+import NavbarMain from "./components/layout/navbar/NavbarMain.vue";
+import NavbarSecundary from "./components/layout/navbar/NavbarSecundary.vue";
+import { IconCheck } from "@/components/ui/icons";
+import { IconSearch } from "@/components/ui/icons";
+import { IconDash } from "@/components/ui/icons";
+import { IconCarretUp } from "@/components/ui/icons";
+import { IconInfo } from "@/components/ui/icons";
+import { IconPin } from "@/components/ui/icons";
+import { IconChange } from "@/components/ui/icons";
+import { IconNewUser } from "@/components/ui/icons";
+import { IconClose } from "@/components/ui/icons";
+import { IconClock } from "@/components/ui/icons";
+import { IconChevronLeft } from "@/components/ui/icons";
+import { IconChevronRight } from "@/components/ui/icons";
+import { IconLink } from "@/components/ui/icons";
+import { IconFilter } from "@/components/ui/icons";
+import { IconPlus } from "@/components/ui/icons";
+import { IconProgram } from "@/components/ui/icons";
+import { IconMenu } from "@/components/ui/icons";
 import TextInput from "./components/inputs/TextInput.vue";
-import ListCard from "./components/ListCard.vue";
+import ListCard from "./components/ui/cards/ListCard.vue";
+import apiClient from "./services/api/api_client.js";
+
 
 const movies = ref(null);
 
 onMounted(async () => {
-  if (!movies.value) {
-    const data = await fetchMovies();
-    if (data) movies.value = data.results;
-  }
+  // const urlProgramacao = "https://api.festivaldorio.com.br/schedules/xml/programacao"
+  // const XMLdata = await apiClient.get(urlProgramacao)
+  const urlPelicula = "https://api.festivaldorio.com.br/movies/xml/pelicula"
+  const XMLdata = await apiClient.get(urlPelicula)
+  const parser = new XMLParser();
+  let jObj = parser.parse(XMLdata.data);
+  console.log(jObj);
+  movies.value = jObj.FMPDSORESULT.ROW
+  console.log(movies.value);
+
+
+  // if (!movies.value) {
+  //   const data = await fetchMovies();
+  //   if (data) movies.value = data.results;
+  // }
 });
+
+
 </script>
 
 <template>

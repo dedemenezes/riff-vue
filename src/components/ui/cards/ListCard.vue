@@ -30,10 +30,10 @@ const backgroundStyle = computed(() => ({
     <p
       class="text-[#FFFFFF] text-[10px] font-medium tracking-[0.09375em] uppercase"
     >
-      {{ props.movie.original_title }}
+      {{ props.movie.titulo_original_coord_int }}
     </p>
     <p class="text-white text-sm font-normal leading-[21px]">
-      {{ props.movie.overview }}
+      <!-- {{ props.movie.overview }} -->
     </p>
   </div>
 </template>
