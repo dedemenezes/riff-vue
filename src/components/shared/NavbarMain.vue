@@ -37,8 +37,9 @@ const currentLanguage = ref('pt')
     <div class="hidden md:flex items-center gap-1200">
       <img src="@assets/search-icon.svg" alt="Lupa" aria-hidden="true" />
       <LanguageSwitcher :langs="['pt', 'en']" v-model="currentLanguage" />
-      <BaseButton text="RioMarket"
-                  colors="text-white bg-vermelho-600 hover:bg-vermelho-400 focus:outline-2 focus:outline-offset-2 focus:outline-vermelho-400 active:bg-vermelho-400"/>
+      <BaseButton as="button" size="md" variant="cta">
+        RioMarket <img  src="@assets/Vector.svg" alt="carret" class="w-full ms-300" />
+      </BaseButton>
     </div>
   </nav>
 </template>
