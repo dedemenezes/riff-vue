@@ -11,7 +11,7 @@ const { extraClasses, breakpoints } = defineProps({
 })
 </script>
 <template>
-  <div class="w-full px-3 mx-auto"
+  <div class="w-full px-400 mx-auto"
     :class="[breakpoints, extraClasses]">
     <slot />
   </div>
