@@ -1,15 +1,18 @@
 <script setup>
-const { extraClasses } = defineProps({
+const { extraClasses, breakpoints } = defineProps({
   extraClasses: {
     type: String,
     default: ""
+  },
+  breakpoints: {
+    type: String,
+    default: "lg:max-w-6xl xl:max-w-7xl xxl:max-w-xxl"
   }
 })
 </script>
 <template>
-  <div class="w-full px-3 mx-auto lg:max-w-4xl xl:max-w-7xl xxl:max-w-xxl"
-    :class="extraClasses"
-  >
+  <div class="w-full px-3 mx-auto"
+    :class="[breakpoints, extraClasses]">
     <slot />
   </div>
 </template>
