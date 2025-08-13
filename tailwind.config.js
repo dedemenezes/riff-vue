@@ -12,6 +12,7 @@ export default {
         "100": "0.25rem", // "4px"
         "150": "0.375rem", // "6px"
         "200": "0.5rem", // "8px"
+        "250": "0.625rem", // "10px"
         "300": "0.75rem", // "12px"
         "400": "1rem", // "16px"
         "600": "1.5rem", // "24px"
@@ -34,6 +35,7 @@ export default {
         regular: '400',
       },
       fontSize: {
+        '2xs': "0.625rem",
         xs: "0.75rem",
         sm: '0.875rem',
         md: "1rem",
@@ -44,6 +46,15 @@ export default {
         '4xl': '3rem',
         '5xl': '4rem',
         "6xl": "4.5rem"
+      },
+      letterSpacing: {
+        tightest: '-.075em',
+        tighter: '-.05em',
+        tight: '-.025em',
+        normal: '0',
+        wide: '.025em',
+        wider: '.05em',
+        widest: '.093em'
       },
       screens: {
         xs: '375px',   // Mobile (iPhone-ish)
