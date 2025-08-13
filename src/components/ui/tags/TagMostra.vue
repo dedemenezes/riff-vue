@@ -50,7 +50,6 @@
   }
   }
 
-  const DEFAULT_STYLE ="py-100 px-250 uppercase font-body text-2xs font-medium leading-[16px] tracking-widest rounded-br-100 max-w-fit"
 </script>
 <script setup>
 import { computed } from 'vue'
@@ -58,13 +57,15 @@ const props = defineProps({
   variant: {
     type: String,
     required: true,
-    validator: (value) => Object.keys(VARIANT_CLASSES).includes(value)
+    validator: (value) => Object.keys(VARIANT_CLASSES).includes(value),
+    default: "cinema-capacete"
   },
   text: { type: String, required: true },
   mode: {
     type: String,
     required: true,
-    validator: (value) => ['filled', 'outline'].includes(value)
+    validator: (value) => ['filled', 'outline'].includes(value),
+    default: 'filled'
   }
 })
 
@@ -73,13 +74,15 @@ const finalClass = computed(() => {
 
   if (!variantClass) {
     console.warn(`Invalid combination: variant="${props.variant}" mode="${props.mode}"`)
-    return DEFAULT_STYLE
+    return ''
   }
 
-  return `${DEFAULT_STYLE} ${variantClass}`
+  return variantClass
 })
 </script>
 
 <template>
-  <p :class="finalClass" role="tag" :aria-label="`${variant} tag`">{{ text }}</p>
+  <span
+    class="py-100 px-250 uppercase font-body text-2xs font-medium leading-[16px] tracking-widest rounded-br-100 max-w-fit"
+   :class="finalClass" role="label" :aria-label="`${variant} tag`">{{ text }}</span>
 </template>
