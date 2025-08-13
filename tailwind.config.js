@@ -53,6 +53,7 @@ export default {
         tight: '-.025em',
         normal: '0',
         wide: '.025em',
+        wid: '0.03125em',
         wider: '.05em',
         widest: '.093em'
       },
