@@ -19,7 +19,7 @@ const props = defineProps({
 
 <template>
   <div class="flex flex-col gap-y-5 border-l border-neutrals-300 px-[1.25rem] py-0">
-    <ButtonText class="lg:text-sm xl:text-md" tag="a" :href="href" variant="dark" size="md" :text="props.title"/>
+    <ButtonText tag="a" :href="href" variant="dark" size="md" :text="props.title"/>
     <p class="text-neutrals-900 font-body text-md font-light leading-[24px] tracking-wid">{{ props.description }}</p>
   </div>
 </template>
