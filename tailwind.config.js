@@ -44,8 +44,9 @@ export default {
         '2xl': '2rem',
         '3xl': '2.5rem',
         '4xl': '3rem',
-        '5xl': '4rem',
-        "6xl": "4.5rem"
+        '5xl': '3.5rem',
+        '6xl': '4rem',
+        "7xl": "4.5rem"
       },
       letterSpacing: {
         tightest: '-.075em',
