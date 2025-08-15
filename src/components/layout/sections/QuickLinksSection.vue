@@ -1,7 +1,7 @@
 <script setup>
-import SectionHeader from "@/components/ui/typography/SectionHeader.vue"
 import QuickLinkCard from "@/components/ui/cards/QuickLinkCard.vue";
 import TwContainer from "../TwContainer.vue";
+import BaseHeader from "../../ui/typography/BaseHeader.vue";
 
 const props = defineProps({
   links: {
@@ -14,8 +14,8 @@ const props = defineProps({
 <template>
   <div class="bg-neutrals-200">
     <TwContainer>
-      <div class="px-400 py-800 flex flex-col space-y-800">
-        <SectionHeader title="Links Rápidos"/>
+      <div class="py-800 flex flex-col space-y-800">
+        <BaseHeader font-size="text-xl" text-color="text-neutrals-900">Links Rápidos</BaseHeader>
         <div class="flex flex-col gap-y-800 lg:flex-row">
           <QuickLinkCard
             v-for="link in props.links"
