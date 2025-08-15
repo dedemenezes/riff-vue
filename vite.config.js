@@ -9,5 +9,8 @@ export default defineConfig({
       '@assets': '/src/assets',
       '@': path.resolve(path.__dirname, '/src'),
     }
-  }
+  },
+  server: {
+    allowedHosts: ['f640407c50fc.ngrok-free.app']
+  },
 });
