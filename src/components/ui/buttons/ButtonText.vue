@@ -37,7 +37,10 @@ const sizeClass = computed(() => sizes[size])
   <component :is="tag"
     :href="href"
     class="p-100 inline-flex items-center justify-center max-w-fit font-body font-semibold"
-    :class="[sizeClass, variantClass]">{{ text }}</component>
+    :class="[sizeClass, variantClass]">
+      <slot name="icon"/>
+      {{ text }}
+    </component>
 </template>
 
 <style scoped>
