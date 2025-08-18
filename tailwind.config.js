@@ -56,7 +56,7 @@ export default {
         wide: '.025em',
         wid: '0.03125em',
         wider: '.05em',
-        widest: '.093em'
+        widest: '1.5px'
       },
       screens: {
         xs: '375px',   // Mobile (iPhone-ish)
