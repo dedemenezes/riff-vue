@@ -13,8 +13,9 @@ const isHovered = ref(false);
 </script>
 
 <template>
+  <!--  w-[380px] -->
   <div
-    class="flex flex-col items-start gap-200 w-[380px]"
+    class="flex flex-col items-start gap-200"
     @mouseenter="isHovered = true"
     @mouseleave="isHovered = false"
   >
