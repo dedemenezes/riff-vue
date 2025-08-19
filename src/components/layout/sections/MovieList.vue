@@ -14,9 +14,7 @@ onMounted(async () => {
     // console.log(movies.value);
     movies.value = await fetchMovies("/schedules/xml/programacao");
 
-    // console.log(movies.value.FMPDSORESULT.ROW);
     movies.value = movies.value.FMPDSORESULT.ROW;
-    console.log(movies.value);
   } catch (err) {
     console.log(err);
     error.value = "Failed to load movies.";
