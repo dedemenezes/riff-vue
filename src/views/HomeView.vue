@@ -7,7 +7,7 @@ import BaseHeader from "@/components/ui/typography/BaseHeader.vue";
 import TwContainer from "@/components/layout/TwContainer.vue";
 import ButtonText from "@/components/ui/buttons/ButtonText.vue";
 import ArticleCard from "@/components/ui/cards/ArticleCard.vue";
-import MovieCard from "@/components/ui/cards/MovieCard.vue";
+import ContextMenu from "../components/layout/navbar/ContextMenu.vue";
 const quickLinks = [
   {
     id: 1,
@@ -32,6 +32,7 @@ const quickLinks = [
 </script>
 
 <template>
+  <ContextMenu />
   <HomeBanner
   imagePath="/src/assets/images/mobile-banner.png"
   alt="Banner promocional"
@@ -48,19 +49,6 @@ const quickLinks = [
   </HomeBanner>
 
   <QuickLinksSection v-bind:links="quickLinks" />
-
-  <TwContainer>
-    <MovieCard
-      title="O Quarto ao Lado"
-      country="Espanha"
-      category="FIC"
-      duration="114’"
-      cinema="Cine Odeon - CCLSR - Centro"
-      :times="['21H30', '23H15']"
-      tag="GALA DE ABERTURA"
-      image="https://leiturafilmica.com.br/wp-content/uploads/2018/09/saneamento-basico-o-filme-1024x575.png"
-    />
-  </TwContainer>
 
   <TwContainer>
     <div class="py-1200">
