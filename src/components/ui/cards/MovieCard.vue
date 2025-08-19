@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 import TagMostra from '../tags/TagMostra.vue';
 import TagScreening from '../tags/TagScreening.vue';
@@ -10,6 +10,21 @@ import { IconPin } from '@/components/ui/icons';
 
 // Hover state
 const isHovered = ref(false);
+const props = defineProps({
+  movie: { type: Object, required: true }
+})
+
+const normalizeString = (str) =>
+  str
+    .normalize('NFD')                // Decompose accented characters
+    .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
+    .replace(/[^a-zA-Z0-9\s-]/g, '')  // Remove special characters (keep letters/numbers/spaces)
+    .trim();
+
+const mostraVariantName = computed(() => {
+  const lowerCaseName = normalizeString(props.movie.submostra.DATA).replaceAll(' ', '-').toLowerCase();
+  return lowerCaseName;
+})
 </script>
 
 <template>
@@ -33,19 +48,19 @@ const isHovered = ref(false);
         style="background: linear-gradient(180deg, rgba(0, 0, 0, 0.30) 36.54%, rgba(0, 0, 0, 0.45) 100%);"
       ></div>
       <!-- tag -->
-      <TagMostra class="absolute top-0 left-0 rounded-tl-200" variant="gala-abertura" text="Gala de Abertura" />
+      <TagMostra class="absolute top-0 left-0 rounded-tl-200" :variant="mostraVariantName" :text="props.movie.submostra.DATA" />
 
       <div class="content absolute bottom-250 left-250 flex flex-col gap-[5px]">
         <!-- movie title -->
         <HeaderSmall color="text-white-transp-1000">
-        Saneamento Básico
+        {{ props.movie.titulo_ingles.DATA }}
         </HeaderSmall>
         <div class="flex items-center gap-200">
-          <OverLine color="text-white-transp-1000">ESPANHA</OverLine>
+          <OverLine color="text-white-transp-1000">{{ props.movie.paiscompleto_coord_int }}</OverLine>
           <img src="@assets/divisor.svg" alt="divisor" height="16px" width="1px">
           <OverLine color="text-white-transp-1000">FIC</OverLine>
           <img src="@assets/divisor.svg" alt="divisor" height="16px" width="1px">
-          <OverLine color="text-white-transp-1000">114'</OverLine>
+          <OverLine color="text-white-transp-1000">{{ props.movie.duracao.DATA }}'</OverLine>
         </div>
         <!-- Animated underline -->
         <span
@@ -58,12 +73,13 @@ const isHovered = ref(false);
       <div class="flex items-center gap-[6px]">
         <IconPin width="16" height="16" />
         <BodyRegular>
-          Cine Odeon - CCLSR - Centro
+          {{ props.movie.Cinema }}
         </BodyRegular>
       </div>
       <div class="flex items-center space-x-200">
         <TagScreening time="21h30" state="disabled" />
-        <TagScreening time="23h45" />
+        <TagScreening time="23h45" state="disabled" />
+        <TagScreening :time="props.movie.sessao" />
       </div>
      </div>
   </div>
