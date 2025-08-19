@@ -22,7 +22,7 @@ export const fetchMovies = async (endpoint = "/schedules/xml/programacao") => {
   let xmlData;
   if (USE_LOCAL_FILE && import.meta.env.DEV) {
     // Load from public folder
-    const response = await fetch("./programacao-api.xml");
+    const response = await fetch("./public/dev-programacao-api.xml");
 
     xmlData = await response.text();
   } else {
