@@ -18,9 +18,12 @@ const currentLanguage = ref('pt')
        aria-label="Navegação primária">
     <div class="flex flex-col md:flex-row md:gap-400 items-start md:items-center">
       <!-- logo link -->
-      <a href="#" class="focus:outline-2 focus:-outline-offset-2 focus:outline-laranja-600">
+      <router-link
+        :to="{name: 'home'}"
+        class="focus:outline-2 focus:-outline-offset-2 focus:outline-laranja-600"
+        >
         <img class="py-200" src="@assets/festival-logo.svg" alt="Logo do Festival do Rio" width="221" />
-      </a>
+      </router-link>
       <!-- divisor -->
       <div class="hidden md:block">
         <img src="@assets/divisor.svg" alt="divisor" aria-hidden="true" />

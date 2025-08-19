@@ -48,7 +48,14 @@
           <AccordionGroup text="Programação" :isOpen="true">
             <template v-slot:content>
               <ul class="ps-600 pt-400 space-y-400">
-                <li>Programação completa</li>
+                <li>
+                  <router-link
+                    @click="closeMenu"
+                    :to="{name: 'components'}"
+                  >
+                    Programação completa
+                  </router-link>
+                </li>
                 <li>Sessões com convidados</li>
                 <li>Mudanças na programação</li>
                 <li>Programação gratuita</li>
