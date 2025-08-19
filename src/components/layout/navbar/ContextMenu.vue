@@ -7,10 +7,10 @@ import { IconProgram } from "@/components/ui/icons";
 </script>
 
 <template>
-  <div class="flex gap-800 px-400 py-0 lg:gap-1600 lg:py-800 lg:justify-center overflow-x-auto">
-    <NavButtonContext class="flex-shrink-0" content="programação" route="/programacao">
-      <template v-slot:icon>
-        <IconProgram height="30px" width="30px" :active="true" />
+  <div class="flex gap-800 px-400 py-200 lg:gap-1600 lg:py-800 lg:justify-center overflow-x-auto">
+    <NavButtonContext class="flex-shrink-0" content="programação" route="/programming">
+      <template #icon="{ active }">
+        <IconProgram height="30px" width="30px" :active="active" />
       </template>
     </NavButtonContext>
     <NavButtonContext class="flex-shrink-0" content="Sessões com convidados">
