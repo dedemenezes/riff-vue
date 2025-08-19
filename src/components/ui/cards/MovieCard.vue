@@ -7,6 +7,7 @@ import BodyRegular from "../typography/BodyRegular.vue";
 import HeaderSmall from "../typography/HeaderSmall.vue";
 import OverLine from "../typography/OverLine.vue";
 import { IconPin } from "@/components/ui/icons";
+import { useMovieLocalization } from "../../../composables/useMovieLocalization";
 
 // Hover state
 const isHovered = ref(false);
@@ -27,6 +28,7 @@ const mostraVariantName = computed(() => {
     .toLowerCase();
   return lowerCaseName;
 });
+const { getLocalizedTitle } = useMovieLocalization()
 </script>
 
 <template>
@@ -65,7 +67,7 @@ const mostraVariantName = computed(() => {
       <div class="content absolute bottom-250 left-250 flex flex-col gap-[5px]">
         <!-- movie title -->
         <HeaderSmall color="text-white-transp-1000">
-          {{ props.movie.titulo_ingles.DATA }}
+          {{ getLocalizedTitle(props.movie) }}
         </HeaderSmall>
         <div class="flex items-center gap-200">
           <OverLine color="text-white-transp-1000">{{
