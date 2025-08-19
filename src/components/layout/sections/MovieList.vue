@@ -1,42 +1,27 @@
 <!-- src/components/layout/sections/MovieList.vue -->
 <script setup>
-import { ref, onMounted } from "vue";
 import MovieCard from "@/components/ui/cards/MovieCard.vue";
-import { fetchMovies } from "../../../services/api/movies"; // centralized API module
+import { useMoviesQuery } from "@/composables/useVueQuery";
+const { isPending, isFetching, isError, data, error } = useMoviesQuery();
 
-const movies = ref([]);
-const loading = ref(true);
-const error = ref(null);
-
-onMounted(async () => {
-  try {
-    // movies.value = await fetchMovies('/movies/xml/pelicula')
-    // console.log(movies.value);
-    movies.value = await fetchMovies("/schedules/xml/programacao");
-
-    movies.value = movies.value.FMPDSORESULT.ROW;
-  } catch (err) {
-    console.log(err);
-    error.value = "Failed to load movies.";
-  } finally {
-    loading.value = false;
-  }
-});
 </script>
 
 <template>
   <section
     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
   >
-    <template v-if="loading">
+    <template v-if="isPending">
       <p>Loading movies...</p>
       <!-- Or skeleton loader -->
     </template>
-    <template v-else-if="error">
+    <template v-else-if="isError">
       <p class="text-red-500">{{ error }}</p>
     </template>
     <template v-else>
-      <MovieCard v-for="movie in movies" :key="movie.RECORDID" :movie="movie" />
+      <MovieCard v-for="movie in data?.FMPDSORESULT?.ROW || []" :key="movie.RECORDID" :movie="movie" />
     </template>
+
+    <p v-if="isFetching">Refreshing...</p> <!-- Shows during background refresh -->
+
   </section>
 </template>
