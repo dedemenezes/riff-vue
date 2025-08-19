@@ -1,13 +1,8 @@
 <script setup>
-import { ref } from "vue";
-
 import BaseButton from "@/components/ui/buttons/BaseButton.vue";
 import LanguageSwitcher from "@/components/layout/navbar/LanguageSwitcher.vue";
 import MobileMenu from "@/components/layout/navbar/MobileMenu.vue";
 import { IconSearch } from "@/components/ui/icons";
-
-// v-model for LanguageSwitcher
-const currentLanguage = ref("pt");
 </script>
 
 <template>
@@ -53,7 +48,7 @@ const currentLanguage = ref("pt");
     <!-- navbar actions -->
     <div class="hidden md:flex items-center gap-1200">
       <IconSearch />
-      <LanguageSwitcher :langs="['pt', 'en']" v-model="currentLanguage" />
+      <LanguageSwitcher />
       <BaseButton as="button" size="md" variant="cta">
         RioMarket
         <img src="@assets/Vector.svg" alt="carret" class="w-full ms-300" />

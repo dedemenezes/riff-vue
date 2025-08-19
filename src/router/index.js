@@ -23,4 +23,4 @@ const riffRouter = createRouter({
   routes,
 });
 
-export default riffRouter
+export default riffRouter;

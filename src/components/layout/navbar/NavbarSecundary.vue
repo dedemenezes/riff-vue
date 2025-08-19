@@ -14,7 +14,7 @@ import BaseButton from "@/components/ui/buttons/BaseButton.vue";
           variant="underline"
           size="lg"
         >
-          {{ $t('navigation.programming') }}
+          {{ $t("navigation.programming") }}
         </BaseButton>
       </li>
       <li class="h-full">
@@ -24,7 +24,7 @@ import BaseButton from "@/components/ui/buttons/BaseButton.vue";
           variant="underline"
           size="lg"
         >
-          {{ $t('navigation.edition2024') }}
+          {{ $t("navigation.edition2024") }}
         </BaseButton>
       </li>
       <li class="h-full">
@@ -34,7 +34,7 @@ import BaseButton from "@/components/ui/buttons/BaseButton.vue";
           variant="underline"
           size="lg"
         >
-          {{ $t('navigation.aboutUs') }}
+          {{ $t("navigation.aboutUs") }}
         </BaseButton>
       </li>
       <li class="h-full">
@@ -45,7 +45,7 @@ import BaseButton from "@/components/ui/buttons/BaseButton.vue";
           variant="underline"
           size="lg"
         >
-          {{ $t('navigation.news') }}
+          {{ $t("navigation.news") }}
         </BaseButton>
       </li>
       <li class="h-full">
@@ -55,7 +55,7 @@ import BaseButton from "@/components/ui/buttons/BaseButton.vue";
           variant="underline"
           size="lg"
         >
-          {{ $t('navigation.media') }}
+          {{ $t("navigation.media") }}
         </BaseButton>
       </li>
       <li class="h-full">
@@ -65,7 +65,7 @@ import BaseButton from "@/components/ui/buttons/BaseButton.vue";
           variant="underline"
           size="lg"
         >
-          {{ $t('navigation.information') }}
+          {{ $t("navigation.information") }}
         </BaseButton>
       </li>
     </ul>

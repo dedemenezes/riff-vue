@@ -53,7 +53,7 @@ const closeMenu = () => {
             alt="Logo Festival do Rio"
           />
 
-          <LanguageSwitcher :langs="['pt', 'en']" v-model="currentLanguage" />
+          <LanguageSwitcher />
           <button @click="closeMenu" class="text-neutrals-900">
             <svg
               xmlns="http://www.w3.org/2000/svg"

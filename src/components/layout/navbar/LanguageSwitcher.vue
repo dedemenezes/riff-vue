@@ -1,16 +1,19 @@
 <script setup>
-const emit = defineEmits(["update:modelValue"]);
+import { useI18n } from "@/composables/useI18n";
+const { locale } = useI18n();
 
 const props = defineProps({
   langs: {
     type: Array,
-    required: true,
-  },
-  modelValue: {
-    type: String,
-    default: "pt",
+    default: () => ["pt", "en"],
   },
 });
+
+const updateLanguage = (lang) => {
+  locale.value = lang;
+};
+
+const isActive = (lang) => locale.value === lang;
 </script>
 
 <template>
@@ -21,10 +24,10 @@ const props = defineProps({
     <template v-for="lang in props.langs" :key="lang">
       <button
         class="font-body text-sm font-semibold leading-[19.6px] uppercase"
-        :class="{ 'text-neutrals-900': modelValue === lang }"
-        @click="emit('update:modelValue', lang)"
+        :class="{ 'text-neutrals-900': isActive(lang) }"
+        @click="updateLanguage(lang)"
         :aria-label="`Alterar para ${lang.toUpperCase()}`"
-        :aria-pressed="modelValue === lang"
+        :aria-pressed="isActive(lang)"
       >
         {{ lang }}
       </button>
