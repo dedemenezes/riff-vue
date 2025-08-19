@@ -1,6 +1,14 @@
 <script setup>
 import { useI18n } from "@/composables/useI18n";
+import { watch } from "vue";
 const { locale } = useI18n();
+
+watch(locale, (newLang) => {
+  localStorage.setItem('lang', newLang);
+});
+// On init
+const savedLang = localStorage.getItem('lang');
+if (savedLang) locale.value = savedLang;
 
 const props = defineProps({
   langs: {
