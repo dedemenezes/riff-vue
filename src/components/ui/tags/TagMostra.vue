@@ -1,4 +1,5 @@
 <script>
+  const DEFAULT_CLASS = "bg-magenta-600 text-white-transp-1000";
   const VARIANT_CLASSES = {
   "gala-abertura": {
     filled: "bg-magenta-600 text-white-transp-1000",
@@ -24,19 +25,19 @@
     filled: "bg-neutrals-400 text-neutrals-900",
     outline: "border-l-4 border-neutrals-400 text-neutrals-900"
   },
-  "classicos-cults": {
+  "classicos--cults": {
     filled: "bg-neutrals-900 text-white-transp-1000",
     outline: "border-l-4 border-neutrals-900 text-neutrals-900"
   },
-  "expectativa": {
+  "expectativas": {
     filled: "bg-azul-600 text-white-transp-1000",
     outline: "border-l-4 border-azul-600 text-neutrals-900"
   },
-  "itinerarios": {
+  "itinerarios-unicos": {
     filled: "bg-verde-600 text-white-transp-1000",
     outline: "border-l-4 border-verde-600 text-neutrals-900"
   },
-  "panorama": {
+  "panorama-mundial": {
     filled: "bg-vermelho-600 text-white-transp-1000",
     outline: "border-l-4 border-vermelho-600 text-neutrals-900"
   },
@@ -60,10 +61,9 @@ const props = defineProps({
     validator: (value) => Object.keys(VARIANT_CLASSES).includes(value),
     default: "cinema-capacete"
   },
-  text: { type: String, required: true },
+  text: { type: String, default: 'Cinema Capacete' },
   mode: {
     type: String,
-    required: true,
     validator: (value) => ['filled', 'outline'].includes(value),
     default: 'filled'
   }
@@ -73,16 +73,18 @@ const finalClass = computed(() => {
   const variantClass = VARIANT_CLASSES[props.variant]?.[props.mode]
 
   if (!variantClass) {
-    console.warn(`Invalid combination: variant="${props.variant}" mode="${props.mode}"`)
-    return ''
+    console.warn(`Invalid combination: variant="${props.variant}" mode="${props.mode}. DISPLAYING DEFAULT"`)
+    return DEFAULT_CLASS
   }
 
   return variantClass
 })
+const displayText = computed(() => props.text?.trim() || 'Cinema Capacete')
+
 </script>
 
 <template>
   <span
     class="py-100 px-250 uppercase font-body text-2xs font-medium leading-[16px] tracking-widest rounded-br-100 max-w-fit"
-   :class="finalClass" role="label" :aria-label="`${variant} tag`">{{ text }}</span>
+   :class="finalClass" role="label" :aria-label="`${variant} tag`">{{ displayText }}</span>
 </template>
