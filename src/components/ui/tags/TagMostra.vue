@@ -72,9 +72,9 @@ const finalClass = computed(() => {
   const variantClass = VARIANT_CLASSES[props.variant]?.[props.mode];
 
   if (!variantClass) {
-    console.warn(
-      `Invalid combination: variant="${props.variant}" mode="${props.mode}. DISPLAYING DEFAULT"`,
-    );
+    // console.warn(
+    //   `Invalid combination: variant="${props.variant}" mode="${props.mode}. DISPLAYING DEFAULT"`,
+    // );
     return DEFAULT_CLASS;
   }
 
