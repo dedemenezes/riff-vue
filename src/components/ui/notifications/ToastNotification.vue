@@ -35,13 +35,17 @@ const icon = computed(() => {
       return "";
   }
 });
+
+const styleDefault = "align-self: baseline; justify-self: anchor-center; bottom: 2rem;"
+
 </script>
 
 <template>
   <transition name="fade">
     <div
       v-if="visible"
-      class="flex items-start gap-3 p-4 bg-white rounded-lg shadow-lg border border-gray-200 w-full max-w-sm"
+      :style="styleDefault"
+      class="absolute botom-800 right-800 flex items-start gap-3 p-4 bg-white rounded-lg shadow-lg border border-gray-200 w-full max-w-sm"
     >
       <!-- Icon -->
       <div class="flex-shrink-0 text-green-500 text-xl">
