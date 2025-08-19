@@ -51,7 +51,7 @@
                 <li>
                   <router-link
                     @click="closeMenu"
-                    :to="{name: 'components'}"
+                    :to="{name: 'programming'}"
                   >
                     Programação completa
                   </router-link>
