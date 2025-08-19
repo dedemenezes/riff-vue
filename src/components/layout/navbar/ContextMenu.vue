@@ -25,7 +25,12 @@ const items = [
       :route="item.route"
     >
       <template #icon="{ active }">
-        <component :is="item.component"  height="30px" width="30px" :active="active" />
+        <component
+          :is="item.component"
+          height="30px"
+          width="30px"
+          :active="active"
+        />
       </template>
     </NavButtonContext>
   </div>

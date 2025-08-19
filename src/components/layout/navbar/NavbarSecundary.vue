@@ -35,13 +35,9 @@ const secondaryItems = [
     </ul>
     <ul class="hidden md:flex items-center space-x-400">
       <li v-for="item in secondaryItems" :key="item">
-        <BaseButton
-          :as="item.tag"
-          :href="item.href"
-          variant="gray"
-          size="xs"
-          >{{ $t(`navigation.${item.name}`) }}</BaseButton
-        >
+        <BaseButton :as="item.tag" :href="item.href" variant="gray" size="xs">{{
+          $t(`navigation.${item.name}`)
+        }}</BaseButton>
       </li>
     </ul>
   </div>
