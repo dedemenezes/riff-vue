@@ -7,15 +7,17 @@ const props = defineProps({
   links: {
     type: Array,
     required: true,
-  }
-})
+  },
+});
 </script>
 
 <template>
   <div class="bg-neutrals-200">
     <TwContainer>
       <div class="py-800 flex flex-col space-y-800">
-        <BaseHeader font-size="text-xl" text-color="text-neutrals-900">Links Rápidos</BaseHeader>
+        <BaseHeader font-size="text-xl" text-color="text-neutrals-900"
+          >Links Rápidos</BaseHeader
+        >
         <div class="flex flex-col gap-y-800 lg:flex-row">
           <QuickLinkCard
             v-for="link in props.links"
@@ -30,6 +32,4 @@ const props = defineProps({
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

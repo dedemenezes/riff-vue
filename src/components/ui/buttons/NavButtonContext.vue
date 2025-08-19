@@ -1,26 +1,34 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref } from "vue";
 
-import { useRoute } from 'vue-router';
+import { useRoute } from "vue-router";
 
-import BodyStrongXs from '../typography/BodyStrongXs.vue';
+import BodyStrongXs from "../typography/BodyStrongXs.vue";
 const props = defineProps({
   content: { type: String, required: true },
-  route: { type: String, default: '#' }
-})
-const isHovered = ref(false)
-const handleMouseEnter = () => { isHovered.value = true }
-const handleMouseLeave = () => { isHovered.value = false }
+  route: { type: String, default: "#" },
+});
+const isHovered = ref(false);
+const handleMouseEnter = () => {
+  isHovered.value = true;
+};
+const handleMouseLeave = () => {
+  isHovered.value = false;
+};
 
-const isFocused = ref(false)
-const handleFocus = () => { isFocused.value = true }
-const handleBlur = () => { isFocused.value = false }
+const isFocused = ref(false);
+const handleFocus = () => {
+  isFocused.value = true;
+};
+const handleBlur = () => {
+  isFocused.value = false;
+};
 
-const isActive = computed(() => isHovered.value || isFocused.value)
+const isActive = computed(() => isHovered.value || isFocused.value);
 
 const currentRoute = useRoute();
-const isRouteActive = computed(() => currentRoute.path == props.route)
-const isIconActive = computed(() => isActive.value || isRouteActive.value)
+const isRouteActive = computed(() => currentRoute.path == props.route);
+const isIconActive = computed(() => isActive.value || isRouteActive.value);
 </script>
 
 <template>
@@ -41,7 +49,9 @@ const isIconActive = computed(() => isActive.value || isRouteActive.value)
         :active="isIconActive"
         :routeActive="isRouteActive"
       />
-      <BodyStrongXs class="text-center uppercase">{{ props.content }}</BodyStrongXs>
+      <BodyStrongXs class="text-center uppercase">{{
+        props.content
+      }}</BodyStrongXs>
     </div>
   </router-link>
 </template>

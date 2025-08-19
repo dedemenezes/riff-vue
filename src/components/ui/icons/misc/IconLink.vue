@@ -2,8 +2,8 @@
 import BaseIcon from "@/components/ui/icons/BaseIcon.vue";
 const props = defineProps({
   color: { type: String, default: undefined },
-  active: { type: Boolean, default: false }
-})
+  active: { type: Boolean, default: false },
+});
 </script>
 
 <template>

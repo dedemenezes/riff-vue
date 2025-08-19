@@ -1,19 +1,17 @@
 <script setup>
-import { computed } from 'vue';
+import { computed } from "vue";
 const props = defineProps({
   width: { type: String, default: "20" },
   height: { type: String, default: "20" },
   className: { type: String, default: "text-neutrals-1000" },
   viewbox: { type: String, default: "0 0 20 20" },
   title: { type: String, default: "" },
-  active: { type: Boolean, default: false }
+  active: { type: Boolean, default: false },
 });
 
-const fillColor = computed(() => (
-  props.active
-    ? 'url(#grad)'
-    : 'currentColor'
-));
+const fillColor = computed(() =>
+  props.active ? "url(#grad)" : "currentColor",
+);
 </script>
 
 <template>
@@ -36,8 +34,8 @@ const fillColor = computed(() => (
         y2="15"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#FF007F"/>
-        <stop offset="1" stop-color="#FF7F00"/>
+        <stop stop-color="#FF007F" />
+        <stop offset="1" stop-color="#FF7F00" />
       </linearGradient>
     </defs>
     <title v-if="props.title">{{ props.title }}</title>

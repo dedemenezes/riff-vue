@@ -2,12 +2,17 @@
 import BaseIcon from "@/components/ui/icons/BaseIcon.vue";
 const props = defineProps({
   color: { type: String, default: undefined },
-  active: { type: Boolean, default: false }
-})
+  active: { type: Boolean, default: false },
+});
 </script>
 
 <template>
-  <BaseIcon viewBox="0 0 21 20" width="20" :active="active" :className="props.color">
+  <BaseIcon
+    viewBox="0 0 21 20"
+    width="20"
+    :active="active"
+    :className="props.color"
+  >
     <template #default="{ fill }">
       <g clip-path="url(#clip0_28_1817)">
         <path

@@ -1,8 +1,8 @@
 <script setup>
-import BaseIcon from "@/components/ui/icons/BaseIcon.vue";;
+import BaseIcon from "@/components/ui/icons/BaseIcon.vue";
 const props = defineProps({
-  color: { type: String, default: 'text-neutral-1000' }
-})
+  color: { type: String, default: "text-neutral-1000" },
+});
 </script>
 
 <template>

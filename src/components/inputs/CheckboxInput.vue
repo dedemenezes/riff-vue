@@ -1,6 +1,6 @@
 <script setup>
-import { computed } from 'vue';
-import { IconCheck } from '@/components/ui/icons'
+import { computed } from "vue";
+import { IconCheck } from "@/components/ui/icons";
 // Props
 const props = defineProps({
   label: { type: String, required: true },
@@ -10,14 +10,15 @@ const props = defineProps({
 
 const checkedColorClass = computed(() => {
   const colors = {
-    default: 'checked:bg-white-transp-1000 checked:border-neutrals-900'
-  }
-  return colors.default
-})
+    default: "checked:bg-white-transp-1000 checked:border-neutrals-900",
+  };
+  return colors.default;
+});
 const modelValue = defineModel({ type: Boolean, default: false });
 
-const checkboxId = computed(() => props.id || `checkbox-${Math.random().toString(36).slice(2, 9)}`);
-
+const checkboxId = computed(
+  () => props.id || `checkbox-${Math.random().toString(36).slice(2, 9)}`,
+);
 </script>
 
 <template>
@@ -38,13 +39,15 @@ const checkboxId = computed(() => props.id || `checkbox-${Math.random().toString
         v-model="modelValue"
         :aria-checked="modelValue"
       />
-      <IconCheck class="opacity-0 peer-checked:opacity-100 pointer-events-none absolute" color="text-neutrals-900"/>
-      <span class="text-gray-900 font-body text-sm leading-[150%]">{{ props.label }}</span>
+      <IconCheck
+        class="opacity-0 peer-checked:opacity-100 pointer-events-none absolute"
+        color="text-neutrals-900"
+      />
+      <span class="text-gray-900 font-body text-sm leading-[150%]">{{
+        props.label
+      }}</span>
     </label>
-
   </div>
-
-
 </template>
 
 <style scoped></style>

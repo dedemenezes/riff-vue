@@ -1,12 +1,12 @@
 {
   "background": {
     "brand": {
-      "primary":"{laranja.600}",
-      "primary-hover":"{laranja.400}",
-      "secondary":"{magenta.600}",
-      "secondary-hover":"{magenta.400}",
-      "tertiary":"{amarelo.600}",
-      "tertiary-hover":"{amarelo.400}"
+      "primary": "{laranja.600}",
+      "primary-hover": "{laranja.400}",
+      "secondary": "{magenta.600}",
+      "secondary-hover": "{magenta.400}",
+      "tertiary": "{amarelo.600}",
+      "tertiary-hover": "{amarelo.400}"
     },
     "neutral": {
       "primary": "{neutrals.100}",

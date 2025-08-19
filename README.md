@@ -18,14 +18,14 @@ Colors are defined as **primitives** in `design-tokens/color-primitives.json` an
 import * as colorPrimitives from "./design-tokens/color-primitives.json";
 
 extend: {
-  colors: colorPrimitives
+  colors: colorPrimitives;
 }
 ```
+
 Usage example:
+
 ```html
-<div class="bg-brand-300 text-neutral-700">
-  Button
-</div>
+<div class="bg-brand-300 text-neutral-700">Button</div>
 ```
 
 ## 2. Spacing
@@ -48,11 +48,13 @@ Spacing tokens from Figma map to Tailwind’s spacing scale in rem units
 | 4000  | 9.375rem | 150px |
 
 Usage:
+
 ```html
 <div class="p-400">Padding 16px</div>
 ```
 
 ## 3. Border Radius
+
 ```js
 borderRadius: {
   "100": "0.25rem", // 4px
@@ -60,8 +62,6 @@ borderRadius: {
   "400": "1rem",    // 16px
 }
 ```
-
-
 
 ## 4. Typography
 
@@ -83,6 +83,7 @@ fontWeight: {
 ```
 
 ### Font Sizes
+
 ```js
 fontSize: {
   xs: "0.75rem",    // 12px
@@ -97,6 +98,7 @@ fontSize: {
   '6xl': "4.5rem",  // 72px
 }
 ```
+
 Usage:
 
 ```html
@@ -121,18 +123,14 @@ These match Figma frame sizes for responsive design.
 Usage:
 
 ```html
-<div class="p-4 md:p-8 xl:p-12">
-  Responsive padding
-</div>
+<div class="p-4 md:p-8 xl:p-12">Responsive padding</div>
 ```
 
 ### Principle:
 
 We keep only primitives in Tailwind, no semantic mappings (primary, secondary, h1, etc.).
 
-
 # Riff Vue Component Library - Simple Documentation
-
 
 ## 🏗️ Component Library Structure
 
@@ -155,16 +153,19 @@ src/components/
 ## 🎨 Design System
 
 ### Colors
+
 - **Neutrals**: `neutrals-200`, `neutrals-300`, `neutrals-600`, `neutrals-900`, `neutrals-1000`
 - **Brand**: `magenta-600`, `laranja-600`, `vermelho-600`
 - **Transparency**: `white-transp-1000`
 
 ### Typography
+
 - **Fonts**: `font-body`, `font-heading`
 - **Weights**: `font-regular`, `font-semibold`
 - **Sizes**: `text-xs`, `text-sm`, `text-md`, `text-xl`
 
 ### Spacing
+
 - **Scale**: `100`, `150`, `200`, `300`, `400` (padding/margin)
 - **Border Radius**: `rounded-100`, `rounded-200`
 
@@ -173,7 +174,9 @@ src/components/
 ## 📚 Typography Components
 
 ### BaseHeader
+
 Main heading component with customizable font size and color.
+
 ```vue
 <BaseHeader fontSize="text-2xl" textColor="text-neutrals-900">
   Page Title
@@ -181,7 +184,9 @@ Main heading component with customizable font size and color.
 ```
 
 ### BodyRegular
+
 Standard body text component.
+
 ```vue
 <BodyRegular>
   Regular paragraph text content
@@ -189,6 +194,7 @@ Standard body text component.
 ```
 
 ### Other Typography
+
 - **HeaderSmall**: Small heading text
 - **SectionHeader**: Section title styling
 - **SubHeading**: Subtitle component
@@ -200,15 +206,18 @@ Standard body text component.
 ## 🔘 Button Components
 
 ### BaseButton
+
 Main button component with variants and sizes.
 
 **Variants:**
+
 - `gray`: Default neutral button
 - `cta`: Gradient call-to-action button
 - `rioMarket`: Red background button
 - `underline`: Text button with underline
 
 **Sizes:**
+
 - `xs`: Extra small (px-200 py-150)
 - `sm`: Small (px-300 py-200)
 - `md`: Medium (px-400 py-400)
@@ -221,9 +230,11 @@ Main button component with variants and sizes.
 ```
 
 ### ButtonText
+
 Text-only button component.
 
 **Variants:**
+
 - `dark`: Dark text with hover
 - `light`: White transparent text
 - `color`: Gradient text effect
@@ -237,7 +248,9 @@ Text-only button component.
 ## 📝 Input Components
 
 ### TextInput
+
 Standard text input with label and validation states.
+
 ```vue
 <TextInput
   id="email"
@@ -248,12 +261,11 @@ Standard text input with label and validation states.
 ```
 
 ### CheckboxInput
+
 Checkbox with custom styling and label.
+
 ```vue
-<CheckboxInput
-  label="I agree to terms"
-  v-model="agreed"
-/>
+<CheckboxInput label="I agree to terms" v-model="agreed" />
 ```
 
 ---
@@ -261,9 +273,11 @@ Checkbox with custom styling and label.
 ## 🃏 Card Components
 
 ### ArticleCard
+
 Article display card with image and content.
 
 **Variants:**
+
 - `primary`: Full content display
 - `secondary`: Fixed height (182px)
 - `simple`: Minimal version
@@ -280,6 +294,7 @@ Article display card with image and content.
 ```
 
 ### ListCard & QuickLinkCard
+
 Specialized card components for different content types.
 
 ---
@@ -287,7 +302,9 @@ Specialized card components for different content types.
 ## 🔄 Accordion Components
 
 ### AccordionGroup
+
 Collapsible content section.
+
 ```vue
 <AccordionGroup text="Section Title" :isOpen="false">
   <template #content>
@@ -301,12 +318,15 @@ Collapsible content section.
 ## 🏷️ Tag Components
 
 ### TagFilter
+
 Removable filter tag with close icon.
+
 ```vue
 <TagFilter text="Design" />
 ```
 
 ### TagMostra & TagScreening
+
 Specialized tag variants for different contexts.
 
 ---
@@ -314,14 +334,11 @@ Specialized tag variants for different contexts.
 ## 🎯 Icon System
 
 ### BaseIcon
+
 Core icon component with gradient support.
+
 ```vue
-<BaseIcon
-  :width="24"
-  :height="24"
-  className="text-neutrals-900"
-  :active="true"
->
+<BaseIcon :width="24" :height="24" className="text-neutrals-900" :active="true">
   <!-- SVG content -->
 </BaseIcon>
 ```
@@ -329,15 +346,19 @@ Core icon component with gradient support.
 ### Icon Categories
 
 **Actions** (4 icons):
+
 - IconClose, IconFilter, IconPlus, IconSearch
 
 **Misc** (8 icons):
+
 - IconChange, IconClock, IconDash, IconInfo, IconLink, IconNewUser, IconPin, IconProgram
 
 **Navigation** (4 icons):
+
 - IconCarretUp, IconChevronLeft, IconChevronRight, IconMenu
 
 **Status** (1 icon):
+
 - IconCheck
 
 ---
@@ -345,17 +366,20 @@ Core icon component with gradient support.
 ## 🔧 Usage Guidelines
 
 ### Component Props
+
 - Always include type validation
 - Use validator functions for restricted values
 - Provide sensible defaults
 - Mark required props clearly
 
 ### CSS Classes
+
 - Use design system tokens consistently
 - Prefer utility classes over custom CSS
 - Follow spacing scale (100, 150, 200, 300, 400)
 
 ### Naming Conventions
+
 - Components: PascalCase (BaseButton)
 - Props: camelCase (textColor)
 - CSS classes: kebab-case (text-neutrals-900)

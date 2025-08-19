@@ -1,11 +1,11 @@
 <script setup>
-import BaseIcon from "@/components/ui/icons/BaseIcon.vue";;
+import BaseIcon from "@/components/ui/icons/BaseIcon.vue";
 const props = defineProps({
   iconColor: {
     type: String,
-    default: "inherit"
-  }
-})
+    default: "inherit",
+  },
+});
 </script>
 
 <template>
