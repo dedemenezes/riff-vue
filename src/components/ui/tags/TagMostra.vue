@@ -57,7 +57,7 @@ const props = defineProps({
   variant: {
     type: String,
     required: true,
-    validator: (value) => Object.keys(VARIANT_CLASSES).includes(value),
+    // validator: (value) => Object.keys(VARIANT_CLASSES).includes(value),
     default: "cinema-capacete",
   },
   text: { type: String, default: "Cinema Capacete" },
