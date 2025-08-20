@@ -1,6 +1,6 @@
 <script setup>
 import { Check, ChevronsUpDown } from 'lucide-vue-next'
-import { ref } from 'vue'
+import { watch, ref } from 'vue'
 import { Button } from '@/components/ui/button'
 import {
   Command,
@@ -26,11 +26,35 @@ import { cn } from '@/lib/utils'
 // ]
 
 const open = ref(false)
-const value = ref('')
 
+// Props definition for v-model support
 const props = defineProps({
-  collection: { type: Array, required: true }
+  collection: { type: Array, required: true },
+  modelValue: { type: String, default: '' }, // v-model prop
+  placeholder: { type: String, default: 'Select item...' }
 })
+
+// Emit definition for v-model support
+const emit = defineEmits(['update:modelValue'])
+
+// Internal value that syncs with modelValue
+const value = ref(props.modelValue)
+
+// Watch external changes and update internal state
+watch(() => props.modelValue, (newValue) => {
+  value.value = newValue
+})
+
+// Watch internal changes and notify parent
+watch(value, (newValue) => {
+  emit('update:modelValue', newValue)
+})
+
+const handleSelect = (selectedValue) => {
+  value.value = selectedValue  // Update internal value
+  open.value = false          // Close dropdown
+  // The watch will automatically emit the change to parent
+}
 </script>
 
 <template>
@@ -42,13 +66,13 @@ const props = defineProps({
         :aria-expanded="open"
         class="w-full justify-between py-[20px]"
       >
-        {{ value ? props.collection.find((item) => item.value === value)?.label : 'Select item...' }}
+        {{ value ? props.collection.find((item) => item.value === value)?.label : props.placeholder }}
         <ChevronsUpDown class="ml-2 h-4 w-4 shrink-0 opacity-50" />
       </Button>
     </PopoverTrigger>
     <PopoverContent class="min-w-[var(--reka-popper-anchor-width)] p-0">
       <Command v-model="value">
-        <CommandInput placeholder="Search framework..." />
+        <CommandInput placeholder="Search..." />
         <CommandEmpty>No framework found.</CommandEmpty>
         <CommandList>
           <CommandGroup>
@@ -56,7 +80,7 @@ const props = defineProps({
               v-for="item in collection"
               :key="item.value"
               :value="item.value"
-              @select="open = false"
+              @select="handleSelect(item.value)"
             >
               <Check
                 :class="cn(
