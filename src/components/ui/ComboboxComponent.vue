@@ -17,16 +17,20 @@ import {
 } from '@/components/ui/popover'
 import { cn } from '@/lib/utils'
 
-const frameworks = [
-  { value: 'next.js', label: 'Next.js' },
-  { value: 'sveltekit', label: 'SvelteKit' },
-  { value: 'nuxt', label: 'Nuxt' },
-  { value: 'remix', label: 'Remix' },
-  { value: 'astro', label: 'Astro' },
-]
+// const frameworks = [
+//   { value: 'next.js', label: 'Next.js' },
+//   { value: 'sveltekit', label: 'SvelteKit' },
+//   { value: 'nuxt', label: 'Nuxt' },
+//   { value: 'remix', label: 'Remix' },
+//   { value: 'astro', label: 'Astro' },
+// ]
 
 const open = ref(false)
 const value = ref('')
+
+const props = defineProps({
+  collection: { type: Array, required: true }
+})
 </script>
 
 <template>
@@ -38,7 +42,7 @@ const value = ref('')
         :aria-expanded="open"
         class="w-full justify-between py-[20px]"
       >
-        {{ value ? frameworks.find((framework) => framework.value === value)?.label : 'Select framework...' }}
+        {{ value ? props.collection.find((item) => item.value === value)?.label : 'Select item...' }}
         <ChevronsUpDown class="ml-2 h-4 w-4 shrink-0 opacity-50" />
       </Button>
     </PopoverTrigger>
@@ -49,18 +53,18 @@ const value = ref('')
         <CommandList>
           <CommandGroup>
             <CommandItem
-              v-for="framework in frameworks"
-              :key="framework.value"
-              :value="framework.value"
+              v-for="item in collection"
+              :key="item.value"
+              :value="item.value"
               @select="open = false"
             >
               <Check
                 :class="cn(
                   'mr-2 h-4 w-4',
-                  value === framework.value ? 'opacity-100' : 'opacity-0',
+                  value === item.value ? 'opacity-100' : 'opacity-0',
                 )"
               />
-              {{ framework.label }}
+              {{ item.label }}
             </CommandItem>
           </CommandGroup>
         </CommandList>
