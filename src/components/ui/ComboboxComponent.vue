@@ -36,7 +36,7 @@ const value = ref('')
         variant="outline"
         role="combobox"
         :aria-expanded="open"
-        class="w-full justify-between"
+        class="w-full justify-between py-[20px]"
       >
         {{ value ? frameworks.find((framework) => framework.value === value)?.label : 'Select framework...' }}
         <ChevronsUpDown class="ml-2 h-4 w-4 shrink-0 opacity-50" />

@@ -58,7 +58,7 @@
     @apply text-neutrals-900;
   }
 
-  .text-secondary {
+  .text-secondary-gray {
     @apply text-neutrals-700;
   }
 

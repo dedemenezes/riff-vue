@@ -54,7 +54,7 @@ const cleanInput = () => {
         <IconFilter height="16px" width="16px" color="text-primary"/> Filtros
       </button>
       <div class="flex items-center gap-300">
-        <span class="text-body-strong-sm uppercase text-secondary">A - Z</span>
+        <span class="text-body-strong-sm uppercase text-secondary-gray">A - Z</span>
         <img
           src="@assets/divisor.svg"
           alt="divisor"
