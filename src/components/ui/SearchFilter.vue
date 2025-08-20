@@ -6,6 +6,7 @@ import AccordionGroup from "./accordion/AccordionGroup.vue";
 import ComboboxComponent from "./ComboboxComponent.vue";
 import BaseButton from "./buttons/BaseButton.vue";
 import ButtonText from "./buttons/ButtonText.vue";
+import DatePickerComponent from "./datepicker/DatePickerComponent.vue";
 
 const collection = [
   {value: "Joachim Trier", label: "Joachim Trier"},
@@ -238,17 +239,9 @@ const hasActiveFilters = computed(() => {
         <div class="flex-grow flex flex-col space-y-800 overflow-y-auto">
           <AccordionGroup :text="$t('filter.date')">
             <template v-slot:content>
-              <input
-                class="
-                  w-full py-2.5 px-400
-                  text-neutrals-900
-                  border border-neutrals-300 rounded-[5px]
-                  text-sm leading-[150%] font-body
-                  focus:outline-none focus:border-neutrals-600
-                "
-                type="date"
-                name="date"
-                id="date">
+                <div class="pt-400">
+                  <DatePickerComponent v-model="filters.date" />
+                </div>
             </template>
           </AccordionGroup>
           <AccordionGroup :text="$t('filter.time')">

@@ -32,5 +32,8 @@
     "festivais": "Festivals",
     "premios": "Awards",
     "palavras-chaves": "Keywords"
+  },
+  "datepicker": {
+    "pick_date": "Pick a date"
   }
 }
