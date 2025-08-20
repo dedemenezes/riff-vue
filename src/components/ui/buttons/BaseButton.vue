@@ -9,8 +9,10 @@ const { as, type, variant, size, disabled } = defineProps({
 
 const baseStyles =
   "font-body inline-flex items-center justify-center rounded-lg transition duration-200 focus:outline-2 focus:outline-offset-2";
-
+const disabledStyles =
+  "disabled:bg-neutrals-300 disabled:text-neutrals-600 disabled:pointer-events-none"
 const variants = {
+  dark: "text-white-transp-1000 bg-neutrals-900 hover:bg-neutrals-800 active:bg-neutrals-900 focus:outline-neutrals-900",
   gray: "text-neutrals-900 bg-neutrals-200 hover:bg-neutrals-300 active:bg-neutrals-300 focus:outline-neutrals-300",
   cta: "text-white-transp-1000 bg-gradient-to-r from-magenta-600 to-laranja-600 hover:bg-gradient-to-l",
   rioMarket: "text-white bg-vermelho-600",
@@ -38,7 +40,7 @@ const sizes = {
     :is="as"
     :type="as === 'button' ? type : undefined"
     :disabled="disabled"
-    :class="[baseStyles, sizes[size], variants[variant]]"
+    :class="[baseStyles, disabledStyles, sizes[size], variants[variant]]"
   >
     <slot />
   </component>

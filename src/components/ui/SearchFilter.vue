@@ -4,6 +4,8 @@ import { IconFilter, IconClose, IconSearch } from "@/components/ui/icons"
 import TwContainer from "@/components/layout/TwContainer.vue";
 import AccordionGroup from "./accordion/AccordionGroup.vue";
 import ComboboxComponent from "./ComboboxComponent.vue";
+import BaseButton from "./buttons/BaseButton.vue";
+import ButtonText from "./buttons/ButtonText.vue";
 
 const collection = [
   {value: "Joachim Trier", label: "Joachim Trier"},
@@ -187,18 +189,20 @@ const cleanInput = () => {
 <transition name="slide-left">
   <div
     v-if="isFilterMenuOpen"
-    class="fixed inset-0 z-50 bg-white flex flex-col w-full max-w-full right-0 shadow-lg overflow-y-auto"
+    class="fixed inset-0 z-50 bg-white flex flex-col w-full max-w-full h-[100vh] right-0 shadow-lg overflow-y-auto"
   >
     <TwContainer>
-      <div class="flex justify-between py-400">
-        <p class="text-header-sm text-primary">Filtros</p>
-        <button @click="closeMenu" class="text-neutrals-900">
-          <IconClose />
-        </button>
-      </div>
-      <div class="py-800">
-        <div class="flex flex-col space-y-800">
-          <AccordionGroup :text="$t('filter.data')">
+
+      <div class="flex flex-col">
+        <div class="shrink-0 flex justify-between py-400 sticky top-0 bg-white-transp-1000 z-10">
+          <p class="text-header-sm text-primary">Filtros</p>
+          <button @click="closeMenu" class="text-neutrals-900">
+            <IconClose />
+          </button>
+        </div>
+
+        <div class="flex-grow flex flex-col space-y-800 overflow-y-auto">
+          <AccordionGroup :text="$t('filter.date')">
             <template v-slot:content>
               <input
                 class="
@@ -213,16 +217,94 @@ const cleanInput = () => {
                 id="date">
             </template>
           </AccordionGroup>
-          <AccordionGroup :text="$t('filter.director')">
+          <AccordionGroup :text="$t('filter.time')">
             <template v-slot:content>
-              <div class="py-400">
-                <ComboboxComponent />
+              <div class="py-400 overflow-hidden">
+                <ComboboxComponent :collection="collection"/>
+              </div>
+            </template>
+          </AccordionGroup>
+          <AccordionGroup :text="$t('filter.mostra')">
+            <template v-slot:content>
+              <div class="py-400 overflow-hidden">
+                <ComboboxComponent :collection="collection"/>
+              </div>
+            </template>
+          </AccordionGroup>
+          <AccordionGroup :text="$t('filter.cinema')">
+            <template v-slot:content>
+              <div class="py-400 overflow-hidden">
+                <ComboboxComponent :collection="collection"/>
+              </div>
+            </template>
+          </AccordionGroup>
+          <AccordionGroup :text="$t('filter.genero')">
+            <template v-slot:content>
+              <div class="py-400 overflow-hidden">
+                <ComboboxComponent :collection="collection"/>
+              </div>
+            </template>
+          </AccordionGroup>
+          <AccordionGroup :text="$t('filter.pais')">
+            <template v-slot:content>
+              <div class="py-400 overflow-hidden">
+                <ComboboxComponent :collection="collection"/>
+              </div>
+            </template>
+          </AccordionGroup>
+          <AccordionGroup :text="$t('filter.direcao')">
+            <template v-slot:content>
+              <div class="py-400 overflow-hidden">
+                <ComboboxComponent :collection="collection"/>
+              </div>
+            </template>
+          </AccordionGroup>
+          <AccordionGroup :text="$t('filter.elenco')">
+            <template v-slot:content>
+              <div class="py-400 overflow-hidden">
+                <ComboboxComponent :collection="collection"/>
+              </div>
+            </template>
+          </AccordionGroup>
+          <AccordionGroup :text="$t('filter.selo')">
+            <template v-slot:content>
+              <div class="py-400 overflow-hidden">
+                <ComboboxComponent :collection="collection"/>
+              </div>
+            </template>
+          </AccordionGroup>
+          <AccordionGroup :text="$t('filter.festivais')">
+            <template v-slot:content>
+              <div class="py-400 overflow-hidden">
+                <ComboboxComponent :collection="collection"/>
+              </div>
+            </template>
+          </AccordionGroup>
+          <AccordionGroup :text="$t('filter.premios')">
+            <template v-slot:content>
+              <div class="py-400 overflow-hidden">
+                <ComboboxComponent :collection="collection"/>
+              </div>
+            </template>
+          </AccordionGroup>
+          <AccordionGroup :text="$t('filter.palavras-chaves')">
+            <template v-slot:content>
+              <div class="py-400 overflow-hidden">
+                <ComboboxComponent :collection="collection"/>
               </div>
             </template>
           </AccordionGroup>
         </div>
-      </div>
 
+        <div class="shrink-0 py-400 actions sticky bottom-0 bg-white-transp-1000 z-10">
+          <div class="flex justify-between">
+            <!-- <button class="flex-1">Limpar tudo</button> -->
+             <ButtonText tag="button" text="Limpar tudo" disabled="true"/>
+            <!-- <button class="flex-1 bg-black text-white">Aplicar filtros</button> -->
+             <BaseButton variant="dark">Aplicar filtros</BaseButton>
+          </div>
+        </div>
+      </div>
     </TwContainer>
   </div>
 </transition>

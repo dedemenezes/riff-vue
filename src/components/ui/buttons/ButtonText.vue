@@ -2,7 +2,7 @@
 import { computed } from "vue";
 
 const variants = {
-  dark: "text-neutrals-900 hover:text-neutrals-700 active:text-neutrals-800",
+  dark: "text-neutrals-900 hover:text-neutrals-700 active:text-neutrals-800 disabled:text-neutrals-600",
   light: "text-white-transp-1000",
   color:
     "bg-clip-text text-transparent bg-gradient-to-r from-magenta-600 to-laranja-600 hover:bg-gradient-to-l active:bg-gradient-to-r",
