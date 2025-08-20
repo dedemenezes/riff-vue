@@ -36,5 +36,8 @@
   },
   "datepicker": {
     "pick_date": "Escolha uma data"
+  },
+  "placeholder": {
+    "select": "Escolha um(a)"
   }
 }

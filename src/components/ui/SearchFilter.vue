@@ -7,6 +7,8 @@ import ComboboxComponent from "./ComboboxComponent.vue";
 import BaseButton from "./buttons/BaseButton.vue";
 import ButtonText from "./buttons/ButtonText.vue";
 import DatePickerComponent from "./datepicker/DatePickerComponent.vue";
+import SelectComponent from "./SelectComponent.vue";
+import { generateTimeOptions } from "@/composables/useTimeOptions";
 
 const collection = [
   {value: "Joachim Trier", label: "Joachim Trier"},
@@ -143,9 +145,13 @@ const cleanInput = () => {
   searchValue.value = ""
 }
 
+const timeOptions = ref(generateTimeOptions()) // Use in <select>
+
+
 const filters = ref({
   date: "",
-  time: "",
+  startTime: "",
+  endTime: "",
   mostra: "",
   cinema: "",
   genero: "",
@@ -247,11 +253,16 @@ const hasActiveFilters = computed(() => {
           <AccordionGroup :text="$t('filter.time')">
             <template v-slot:content>
               <div class="pt-400 overflow-hidden">
-                <ComboboxComponent
-                  :collection="collection"
-                  v-model="filters.time"
-                  placeholder="Selecionar mostra..."
-                />
+                <div class="flex items-center gap-400">
+                  <SelectComponent
+                    class="m-400"
+                    v-model="filters.startTime"
+                    :options="timeOptions" />
+                  <SelectComponent
+                    class="m-400"
+                    v-model="filters.endTime"
+                    :options="timeOptions" />
+                </div>
               </div>
             </template>
           </AccordionGroup>
