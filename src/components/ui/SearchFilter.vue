@@ -20,7 +20,7 @@ const cleanInput = () => {
 </script>
 
 <template>
-  <div class="flex flex-col gap-400">
+  <div class="w-full flex flex-col gap-400 md:flex-row md:justify-between md:gap-600">
     <div class="input">
       <div class="relative">
         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -30,7 +30,7 @@ const cleanInput = () => {
             v-model="searchValue"
             type="text"
             placeholder="Pesquisar"
-            class="w-full pl-10 pr-8 py-2.5
+            class="w-full md:w-96 pl-10 pr-8 py-2.5
             border border-neutrals-300 rounded-[5px]
             font-body leading-[150%] text-sm text-neutrals-900 placeholder-neutrals-400
             focus:outline-none focus:border-neutrals-600
@@ -42,10 +42,10 @@ const cleanInput = () => {
         </div>
       </div>
     </div>
-    <div class="filter flex items-center justify-between">
+    <div class="filter flex items-center justify-between md:gap-800 lg:gap-1200">
       <button
         @click="openMenu"
-        class="p-100 flex items-center gap-200 text-body-strong-sm text-primary"
+        class="p-100 flex items-center gap-200 text-body-strong-sm text-primary md:order-2"
       >
         <IconFilter height="16px" width="16px" color="text-primary"/> Filtros
       </button>
