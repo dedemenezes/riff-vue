@@ -46,7 +46,7 @@ watch(value, (newValue) => {
       <Button
         variant="outline"
         :class="cn(
-          'w-full justify-start text-left font-normal',
+          'w-[-webkit-fill-available] m-100 justify-start text-left font-normal',
           !value && 'text-muted-foreground',
         )"
       >

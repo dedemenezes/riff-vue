@@ -64,7 +64,7 @@ const handleSelect = (selectedValue) => {
         variant="outline"
         role="combobox"
         :aria-expanded="open"
-        class="w-full justify-between py-[20px]"
+        class="w-[-webkit-fill-available] justify-between m-100"
       >
         {{ value ? props.collection.find((item) => item.value === value)?.label : props.placeholder }}
         <ChevronsUpDown class="ml-2 h-4 w-4 shrink-0 opacity-50" />
