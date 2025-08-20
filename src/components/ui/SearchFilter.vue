@@ -246,7 +246,7 @@ const hasActiveFilters = computed(() => {
           </AccordionGroup>
           <AccordionGroup :text="$t('filter.time')">
             <template v-slot:content>
-              <div class="py-400 overflow-hidden">
+              <div class="pt-400 overflow-hidden">
                 <ComboboxComponent
                   :collection="collection"
                   v-model="filters.time"
@@ -257,35 +257,35 @@ const hasActiveFilters = computed(() => {
           </AccordionGroup>
           <AccordionGroup :text="$t('filter.mostra')">
             <template v-slot:content>
-              <div class="py-400 overflow-hidden">
+              <div class="pt-400 overflow-hidden">
                 <ComboboxComponent :collection="collection"/>
               </div>
             </template>
           </AccordionGroup>
           <AccordionGroup :text="$t('filter.cinema')">
             <template v-slot:content>
-              <div class="py-400 overflow-hidden">
+              <div class="pt-400 overflow-hidden">
                 <ComboboxComponent :collection="collection"/>
               </div>
             </template>
           </AccordionGroup>
           <AccordionGroup :text="$t('filter.genero')">
             <template v-slot:content>
-              <div class="py-400 overflow-hidden">
+              <div class="pt-400 overflow-hidden">
                 <ComboboxComponent :collection="collection"/>
               </div>
             </template>
           </AccordionGroup>
           <AccordionGroup :text="$t('filter.pais')">
             <template v-slot:content>
-              <div class="py-400 overflow-hidden">
+              <div class="pt-400 overflow-hidden">
                 <ComboboxComponent :collection="collection"/>
               </div>
             </template>
           </AccordionGroup>
           <AccordionGroup :text="$t('filter.direcao')">
             <template v-slot:content>
-              <div class="py-400 overflow-hidden">
+              <div class="pt-400 overflow-hidden">
                 <ComboboxComponent
                   :collection="collection"
                   v-model="filters.direcao"
@@ -296,42 +296,42 @@ const hasActiveFilters = computed(() => {
           </AccordionGroup>
           <AccordionGroup :text="$t('filter.elenco')">
             <template v-slot:content>
-              <div class="py-400 overflow-hidden">
+              <div class="pt-400 overflow-hidden">
                 <ComboboxComponent :collection="collection"/>
               </div>
             </template>
           </AccordionGroup>
           <AccordionGroup :text="$t('filter.selo')">
             <template v-slot:content>
-              <div class="py-400 overflow-hidden">
+              <div class="pt-400 overflow-hidden">
                 <ComboboxComponent :collection="collection"/>
               </div>
             </template>
           </AccordionGroup>
           <AccordionGroup :text="$t('filter.festivais')">
             <template v-slot:content>
-              <div class="py-400 overflow-hidden">
+              <div class="pt-400 overflow-hidden">
                 <ComboboxComponent :collection="collection"/>
               </div>
             </template>
           </AccordionGroup>
           <AccordionGroup :text="$t('filter.premios')">
             <template v-slot:content>
-              <div class="py-400 overflow-hidden">
+              <div class="pt-400 overflow-hidden">
                 <ComboboxComponent :collection="collection"/>
               </div>
             </template>
           </AccordionGroup>
           <AccordionGroup :text="$t('filter.palavras-chaves')">
             <template v-slot:content>
-              <div class="py-400 overflow-hidden">
+              <div class="pt-400 overflow-hidden">
                 <ComboboxComponent :collection="collection"/>
               </div>
             </template>
           </AccordionGroup>
         </div>
 
-        <div class="shrink-0 py-400 actions sticky bottom-0 bg-white-transp-1000 z-10">
+        <div class="shrink-0 pt-400 actions sticky bottom-0 bg-white-transp-1000 z-10">
           <div class="flex justify-between">
             <!-- <button class="flex-1">Limpar tudo</button> -->
              <ButtonText
