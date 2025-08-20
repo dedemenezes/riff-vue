@@ -1,77 +1,103 @@
-@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100;200;300;400;500;600;700;800;900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @theme {
-  --header-font: "Fira Sans", monospace;
 }
-
-
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
+    --header-font: "Fira Sans", monospace;
+    --body-font: "Inter", monospace;
+
+    /* 🌈 Background & Foreground */
+    --background: 0 0% 100%; /* White background */
+    --foreground: 0 0% 3.9%; /* Almost black text */
+
+    /* 🃏 Card Components */
+    --card: 0 0% 100%; /* White card background */
+    --card-foreground: 0 0% 3.9%; /* Card text color */
+
+    /* 📦 Popover / Dropdown */
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
+
+    /* 🎨 Primary Color (use your laranja 600) */
+    --primary: 40 5% 22%; /* #FF7F00 → laranja.600 */
+    --primary-foreground: 0 0% 100%; /* White text on primary */
+
+    /* 🎨 Secondary (neutral background) */
+    --secondary: 0 0% 96.1%; /* #F5F4F4 → neutrals.200 */
+    --secondary-foreground: 0 0% 10%; /* Dark text on light bg */
+
+    /* 🎨 Muted (gray tone for less emphasis) */
     --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
+    --muted-foreground: 0 0% 45.1%; /* #736F68 approx neutrals.700 */
+
+    /* 🎨 Accent (highlight elements) */
     --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
+    --accent-foreground: 0 0% 10%;
+
+    /* 🚨 Destructive (error/red) */
+    --destructive: 0 100% 50%; /* #FF0000 → vermelho.600 */
+    --destructive-foreground: 0 0% 98%; /* White text on red */
+
+    /* 🔲 Borders & Inputs */
+    --border: 0 0% 89.8%; /* Light gray for borders */
     --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
+    --ring: 0 0% 3.9%; /* Focus ring color */
+
+    /* 📊 Chart Colors (Optional) */
+    --chart-1: 28 100% 50%; /* laranja */
+    --chart-2: 160 80% 50%; /* verde */
+    --chart-3: 220 80% 50%; /* azul */
+    --chart-4: 340 80% 50%; /* magenta */
+    --chart-5: 50 80% 50%; /* amarelo */
+
+    --radius: 0.5rem; /* Default border radius */
   }
+
+  /* 🌑 Dark Mode */
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
+    --background: 0 0% 3.9%; /* Dark gray background */
+    --foreground: 0 0% 98%; /* White text */
+
     --card: 0 0% 3.9%;
     --card-foreground: 0 0% 98%;
+
     --popover: 0 0% 3.9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
+
+    --primary: 28 100% 50%; /* Keep same orange */
+    --primary-foreground: 0 0% 100%;
+
     --secondary: 0 0% 14.9%;
     --secondary-foreground: 0 0% 98%;
+
     --muted: 0 0% 14.9%;
     --muted-foreground: 0 0% 63.9%;
+
     --accent: 0 0% 14.9%;
     --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
+
+    --destructive: 0 100% 50%;
     --destructive-foreground: 0 0% 98%;
+
     --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;
     --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
   }
 }
 
-
-
+/* Apply your font */
 @layer base {
   * {
     @apply border-border;
   }
   body {
+    font-family: var(--body-font, 'Inter', sans-serif);
     @apply bg-background text-foreground;
   }
 }
