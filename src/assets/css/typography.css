@@ -20,6 +20,10 @@
     @apply font-body text-xs font-semibold leading-[140%];
   }
 
+  .text-body-strong-sm {
+    @apply font-body text-sm font-semibold leading-[140%];
+  }
+
   .text-subheading {
     @apply font-body text-xl font-regular leading-[30px];
   }
