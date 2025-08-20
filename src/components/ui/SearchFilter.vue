@@ -145,7 +145,9 @@ const cleanInput = () => {
   searchValue.value = ""
 }
 
-const timeOptions = ref(generateTimeOptions()) // Use in <select>
+const timeOptions = computed(
+  () => generateTimeOptions()
+) // Use in <select>
 
 
 const filters = ref({
