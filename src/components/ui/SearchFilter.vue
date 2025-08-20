@@ -1,6 +1,9 @@
 <script setup>
 import { ref } from "vue";
 import { IconFilter, IconClose, IconSearch } from "@/components/ui/icons"
+import TwContainer from "@/components/layout/TwContainer.vue";
+import AccordionGroup from "./accordion/AccordionGroup.vue";
+
 // Controls menu visibility
 const isFilterMenuOpen = ref(false);
 
@@ -67,10 +70,34 @@ const cleanInput = () => {
     v-if="isFilterMenuOpen"
     class="fixed inset-0 z-50 bg-white flex flex-col w-full max-w-full right-0 shadow-lg overflow-y-auto"
   >
-  FLAMENGO
-  <button @click="closeMenu" class="text-neutrals-900">
-    <IconClose />
-  </button>
+    <TwContainer>
+      <div class="flex justify-between py-400">
+        <p class="text-header-sm text-primary">Filtros</p>
+        <button @click="closeMenu" class="text-neutrals-900">
+          <IconClose />
+        </button>
+      </div>
+      <div class="py-800">
+        <div class="flex flex-col space-y-800">
+          <AccordionGroup :text="$t('filter.data')">
+            <template v-slot:content>
+              <input
+                class="
+                  w-full py-2.5 px-400
+                  text-neutrals-900
+                  border border-neutrals-300 rounded-[5px]
+                  text-sm leading-[150%] font-body
+                  focus:outline-none focus:border-neutrals-600
+                "
+                type="date"
+                name="date"
+                id="date">
+            </template>
+          </AccordionGroup>
+        </div>
+      </div>
+
+    </TwContainer>
   </div>
 </transition>
 </template>
@@ -86,3 +113,10 @@ const cleanInput = () => {
   transform: translateX(-100%);
 }
 </style>
+<!--
+              <ul>
+                <li
+                  style="box-shadow: 4px 4px 14px 6px rgba(82, 81, 81, 0.10);"
+                  class="p-300 flex items-center self-stretch text-body-regular border border-neutrals-300 rounded-100"
+                >Select option</li>
+              </ul> -->
