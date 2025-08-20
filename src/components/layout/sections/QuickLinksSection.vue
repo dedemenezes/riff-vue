@@ -1,7 +1,6 @@
 <script setup>
 import QuickLinkCard from "@/components/ui/cards/QuickLinkCard.vue";
 import TwContainer from "../TwContainer.vue";
-import BaseHeader from "../../ui/typography/BaseHeader.vue";
 
 const props = defineProps({
   links: {
@@ -15,8 +14,8 @@ const props = defineProps({
   <div class="bg-neutrals-200">
     <TwContainer>
       <div class="py-800 flex flex-col space-y-800">
-        <BaseHeader font-size="text-xl" text-color="text-neutrals-900"
-          >Links Rápidos</BaseHeader
+        <h3 class="text-header-base text-xl text-primary"
+          >Links Rápidos</h3
         >
         <div class="flex flex-col gap-y-800 lg:flex-row">
           <QuickLinkCard

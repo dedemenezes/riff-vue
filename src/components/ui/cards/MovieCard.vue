@@ -3,9 +3,6 @@ import { computed, ref } from "vue";
 
 import TagMostra from "../tags/TagMostra.vue";
 import TagScreening from "../tags/TagScreening.vue";
-import BodyRegular from "../typography/BodyRegular.vue";
-import HeaderSmall from "../typography/HeaderSmall.vue";
-import OverLine from "../typography/OverLine.vue";
 import { IconPin } from "@/components/ui/icons";
 import { useMovieLocalization } from "../../../composables/useMovieLocalization";
 
@@ -66,28 +63,28 @@ const { getLocalizedTitle } = useMovieLocalization()
 
       <div class="content absolute bottom-250 left-250 flex flex-col gap-[5px]">
         <!-- movie title -->
-        <HeaderSmall color="text-white-transp-1000">
+        <h2 class="text-header-sm text-on-dark">
           {{ getLocalizedTitle(props.movie) }}
-        </HeaderSmall>
+        </h2>
         <div class="flex items-center gap-200">
-          <OverLine color="text-white-transp-1000">{{
+          <span class="text-overline text-on-dark-secondary">{{
             props.movie.paiscompleto_coord_int
-          }}</OverLine>
+          }}</span>
           <img
             src="@assets/divisor.svg"
             alt="divisor"
             height="16px"
             width="1px"
           />
-          <OverLine color="text-white-transp-1000">FIC</OverLine>
+          <span class="text-overline text-on-dark-secondary">FIC</span>
           <img
             src="@assets/divisor.svg"
             alt="divisor"
             height="16px"
             width="1px"
           />
-          <OverLine color="text-white-transp-1000"
-            >{{ props.movie.duracao.DATA }}'</OverLine
+          <span class="text-overline text-on-dark-secondary"
+            >{{ props.movie.duracao.DATA }}'</span
           >
         </div>
         <!-- Animated underline -->
@@ -100,9 +97,9 @@ const { getLocalizedTitle } = useMovieLocalization()
     <div class="px-200 space-y-250 w-full">
       <div class="flex items-center gap-[6px]">
         <IconPin width="16" height="16" />
-        <BodyRegular>
+        <p class="text-body-regular text-primary">
           {{ props.movie.Cinema }}
-        </BodyRegular>
+        </p>
       </div>
       <div class="flex items-center space-x-200">
         <TagScreening time="21h30" state="disabled" />

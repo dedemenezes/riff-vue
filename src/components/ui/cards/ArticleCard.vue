@@ -1,10 +1,5 @@
 <script setup>
 import { computed } from "vue";
-
-import OverLine from "@/components/ui/typography/OverLine.vue";
-import HeaderSmall from "@/components/ui/typography/HeaderSmall.vue";
-import BodyRegular from "@/components/ui/typography/BodyRegular.vue";
-
 const props = defineProps({
   variant: {
     type: String,
@@ -41,20 +36,23 @@ const backgroundImageStyle = computed(() => ({
       :style="backgroundImageStyle"
     ></div>
     <div v-if="date && category" class="flex gap-x-200 items-center">
-      <OverLine>
+      <span class="text-overline text-primary">
         {{ date }}
-      </OverLine>
+      </span>
       <img src="@assets/divisor.svg" alt="divisor" style="height: 16px" />
-      <OverLine>
+      <span class="text-overline text-primary">
         {{ category }}
-      </OverLine>
+      </span>
     </div>
-    <HeaderSmall>
+    <h3 class="text-header-sm text-primary">
       {{ props.title }}
-    </HeaderSmall>
-    <BodyRegular v-if="props.variant === 'primary'">
+    </h3>
+    <p
+      v-if="props.variant === 'primary'"
+      class="text-body-regular text-primary"
+    >
       {{ props.content }}
-    </BodyRegular>
+    </p>
   </div>
 </template>
 

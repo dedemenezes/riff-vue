@@ -2,8 +2,6 @@
 import { IconPlus } from "@/components/ui/icons";
 import QuickLinksSection from "@/components/layout/sections/QuickLinksSection.vue";
 import HomeBanner from "@/components/ui/HomeBanner.vue";
-import SubHeading from "@/components/ui/typography/SubHeading.vue";
-import BaseHeader from "@/components/ui/typography/BaseHeader.vue";
 import TwContainer from "@/components/layout/TwContainer.vue";
 import ButtonText from "@/components/ui/buttons/ButtonText.vue";
 import ArticleCard from "@/components/ui/cards/ArticleCard.vue";
@@ -37,12 +35,12 @@ const quickLinks = [
     imagePath="/src/assets/images/mobile-banner.png"
     alt="Banner promocional"
   >
-    <BaseHeader font-size="text-2xl lg:text-3xl" class="mb-200">
+    <h1 class="text-header-base text-2xl lg:text-3xl mb-200 text-primary">
       A 26ª edição do Festival do Rio vem aí!
-    </BaseHeader>
-    <SubHeading>
+    </h1>
+    <p class="text-subheading text-primary">
       De 2 a 12 de outubro o cinema estará sob a luz do Rio
-    </SubHeading>
+    </p>
   </HomeBanner>
 
   <QuickLinksSection v-bind:links="quickLinks" />
@@ -50,7 +48,7 @@ const quickLinks = [
   <TwContainer>
     <div class="py-1200">
       <div class="flex flex-col gap-y-800">
-        <BaseHeader font-size="text-3xl">Últimas notícias</BaseHeader>
+        <h2 class="text-header-base text-3xl text-primary">Últimas notícias</h2>
 
         <div
           class="flex flex-col gap-y-800 lg:grid lg:gap-x-800 lg:grid-cols-[2fr_1fr]"

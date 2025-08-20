@@ -3,7 +3,6 @@ import { computed, ref } from "vue";
 
 import { useRoute } from "vue-router";
 
-import BodyStrongXs from "../typography/BodyStrongXs.vue";
 const props = defineProps({
   content: { type: String, required: true },
   route: { type: String, default: "#" },
@@ -49,9 +48,9 @@ const isIconActive = computed(() => isActive.value || isRouteActive.value);
         :active="isIconActive"
         :routeActive="isRouteActive"
       />
-      <BodyStrongXs class="text-center uppercase">{{
+      <p class="text-body-strong-xs text-primary text-center uppercase">{{
         props.content
-      }}</BodyStrongXs>
+      }}</p>
     </div>
   </router-link>
 </template>
