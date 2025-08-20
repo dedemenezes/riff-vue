@@ -3,6 +3,7 @@ import { ref } from "vue";
 import { IconFilter, IconClose, IconSearch } from "@/components/ui/icons"
 import TwContainer from "@/components/layout/TwContainer.vue";
 import AccordionGroup from "./accordion/AccordionGroup.vue";
+import ComboboxComponent from "./ComboboxComponent.vue";
 
 // Controls menu visibility
 const isFilterMenuOpen = ref(false);
@@ -92,6 +93,13 @@ const cleanInput = () => {
                 type="date"
                 name="date"
                 id="date">
+            </template>
+          </AccordionGroup>
+          <AccordionGroup :text="$t('filter.director')">
+            <template v-slot:content>
+              <div class="py-400">
+                <ComboboxComponent />
+              </div>
             </template>
           </AccordionGroup>
         </div>

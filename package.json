@@ -15,8 +15,15 @@
   },
   "dependencies": {
     "@tanstack/vue-query": "^5.85.5",
+    "@vueuse/core": "^13.7.0",
     "axios": "^1.11.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "fast-xml-parser": "^5.2.5",
+    "lucide-vue-next": "^0.540.0",
+    "reka-ui": "^2.4.1",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss-animate": "^1.0.7",
     "vue": "^3.5.17",
     "vue-i18n": "11",
     "vue-router": "4"
@@ -24,6 +31,7 @@
   "devDependencies": {
     "@eslint/js": "^9.32.0",
     "@eslint/markdown": "^7.1.0",
+    "@types/node": "^24.3.0",
     "@vitejs/plugin-vue": "^6.0.0",
     "autoprefixer": "^10.4.21",
     "eslint": "^9.32.0",
