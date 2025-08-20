@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { IconFilter, IconClose, IconSearch } from "@/components/ui/icons"
 import TwContainer from "@/components/layout/TwContainer.vue";
 import AccordionGroup from "./accordion/AccordionGroup.vue";
@@ -141,6 +141,40 @@ const searchValue = ref("")
 const cleanInput = () => {
   searchValue.value = ""
 }
+
+const filters = ref({
+  date: "",
+  time: "",
+  mostra: "",
+  cinema: "",
+  genero: "",
+  pais: "",
+  direcao: "",
+  elenco: "",
+  selo: "",
+  festivais: "",
+  premios: "",
+  palavrasChaves: ""
+});
+
+// Define emits
+const emit = defineEmits(['filtersApplied', 'filtersCleared', 'searchChanged']);
+
+const clearAllFilters = () => {
+  // Clear all filter values
+  Object.keys(filters.value).forEach(key => {
+    filters.value[key] = "";
+  });
+
+  // Emit event to parent component if needed
+  emit('filtersCleared');
+}
+
+const hasActiveFilters = computed(() => {
+  return searchValue.value.length > 0 ||
+         Object.values(filters.value).some(value => value !== "");
+});
+
 </script>
 
 <template>
@@ -171,7 +205,7 @@ const cleanInput = () => {
         @click="openMenu"
         class="p-100 flex items-center gap-200 text-body-strong-sm text-primary md:order-2"
       >
-        <IconFilter height="16px" width="16px" color="text-primary"/> Filtros
+        <IconFilter height="16px" width="16px" color="text-primary"/> {{ $t('filtro', 2)}}
       </button>
       <div class="flex items-center gap-300">
         <span class="text-body-strong-sm uppercase text-secondary-gray">A - Z</span>
@@ -181,7 +215,7 @@ const cleanInput = () => {
           height="16px"
           width="1px"
         />
-        <span class="text-body-strong-sm uppercase text-primary">POR DATA</span>
+        <span class="text-body-strong-sm uppercase text-primary">{{ $t('filter_by.date') }}</span>
       </div>
     </div>
   </div>
@@ -194,10 +228,10 @@ const cleanInput = () => {
     <TwContainer>
 
       <div class="flex flex-col">
-        <div class="shrink-0 flex justify-between py-400 sticky top-0 bg-white-transp-1000 z-10">
-          <p class="text-header-sm text-primary">Filtros</p>
+        <div class="shrink-0 flex justify-between items-center py-400 sticky top-0 bg-white-transp-1000 z-10">
+          <p class="text-header-sm text-primary uppercase">{{ $t("filtro", 2)}}</p>
           <button @click="closeMenu" class="text-neutrals-900">
-            <IconClose />
+            <IconClose height="32px" width="32px" />
           </button>
         </div>
 
@@ -220,7 +254,11 @@ const cleanInput = () => {
           <AccordionGroup :text="$t('filter.time')">
             <template v-slot:content>
               <div class="py-400 overflow-hidden">
-                <ComboboxComponent :collection="collection"/>
+                <ComboboxComponent
+                  :collection="collection"
+                  v-model="filters.time"
+                  placeholder="Selecionar mostra..."
+                />
               </div>
             </template>
           </AccordionGroup>
@@ -255,7 +293,11 @@ const cleanInput = () => {
           <AccordionGroup :text="$t('filter.direcao')">
             <template v-slot:content>
               <div class="py-400 overflow-hidden">
-                <ComboboxComponent :collection="collection"/>
+                <ComboboxComponent
+                  :collection="collection"
+                  v-model="filters.direcao"
+                  placeholder="Selecionar mostra..."
+                />
               </div>
             </template>
           </AccordionGroup>
@@ -299,7 +341,11 @@ const cleanInput = () => {
         <div class="shrink-0 py-400 actions sticky bottom-0 bg-white-transp-1000 z-10">
           <div class="flex justify-between">
             <!-- <button class="flex-1">Limpar tudo</button> -->
-             <ButtonText tag="button" text="Limpar tudo" disabled="true"/>
+             <ButtonText
+             tag="button"
+             text="Limpar tudo"
+             @click="clearAllFilters"
+             :disabled="!hasActiveFilters"/>
             <!-- <button class="flex-1 bg-black text-white">Aplicar filtros</button> -->
              <BaseButton variant="dark">Aplicar filtros</BaseButton>
           </div>
@@ -321,10 +367,3 @@ const cleanInput = () => {
   transform: translateX(-100%);
 }
 </style>
-<!--
-              <ul>
-                <li
-                  style="box-shadow: 4px 4px 14px 6px rgba(82, 81, 81, 0.10);"
-                  class="p-300 flex items-center self-stretch text-body-regular border border-neutrals-300 rounded-100"
-                >Select option</li>
-              </ul> -->

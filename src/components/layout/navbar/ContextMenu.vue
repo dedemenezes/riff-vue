@@ -7,9 +7,9 @@ import { IconProgram } from "@/components/ui/icons";
 
 const items = [
   { name: "programming", route: "/programming", component: IconProgram },
-  { name: "Sessões com convidados", route: "/", component: IconNewUser },
-  { name: "Mudanças na programação", route: "/", component: IconChange },
-  { name: "Sessões ao ar livre", route: "/", component: IconClock },
+  { name: "sessoes_com_convidados", route: "/", component: IconNewUser },
+  { name: "mudancas_na_programacao", route: "/", component: IconChange },
+  { name: "sessoes_ao_ar_livre", route: "/", component: IconClock },
 ];
 </script>
 

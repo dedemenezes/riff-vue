@@ -1,5 +1,10 @@
 {
-  "navigation": {
+  "filtro": "Filter | Filters",
+  "filter_by": {
+    "date": "by date",
+    "time": "by time",
+    "genre": "by genre"
+  },  "navigation": {
     "programming": "Programming",
     "edition2024": "2024 Edition",
     "aboutUs": "About Us",
@@ -9,6 +14,23 @@
     "press": "Press",
     "archive": "Archive",
     "registrations": "Registration",
-    "contact": "Contact"
+    "contact": "Contact",
+    "sessoes_com_convidados": "Sessions with Guests",
+    "mudancas_na_programacao": "Program Updates",
+    "sessoes_ao_ar_livre": "Open-Air Screenings"
+  },
+  "filter": {
+    "date": "Date",
+    "time": "Time",
+    "mostra": "Showcase",
+    "cinema": "Cinema",
+    "genero": "Genre",
+    "pais": "Country",
+    "direcao": "Director",
+    "elenco": "Cast",
+    "selo": "Label",
+    "festivais": "Festivals",
+    "premios": "Awards",
+    "palavras-chaves": "Keywords"
   }
 }

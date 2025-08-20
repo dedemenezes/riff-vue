@@ -1,4 +1,10 @@
 {
+  "filtro": "Filtro | Filtros",
+  "filter_by": {
+    "date": "por data",
+    "time": "por horário",
+    "genre": "por gênero"
+  },
   "navigation": {
     "programming": "Programação",
     "edition2024": "Edição 2024",
@@ -9,6 +15,23 @@
     "press": "Imprensa",
     "archive": "Arquivo",
     "registrations": "Inscrições",
-    "contact": "Contato"
+    "contact": "Contato",
+    "sessoes_com_convidados": "Sessões com convidados",
+    "mudancas_na_programacao": "Mudanças na programação",
+    "sessoes_ao_ar_livre": "Sessões ao ar livre"
+  },
+  "filter": {
+    "date": "Data",
+    "time": "Horário",
+    "mostra": "Mostra",
+    "cinema": "Cinema",
+    "genero": "Genero",
+    "pais": "País",
+    "direcao": "Direção",
+    "elenco": "Elenco",
+    "selo": "Selo",
+    "festivais": "Festivais",
+    "premios": "Prêmios",
+    "palavras-chaves": "Palavras-chaves"
   }
 }
