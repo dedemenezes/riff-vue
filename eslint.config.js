@@ -5,17 +5,12 @@ import markdown from "@eslint/markdown";
 import { defineConfig } from "eslint/config";
 
 export default defineConfig([
+  js.configs.recommended,
+  ...pluginVue.configs["flat/essential"], // ✅ spread array here safely
   {
-    files: ["**/*.{js,mjs,cjs,vue}"],
-    plugins: { js },
-    extends: ["js/recommended"],
-    languageOptions: { globals: globals.browser },
+    files: ["**/*.vue"],
+    rules: { "vue/multi-word-component-names": "off" }, // ✅ override after spreading
   },
-  pluginVue.configs["flat/essential"],
-  {
-    files: ["**/*.md"],
-    plugins: { markdown },
-    language: "markdown/gfm",
-    extends: ["markdown/recommended"],
-  },
+  markdown.configs.recommended,
+  { languageOptions: { globals: globals.browser } },
 ]);

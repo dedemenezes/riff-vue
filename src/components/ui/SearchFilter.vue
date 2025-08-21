@@ -1,5 +1,5 @@
 <script setup>
-import { isEqual } from "lodash-es";
+// import { isEqual } from "lodash-es";
 import { computed, ref } from "vue";
 import { toRaw } from "vue";
 import { IconFilter, IconClose, IconSearch } from "@/components/ui/icons";
@@ -293,11 +293,11 @@ const hasActiveFilters = computed(() => {
   return Object.values(filters.value).some((value) => value !== null);
 });
 
-const hasFiltersChanged = computed(() => {
-  const rawFilters = cleanObject(toRaw(filters.value));
-  const rawSubmitted = cleanObject(toRaw(submittedFilters.value));
-  return !isEqual(rawFilters, rawSubmitted);
-});
+// const hasFiltersChanged = computed(() => {
+//   const rawFilters = cleanObject(toRaw(filters.value));
+//   const rawSubmitted = cleanObject(toRaw(submittedFilters.value));
+//   return !isEqual(rawFilters, rawSubmitted);
+// });
 
 const fetchFilteredResults = async (filters) => {
   await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -313,7 +313,7 @@ const fetchFilteredResults = async (filters) => {
 
 const {
   data: filteredData,
-  isFetching,
+  isFetching, /*eslint-disable-line no-unused-vars */
   refetch: refetchFilters,
 } = useQuery({
   queryKey: ["filtered-results", submittedFilters],

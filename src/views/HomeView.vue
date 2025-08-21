@@ -11,27 +11,27 @@ import { useI18n } from "@/composables/useI18n";
 
 const { t } = useI18n();
 
-const quickLinks = [
-  {
-    id: 1,
-    title: "PROGRAMAÇÃO",
-    description:
-      "Veja a programação completa ou filtre de acordo com o que deseja.",
-    href: "/programacao",
-  },
-  {
-    id: 2,
-    title: "INGRESSOS",
-    description: "Descubra como garantir sua entrada nos cinemas e eventos.",
-    href: "/filmes",
-  },
-  {
-    id: 3,
-    title: "MUDANÇAS NA PROGRAMAÇÃO",
-    description: "Planeje-se verificando as mudanças na programação.",
-    href: "/mudancas",
-  },
-];
+// const quickLinks = [
+//   {
+//     id: 1,
+//     title: "PROGRAMAÇÃO",
+//     description:
+//       "Veja a programação completa ou filtre de acordo com o que deseja.",
+//     href: "/programacao",
+//   },
+//   {
+//     id: 2,
+//     title: "INGRESSOS",
+//     description: "Descubra como garantir sua entrada nos cinemas e eventos.",
+//     href: "/filmes",
+//   },
+//   {
+//     id: 3,
+//     title: "MUDANÇAS NA PROGRAMAÇÃO",
+//     description: "Planeje-se verificando as mudanças na programação.",
+//     href: "/mudancas",
+//   },
+// ];
 
 // After (optimized with translation keys)
 const quickLinksConfig = [

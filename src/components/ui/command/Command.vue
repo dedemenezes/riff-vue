@@ -80,6 +80,7 @@ function filterItems() {
   filterState.filtered.count = itemCount;
 }
 
+/*eslint-disable-next-line no-unused-vars */
 function handleSelect() {
   filterState.search = "";
 }
