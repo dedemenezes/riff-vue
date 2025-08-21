@@ -20,14 +20,15 @@ const { isPending, isFetching, isError, data, error } = useMoviesQuery();
         v-if="showToast"
         message="Loading movies..."
         description="Very very soon."
-        type="pending"
+        type="info"
         :duration="5000"
         @close="showToast = false"
       />
       <!-- Or skeleton loader -->
     </template>
     <template v-else-if="isError">
-      <p class="text-red-500">{{ error }}</p>
+      <p class="text-red-500">{{ console.log(error) }}</p>
+      <ToastNotification :description="error.message" :message="error.name" type="error" />
     </template>
     <template v-else>
       <MovieCard v-for="movie in data?.FMPDSORESULT?.ROW || []" :key="movie.RECORDID" :movie="movie" />

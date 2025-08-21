@@ -1,4 +1,4 @@
-import apiClient from "./api_client";
+import apiClient from "@/services/api/client/apiClient";
 import { XMLParser } from "fast-xml-parser";
 
 const parser = new XMLParser({ ignoreAttributes: false });
@@ -13,7 +13,7 @@ export const fetchMovies = async () => {
     xmlData = await response.text();
   } else {
     // Use API
-    const endpoint = "/schedules/xml/programacao"
+    const endpoint = "/schedules/xml/"
     const response = await apiClient.get(endpoint, { responseType: "text" });
     xmlData = response.data;
   }

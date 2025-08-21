@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/vue-query'
-import { fetchMovies } from '../services/api/movies'
+import { fetchMovies } from '@/services/api/endpoints/movies'
 
 export function useMoviesQuery() {
   return useQuery({
