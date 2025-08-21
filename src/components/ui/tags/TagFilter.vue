@@ -8,8 +8,7 @@ const { text } = defineProps({
 });
 
 const emit = defineEmits(['remove-filter'])
-const removeSelf = (event) => {
-  console.log(event);
+const removeSelf = () => {
   emit("remove-filter", text)
 }
 </script>

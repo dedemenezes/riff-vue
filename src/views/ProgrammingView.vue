@@ -10,7 +10,6 @@ const searchFilterRef = ref(null);
 const searchQuery = ref({})
 
 const loggg = (data) => {
-  console.log(data);
   searchQuery.value = data;
 }
 

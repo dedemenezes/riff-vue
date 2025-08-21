@@ -21,7 +21,7 @@ const df = new DateFormatter(locale.value, {
 })
 
 const props = defineProps({
-  modelValue: { type: Object, required: true }
+  modelValue: { type: Object, default: null }
 })
 // Emit definition for v-model support
 const emit = defineEmits(['update:modelValue'])

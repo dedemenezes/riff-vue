@@ -180,8 +180,9 @@ const emit = defineEmits(['filtersApplied', 'filtersCleared']);
 const applyFilters = async () => {
   const rawFilters = toRaw(filters.value);
   const cleanedFilters = cleanObject(rawFilters)
+
   if (cleanedFilters.date) {
-    cleanedFilters.date = cleanedFilters.date.toISOString()
+    cleanedFilters.date = cleanedFilters.date.toString()
   }
   submittedFilters.value = cleanedFilters;
   await refetchFilters()
@@ -442,7 +443,7 @@ const {
              <BaseButton
               variant="dark"
               @click="applyFilters"
-              :disabled="!hasFiltersChanged"
+              :disabled="!hasActiveFilters"
             >Aplicar filtros</BaseButton>
           </div>
         </div>
