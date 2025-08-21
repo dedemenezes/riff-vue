@@ -12,6 +12,28 @@ const props = defineProps({
   movie: { type: Object, required: true },
 });
 
+const moviePoster = computed(() => {
+  return props.movie.poster || "src/assets/poc-poster.jpg"
+})
+
+const movieGenre = computed(() => {
+  return props.movie.genero || "TBD"
+})
+
+const screenings = computed(() => {
+  if (props.movie.sessao) {
+    return [
+      { time: "08h30", state: "disabled" },
+      { time: props.movie.sessao.replace(":", "h"), state: "active" }
+    ]
+  } else {
+    return [
+      { time: "08h30", state: "disabled" },
+      { time: "21h00", state: "active" }
+    ]
+  }
+})
+
 const normalizeString = (str) =>
   str
     .normalize("NFD") // Decompose accented characters
@@ -38,7 +60,7 @@ const { getLocalizedTitle } = useMovieLocalization();
     <!-- image -->
     <div class="relative">
       <img
-        src="https://leiturafilmica.com.br/wp-content/uploads/2018/09/saneamento-basico-o-filme-1024x575.png"
+        :src="moviePoster"
         alt="movie-name poster"
         width="100%"
         class="rounded-200"
@@ -76,7 +98,7 @@ const { getLocalizedTitle } = useMovieLocalization();
             height="16px"
             width="1px"
           />
-          <span class="text-overline text-on-dark-secondary">FIC</span>
+          <span class="text-overline text-on-dark-secondary">{{ movieGenre }}</span>
           <img
             src="@assets/divisor.svg"
             alt="divisor"
@@ -102,9 +124,12 @@ const { getLocalizedTitle } = useMovieLocalization();
         </p>
       </div>
       <div class="flex items-center space-x-200">
-        <TagScreening time="21h30" state="disabled" />
-        <TagScreening time="23h45" state="disabled" />
-        <TagScreening :time="props.movie.sessao" />
+        <TagScreening
+          v-for="screening in screenings"
+          :key="screening"
+          :time="screening.time"
+          :state="screening.state"
+        />
       </div>
     </div>
   </div>

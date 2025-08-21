@@ -5,8 +5,8 @@ export function useMoviesQuery() {
   return useQuery({
     queryKey: ["programming"],
     queryFn: fetchMovies,
-    staleTime: 5 * 60 * 1000, // 5 minutes
-    gcTime: 60 * 60 * 1000, // 60 minutes
+    // staleTime: 5 * 60 * 1000, // 5 minutes
+    gcTime: 4 * 60 * 60 * 1000, // 4 * 60 minutes
     refetchOnWindowFocus: false,
     refetchOnReconnect: true,
     retry: 3,
