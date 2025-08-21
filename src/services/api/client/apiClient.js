@@ -11,7 +11,7 @@ apiClient.interceptors.request.use(
   (config) => {
     // Set default timeout
     if (!config.timeout) {
-      config.timeout = 5000; // 30 seconds
+      config.timeout = 30000; // 30 seconds
     }
 
     // Add auth token if available (commented out as in original)

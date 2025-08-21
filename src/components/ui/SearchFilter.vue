@@ -12,7 +12,7 @@ import DatePickerComponent from "./datepicker/DatePickerComponent.vue";
 import SelectComponent from "./SelectComponent.vue";
 import { generateTimeOptions } from "@/composables/useTimeOptions";
 import { useQuery } from '@tanstack/vue-query'
-import { cleanObject } from "@/composables/cleanObject";
+import { cleanObject } from "@/utils/helpers/objectHelpers";
 
 const collection = [
   {value: "Joachim Trier", label: "Joachim Trier"},

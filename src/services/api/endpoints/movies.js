@@ -13,7 +13,7 @@ export const fetchMovies = async () => {
     xmlData = await response.text();
   } else {
     // Use API
-    const endpoint = "/schedules/xml/"
+    const endpoint = "/schedules/xml/programacao"
     const response = await apiClient.get(endpoint, { responseType: "text" });
     xmlData = response.data;
   }
