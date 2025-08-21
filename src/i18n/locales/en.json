@@ -31,7 +31,7 @@
     "selo": "Label",
     "festivais": "Festivals",
     "premios": "Awards",
-    "palavras-chaves": "Keywords"
+    "palavras_chaves": "Keywords"
   },
   "datepicker": {
     "pick_date": "Pick a date"

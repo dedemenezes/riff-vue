@@ -1,5 +1,6 @@
 <script setup>
 import { computed, ref } from "vue";
+import { toRaw } from "vue";
 import { IconFilter, IconClose, IconSearch } from "@/components/ui/icons"
 import TwContainer from "@/components/layout/TwContainer.vue";
 import AccordionGroup from "./accordion/AccordionGroup.vue";
@@ -9,6 +10,8 @@ import ButtonText from "./buttons/ButtonText.vue";
 import DatePickerComponent from "./datepicker/DatePickerComponent.vue";
 import SelectComponent from "./SelectComponent.vue";
 import { generateTimeOptions } from "@/composables/useTimeOptions";
+import { useQuery } from '@tanstack/vue-query'
+import { cleanObject } from "@/composables/cleanObject";
 
 const collection = [
   {value: "Joachim Trier", label: "Joachim Trier"},
@@ -134,16 +137,65 @@ const showcases = [
   { label: "Première Latina", value: "premiere-latina", iconColor: "bg-amarelo-800" },
 ]
 
-// Controls menu visibility
+
+const fetchFilteredResults = async (filters) => {
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  return {
+    message: "Success",
+    filtersUsed: filters,
+    results: [{ id: 1, name: 'Fake Movie 1' }, { id: 2, name: 'Fake Movie 2' }]
+  };
+};
+
+const updateFilters = (newFilters) => {
+  submittedFilters.value = newFilters;
+  // we need to update the filters ref object so th ui also reflect the qury removal
+  Object.keys(filters.value).forEach(key => {
+    filters.value[key] = newFilters[key] ?? null;
+  });
+  refetchFilters();
+}
+
+defineExpose({
+  updateFilters
+})
+
+const submittedFilters = ref({});
+
+const {
+  data: filteredData,
+  isFetching,
+  refetch: refetchFilters
+} = useQuery({
+  queryKey: ['filtered-results', submittedFilters],
+  queryFn: () => fetchFilteredResults(submittedFilters.value),
+  enabled: false
+});
+
+const applyFilters = async () => {
+  const rawFilters = toRaw(filters.value);
+  const cleanedFilters = cleanObject(rawFilters)
+  if (cleanedFilters.date) {
+    cleanedFilters.date = cleanedFilters.date.toString()
+  }
+  submittedFilters.value = cleanedFilters;
+  await refetchFilters()
+  console.log("Results:", filteredData.value)
+  emit('filtersApplied', submittedFilters.value);
+  closeMenu()
+}
+
+
+
 const isFilterMenuOpen = ref(false);
 
 const openMenu = () => {
   isFilterMenuOpen.value = true;
-  document.body.style.overflow = "hidden"; // prevent background scroll
+  document.body.style.overflow = "hidden";
 };
 const closeMenu = () => {
   isFilterMenuOpen.value = false;
-  document.body.style.overflow = ""; // restore scroll
+  document.body.style.overflow = "";
 };
 
 const searchValue = ref("")
@@ -153,35 +205,35 @@ const cleanInput = () => {
 
 const timeOptions = computed(
   () => generateTimeOptions()
-) // Use in <select>
+)
 
 
 const filters = ref({
-  date: "",
-  startTime: "",
-  endTime: "",
-  mostra: "",
-  cinema: "",
-  genero: "",
-  pais: "",
-  direcao: "",
-  elenco: "",
-  selo: "",
-  festivais: "",
-  premios: "",
-  palavrasChaves: ""
+  date: null,
+  startTime: null,
+  endTime: null,
+  mostra: null,
+  cinema: null,
+  genero: null,
+  pais: null,
+  direcao: null,
+  elenco: null,
+  selo: null,
+  festivais: null,
+  premios: null,
+  palavrasChaves: null
 });
 
-// Define emits
-const emit = defineEmits(['filtersApplied', 'filtersCleared', 'searchChanged']);
+
+const emit = defineEmits(['filtersApplied', 'filtersCleared']);
 
 const clearAllFilters = () => {
-  // Clear all filter values
+
   Object.keys(filters.value).forEach(key => {
-    filters.value[key] = "";
+    filters.value[key] = null;
   });
 
-  // Emit event to parent component if needed
+
   emit('filtersCleared');
 }
 
@@ -189,6 +241,12 @@ const hasActiveFilters = computed(() => {
   return searchValue.value.length > 0 ||
          Object.values(filters.value).some(value => value !== "");
 });
+
+
+const hasFiltersChanged = computed(() => {
+  return hasActiveFilters.value;
+});
+
 
 </script>
 
@@ -238,6 +296,7 @@ const hasActiveFilters = computed(() => {
 <transition name="slide-left">
   <div
     v-if="isFilterMenuOpen"
+    style="margin-top: 0;"
     class="fixed inset-0 z-50 bg-white flex flex-col w-full max-w-full h-[100vh] right-0 shadow-lg overflow-y-auto"
   >
     <TwContainer>
@@ -251,14 +310,14 @@ const hasActiveFilters = computed(() => {
         </div>
 
         <div class="flex-grow flex flex-col space-y-800 overflow-y-auto">
-          <AccordionGroup :text="$t('filter.date')">
+          <AccordionGroup :text="$t('filter.date')" :isOpen="filters.date != null">
             <template v-slot:content>
                 <div class="pt-400">
                   <DatePickerComponent v-model="filters.date" />
                 </div>
             </template>
           </AccordionGroup>
-          <AccordionGroup :text="$t('filter.time')">
+          <AccordionGroup :text="$t('filter.time')" :isOpen="filters.time != null">
             <template v-slot:content>
               <div class="pt-400 overflow-hidden">
                 <div class="flex items-center gap-400">
@@ -274,7 +333,7 @@ const hasActiveFilters = computed(() => {
               </div>
             </template>
           </AccordionGroup>
-          <AccordionGroup :text="$t('filter.mostra')">
+          <AccordionGroup :text="$t('filter.mostra')" :isOpen="filters.mostra != null">
             <template v-slot:content>
               <div class="pt-400 overflow-hidden">
                 <ComboboxComponent
@@ -285,67 +344,66 @@ const hasActiveFilters = computed(() => {
               </div>
             </template>
           </AccordionGroup>
-          <AccordionGroup :text="$t('filter.cinema')">
+          <AccordionGroup :text="$t('filter.cinema')" :isOpen="filters.cinema != null">
             <template v-slot:content>
               <div class="pt-400 overflow-hidden">
                 <ComboboxComponent :collection="collection"/>
               </div>
             </template>
           </AccordionGroup>
-          <AccordionGroup :text="$t('filter.genero')">
+          <AccordionGroup :text="$t('filter.genero')" :isOpen="filters.genero != null">
             <template v-slot:content>
               <div class="pt-400 overflow-hidden">
                 <ComboboxComponent :collection="collection"/>
               </div>
             </template>
           </AccordionGroup>
-          <AccordionGroup :text="$t('filter.pais')">
+          <AccordionGroup :text="$t('filter.pais')" :isOpen="filters.pais != null">
             <template v-slot:content>
               <div class="pt-400 overflow-hidden">
                 <ComboboxComponent :collection="collection"/>
               </div>
             </template>
           </AccordionGroup>
-          <AccordionGroup :text="$t('filter.direcao')">
+          <AccordionGroup :text="$t('filter.direcao')" :isOpen="filters.direcao != null">
             <template v-slot:content>
               <div class="pt-400 overflow-hidden">
                 <ComboboxComponent
                   :collection="collection"
                   v-model="filters.direcao"
-                  placeholder="Selecionar mostra..."
                 />
               </div>
             </template>
           </AccordionGroup>
-          <AccordionGroup :text="$t('filter.elenco')">
+          <AccordionGroup :text="$t('filter.elenco')" :isOpen="filters.elenco != null">
             <template v-slot:content>
               <div class="pt-400 overflow-hidden">
                 <ComboboxComponent :collection="collection"/>
               </div>
             </template>
           </AccordionGroup>
-          <AccordionGroup :text="$t('filter.selo')">
+          <AccordionGroup :text="$t('filter.selo')" :isOpen="filters.selo != null">
             <template v-slot:content>
               <div class="pt-400 overflow-hidden">
                 <ComboboxComponent :collection="collection"/>
               </div>
             </template>
           </AccordionGroup>
-          <AccordionGroup :text="$t('filter.festivais')">
+          <AccordionGroup :text="$t('filter.festivais')" :isOpen="filters.festivais != null">
             <template v-slot:content>
               <div class="pt-400 overflow-hidden">
                 <ComboboxComponent :collection="collection"/>
               </div>
             </template>
           </AccordionGroup>
-          <AccordionGroup :text="$t('filter.premios')">
+          <AccordionGroup :text="$t('filter.premios')" :isOpen="filters.premios != null">
             <template v-slot:content>
               <div class="pt-400 overflow-hidden">
                 <ComboboxComponent :collection="collection"/>
               </div>
             </template>
           </AccordionGroup>
-          <AccordionGroup :text="$t('filter.palavras-chaves')">
+          <AccordionGroup :text="$t('filter.palavras_chaves')" :isOpen="filters.palavras-chaves != null">
             <template v-slot:content>
               <div class="pt-400 overflow-hidden">
                 <ComboboxComponent :collection="collection"/>
@@ -354,7 +412,7 @@ const hasActiveFilters = computed(() => {
           </AccordionGroup>
         </div>
 
-        <div class="shrink-0 pt-400 actions sticky bottom-0 bg-white-transp-1000 z-10">
+        <div class="shrink-0 py-400 actions sticky bottom-0 bg-white-transp-1000 z-10">
           <div class="flex justify-between">
             <!-- <button class="flex-1">Limpar tudo</button> -->
              <ButtonText
@@ -363,7 +421,11 @@ const hasActiveFilters = computed(() => {
              @click="clearAllFilters"
              :disabled="!hasActiveFilters"/>
             <!-- <button class="flex-1 bg-black text-white">Aplicar filtros</button> -->
-             <BaseButton variant="dark">Aplicar filtros</BaseButton>
+             <BaseButton
+              variant="dark"
+              @click="applyFilters"
+              :disabled="!hasFiltersChanged"
+            >Aplicar filtros</BaseButton>
           </div>
         </div>
       </div>

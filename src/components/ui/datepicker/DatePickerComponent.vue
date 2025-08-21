@@ -1,6 +1,7 @@
 <script setup>
 import {
   DateFormatter,
+  // DateValue,
 
   getLocalTimeZone,
 } from "@internationalized/date"
@@ -20,7 +21,7 @@ const df = new DateFormatter(locale.value, {
 })
 
 const props = defineProps({
-  modelValue: { type: String, required: true }
+  modelValue: { type: Object, required: true }
 })
 // Emit definition for v-model support
 const emit = defineEmits(['update:modelValue'])
