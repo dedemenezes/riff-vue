@@ -1,4 +1,5 @@
 <script setup>
+import { computed } from "vue";
 import { IconPlus } from "@/components/ui/icons";
 import QuickLinksSection from "@/components/layout/sections/QuickLinksSection.vue";
 import HomeBanner from "@/components/ui/HomeBanner.vue";
@@ -6,6 +7,10 @@ import TwContainer from "@/components/layout/TwContainer.vue";
 import { ButtonText } from "@/components/ui/buttons";
 import ArticleCard from "@/components/ui/cards/ArticleCard.vue";
 import ContextMenu from "../components/layout/navbar/ContextMenu.vue";
+import { useI18n }  from "@/composables/useI18n";
+
+const { t } = useI18n()
+
 const quickLinks = [
   {
     id: 1,
@@ -27,6 +32,38 @@ const quickLinks = [
     href: "/mudancas",
   },
 ];
+
+// After (optimized with translation keys)
+const quickLinksConfig = [
+  {
+    id: 1,
+    titleKey: "quickLinks.programming.title",
+    descriptionKey: "quickLinks.programming.description",
+    href: "/programacao",
+  },
+  {
+    id: 2,
+    titleKey: "quickLinks.tickets.title",
+    descriptionKey: "quickLinks.tickets.description",
+    href: "/filmes",
+  },
+  {
+    id: 3,
+    titleKey: "quickLinks.schedule.title",
+    descriptionKey: "quickLinks.schedule.description",
+    href: "/mudancas",
+  },
+];
+
+const translatedLinks = computed(() =>
+  quickLinksConfig.map(link => ({
+    ...link,
+    title: t(link.titleKey),
+    description: t(link.descriptionKey)
+  }))
+);
+console.log(translatedLinks.value);
+
 </script>
 
 <template>
@@ -36,14 +73,14 @@ const quickLinks = [
     alt="Banner promocional"
   >
     <h1 class="text-header-base text-2xl lg:text-3xl mb-200 text-primary">
-      A 26ª edição do Festival do Rio vem aí!
+      {{ $t("home.banner_title") }}
     </h1>
     <p class="text-subheading text-primary">
-      De 2 a 12 de outubro o cinema estará sob a luz do Rio
+      {{ $t("home.banner_subtitle") }}
     </p>
   </HomeBanner>
 
-  <QuickLinksSection v-bind:links="quickLinks" />
+  <QuickLinksSection v-bind:links="translatedLinks" />
 
   <TwContainer>
     <div class="py-1200">

@@ -1,10 +1,23 @@
 {
-  "filtro": "Filter | Filters",
-  "filter_by": {
-    "date": "by date",
-    "time": "by time",
-    "genre": "by genre"
-  },  "navigation": {
+  "home": {
+    "banner_title": "The 26th edition of Festival do Rio is coming!",
+    "banner_subtitle": "From October 2 to 12, cinema will be under the light of Rio"
+  },
+  "quickLinks": {
+    "programming": {
+      "title": "PROGRAMMING",
+      "description": "View the complete schedule or filter according to what you want."
+    },
+    "tickets": {
+      "title": "TICKETS",
+      "description": "Find out how to secure your entry to cinemas and events."
+    },
+    "schedule": {
+      "title": "SCHEDULE CHANGES",
+      "description": "Plan ahead by checking schedule changes."
+    }
+  },
+  "navigation": {
     "programming": "Programming",
     "edition2024": "2024 Edition",
     "aboutUs": "About Us",
@@ -20,6 +33,7 @@
     "sessoes_ao_ar_livre": "Open-Air Screenings"
   },
   "filter": {
+    "title": "Filters",
     "date": "Date",
     "time": "Time",
     "mostra": "Showcase",
@@ -32,6 +46,15 @@
     "festivais": "Festivals",
     "premios": "Awards",
     "palavras_chaves": "Keywords"
+  },
+  "filter_by": {
+    "date": "by date",
+    "time": "by time",
+    "genre": "by genre"
+  },
+  "loading": {
+    "title": "Loading",
+    "movies": "Loading movies"
   },
   "datepicker": {
     "pick_date": "Pick a date"

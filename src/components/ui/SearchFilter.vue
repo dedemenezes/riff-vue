@@ -273,7 +273,7 @@ const {
         @click="openMenu"
         class="p-100 flex items-center gap-200 text-body-strong-sm text-primary md:order-2"
       >
-        <IconFilter height="16px" width="16px" color="text-primary"/> {{ $t('filtro', 2)}}
+        <IconFilter height="16px" width="16px" color="text-primary"/> {{ $t('filter.title')}}
       </button>
       <div class="flex items-center gap-300">
         <span class="text-body-strong-sm uppercase text-secondary-gray">A - Z</span>
