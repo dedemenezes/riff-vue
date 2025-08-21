@@ -31,7 +31,7 @@ const open = ref(false)
 const props = defineProps({
   collection: { type: Array, required: true },
   modelValue: { type: String, default: '' }, // v-model prop
-  placeholder: { type: String, default: 'placeholder.select' },
+  placeholder: { type: String, default: "placeholder.select" },
   withIcon: { type: Boolean, default: false }
 })
 
@@ -69,7 +69,7 @@ const iconColor = (value) => props.collection.find((item) => item.value === valu
         :aria-expanded="open"
         class="w-[-webkit-fill-available] justify-between m-100"
       >
-        <div class="flex gap-300 items-center">
+        <div class="flex gap-300 items-center" :class="value ? 'text-primary' : 'text-secondary-gray'">
           <span v-if="withIcon && value" :class="iconColor(value)" style="width: 8px; height: 8px; border-radius: 50%;"></span>
           {{ value ? props.collection.find((item) => item.value === value)?.label : $t(props.placeholder) }}
         </div>
