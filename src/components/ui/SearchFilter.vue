@@ -1,4 +1,5 @@
 <script setup>
+import { isEqual } from 'lodash-es';
 import { computed, ref } from "vue";
 import { toRaw } from "vue";
 import { IconFilter, IconClose, IconSearch } from "@/components/ui/icons"
@@ -137,57 +138,8 @@ const showcases = [
   { label: "Première Latina", value: "premiere-latina", iconColor: "bg-amarelo-800" },
 ]
 
-
-const fetchFilteredResults = async (filters) => {
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  return {
-    message: "Success",
-    filtersUsed: filters,
-    results: [{ id: 1, name: 'Fake Movie 1' }, { id: 2, name: 'Fake Movie 2' }]
-  };
-};
-
-const updateFilters = (newFilters) => {
-  submittedFilters.value = newFilters;
-  // we need to update the filters ref object so th ui also reflect the qury removal
-  Object.keys(filters.value).forEach(key => {
-    filters.value[key] = newFilters[key] ?? null;
-  });
-  refetchFilters();
-}
-
-defineExpose({
-  updateFilters
-})
-
-const submittedFilters = ref({});
-
-const {
-  data: filteredData,
-  isFetching,
-  refetch: refetchFilters
-} = useQuery({
-  queryKey: ['filtered-results', submittedFilters],
-  queryFn: () => fetchFilteredResults(submittedFilters.value),
-  enabled: false
-});
-
-const applyFilters = async () => {
-  const rawFilters = toRaw(filters.value);
-  const cleanedFilters = cleanObject(rawFilters)
-  if (cleanedFilters.date) {
-    cleanedFilters.date = cleanedFilters.date.toString()
-  }
-  submittedFilters.value = cleanedFilters;
-  await refetchFilters()
-  console.log("Results:", filteredData.value)
-  emit('filtersApplied', submittedFilters.value);
-  closeMenu()
-}
-
-
-
 const isFilterMenuOpen = ref(false);
+const submittedFilters = ref({});
 
 const openMenu = () => {
   isFilterMenuOpen.value = true;
@@ -207,7 +159,6 @@ const timeOptions = computed(
   () => generateTimeOptions()
 )
 
-
 const filters = ref({
   date: null,
   startTime: null,
@@ -224,30 +175,73 @@ const filters = ref({
   palavrasChaves: null
 });
 
-
 const emit = defineEmits(['filtersApplied', 'filtersCleared']);
 
-const clearAllFilters = () => {
+const applyFilters = async () => {
+  const rawFilters = toRaw(filters.value);
+  const cleanedFilters = cleanObject(rawFilters)
+  if (cleanedFilters.date) {
+    cleanedFilters.date = cleanedFilters.date.toISOString()
+  }
+  submittedFilters.value = cleanedFilters;
+  await refetchFilters()
+  console.log("Results:", filteredData.value)
+  emit('filtersApplied', submittedFilters.value);
+  closeMenu()
+}
 
+const clearAllFilters = () => {
   Object.keys(filters.value).forEach(key => {
     filters.value[key] = null;
   });
 
-
   emit('filtersCleared');
 }
 
-const hasActiveFilters = computed(() => {
-  return searchValue.value.length > 0 ||
-         Object.values(filters.value).some(value => value !== "");
-});
+const updateFilters = (newFilters) => {
+  submittedFilters.value = newFilters;
+  // we need to update the filters ref object so th ui also reflect the qury removal
+  Object.keys(filters.value).forEach(key => {
+    filters.value[key] = Object.prototype.hasOwnProperty.call(newFilters, key)
+      ? newFilters[key]
+      : null;
+  });
 
+  refetchFilters();
+}
+
+defineExpose({
+  updateFilters
+})
+
+const hasActiveFilters = computed(() => {
+  return Object.values(filters.value).some(value => value !== null);
+});
 
 const hasFiltersChanged = computed(() => {
-  return hasActiveFilters.value;
+  const rawFilters = cleanObject(toRaw(filters.value));
+  const rawSubmitted = cleanObject(toRaw(submittedFilters.value));
+  return !isEqual(rawFilters, rawSubmitted);
 });
 
+const fetchFilteredResults = async (filters) => {
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  return {
+    message: "Success",
+    filtersUsed: filters,
+    results: [{ id: 1, name: 'Fake Movie 1' }, { id: 2, name: 'Fake Movie 2' }]
+  };
+};
 
+const {
+  data: filteredData,
+  isFetching,
+  refetch: refetchFilters
+} = useQuery({
+  queryKey: ['filtered-results', submittedFilters],
+  queryFn: () => fetchFilteredResults(submittedFilters.value),
+  enabled: false
+});
 </script>
 
 <template>
@@ -347,21 +341,30 @@ const hasFiltersChanged = computed(() => {
           <AccordionGroup :text="$t('filter.cinema')" :isOpen="filters.cinema != null">
             <template v-slot:content>
               <div class="pt-400 overflow-hidden">
-                <ComboboxComponent :collection="collection"/>
+                <ComboboxComponent
+                  :collection="showcases"
+                  v-model="filters.cinema"
+                />
               </div>
             </template>
           </AccordionGroup>
           <AccordionGroup :text="$t('filter.genero')" :isOpen="filters.genero != null">
             <template v-slot:content>
               <div class="pt-400 overflow-hidden">
-                <ComboboxComponent :collection="collection"/>
+                <ComboboxComponent
+                  :collection="showcases"
+                  v-model="filters.genero"
+                />
               </div>
             </template>
           </AccordionGroup>
           <AccordionGroup :text="$t('filter.pais')" :isOpen="filters.pais != null">
             <template v-slot:content>
               <div class="pt-400 overflow-hidden">
-                <ComboboxComponent :collection="collection"/>
+                <ComboboxComponent
+                  :collection="showcases"
+                  v-model="filters.pais"
+                />
               </div>
             </template>
           </AccordionGroup>
@@ -378,35 +381,50 @@ const hasFiltersChanged = computed(() => {
           <AccordionGroup :text="$t('filter.elenco')" :isOpen="filters.elenco != null">
             <template v-slot:content>
               <div class="pt-400 overflow-hidden">
-                <ComboboxComponent :collection="collection"/>
+                <ComboboxComponent
+                  :collection="showcases"
+                  v-model="filters.elenco"
+                />
               </div>
             </template>
           </AccordionGroup>
           <AccordionGroup :text="$t('filter.selo')" :isOpen="filters.selo != null">
             <template v-slot:content>
               <div class="pt-400 overflow-hidden">
-                <ComboboxComponent :collection="collection"/>
+                <ComboboxComponent
+                  :collection="showcases"
+                  v-model="filters.selo"
+                />
               </div>
             </template>
           </AccordionGroup>
           <AccordionGroup :text="$t('filter.festivais')" :isOpen="filters.festivais != null">
             <template v-slot:content>
               <div class="pt-400 overflow-hidden">
-                <ComboboxComponent :collection="collection"/>
+                <ComboboxComponent
+                  :collection="showcases"
+                  v-model="filters.festivais"
+                />
               </div>
             </template>
           </AccordionGroup>
           <AccordionGroup :text="$t('filter.premios')" :isOpen="filters.premios != null">
             <template v-slot:content>
               <div class="pt-400 overflow-hidden">
-                <ComboboxComponent :collection="collection"/>
+                <ComboboxComponent
+                  :collection="showcases"
+                  v-model="filters.premios"
+                />
               </div>
             </template>
           </AccordionGroup>
-          <AccordionGroup :text="$t('filter.palavras_chaves')" :isOpen="filters.palavras-chaves != null">
+          <AccordionGroup :text="$t('filter.palavras_chaves')" :isOpen="filters.palavrasChaves != null">
             <template v-slot:content>
               <div class="pt-400 overflow-hidden">
-                <ComboboxComponent :collection="collection"/>
+                <ComboboxComponent
+                  :collection="showcases"
+                  v-model="filters.palavrasChaves"
+                />
               </div>
             </template>
           </AccordionGroup>
