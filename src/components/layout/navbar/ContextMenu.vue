@@ -1,5 +1,5 @@
 <script setup>
-import NavButtonContext from "@/components/ui/buttons/NavButtonContext.vue";
+import { NavButtonContext } from "@/components/ui/buttons";
 import { IconChange } from "@/components/ui/icons";
 import { IconNewUser } from "@/components/ui/icons";
 import { IconClock } from "@/components/ui/icons";

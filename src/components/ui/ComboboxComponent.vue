@@ -1,7 +1,7 @@
 <script setup>
 import { Check, ChevronsUpDown } from 'lucide-vue-next'
 import { watch, ref } from 'vue'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/buttons'
 import {
   Command,
   CommandEmpty,

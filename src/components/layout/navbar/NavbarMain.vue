@@ -1,5 +1,5 @@
 <script setup>
-import BaseButton from "@/components/ui/buttons/BaseButton.vue";
+import { BaseButton } from "@/components/ui/buttons";
 import LanguageSwitcher from "@/components/layout/navbar/LanguageSwitcher.vue";
 import MobileMenu from "@/components/layout/navbar/MobileMenu.vue";
 import { IconSearch } from "@/components/ui/icons";

@@ -6,8 +6,8 @@ import { IconFilter, IconClose, IconSearch } from "@/components/ui/icons"
 import TwContainer from "@/components/layout/TwContainer.vue";
 import AccordionGroup from "./accordion/AccordionGroup.vue";
 import ComboboxComponent from "./ComboboxComponent.vue";
-import BaseButton from "./buttons/BaseButton.vue";
-import ButtonText from "./buttons/ButtonText.vue";
+import { BaseButton } from "@/components/ui/buttons";
+import { ButtonText } from "@/components/ui/buttons";
 import DatePickerComponent from "./datepicker/DatePickerComponent.vue";
 import SelectComponent from "./SelectComponent.vue";
 import { generateTimeOptions } from "@/composables/useTimeOptions";

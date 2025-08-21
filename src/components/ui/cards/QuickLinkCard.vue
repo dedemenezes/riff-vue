@@ -1,5 +1,5 @@
 <script setup>
-import ButtonText from "../buttons/ButtonText.vue";
+import { ButtonText } from "@/components/ui/buttons";
 
 const props = defineProps({
   title: {

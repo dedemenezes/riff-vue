@@ -3,7 +3,7 @@ import { IconPlus } from "@/components/ui/icons";
 import QuickLinksSection from "@/components/layout/sections/QuickLinksSection.vue";
 import HomeBanner from "@/components/ui/HomeBanner.vue";
 import TwContainer from "@/components/layout/TwContainer.vue";
-import ButtonText from "@/components/ui/buttons/ButtonText.vue";
+import { ButtonText } from "@/components/ui/buttons";
 import ArticleCard from "@/components/ui/cards/ArticleCard.vue";
 import ContextMenu from "../components/layout/navbar/ContextMenu.vue";
 const quickLinks = [
