@@ -48,9 +48,9 @@ const isIconActive = computed(() => isActive.value || isRouteActive.value);
         :active="isIconActive"
         :routeActive="isRouteActive"
       />
-      <p class="text-body-strong-xs text-primary text-center uppercase">{{
-        props.content
-      }}</p>
+      <p class="text-body-strong-xs text-primary text-center uppercase">
+        {{ props.content }}
+      </p>
     </div>
   </router-link>
 </template>

@@ -1,10 +1,10 @@
 import { createApp } from "vue";
-import { VueQueryPlugin, QueryClient } from '@tanstack/vue-query';
+import { VueQueryPlugin, QueryClient } from "@tanstack/vue-query";
 
 import riffRouter from "./router/index.js";
 import i18n from "./i18n/index.js";
 import "./style.css";
-import "./assets/css/typography.css"
+import "./assets/css/typography.css";
 import App from "./App.vue";
 
 const app = createApp(App);

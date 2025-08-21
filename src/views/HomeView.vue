@@ -7,9 +7,9 @@ import TwContainer from "@/components/layout/TwContainer.vue";
 import { ButtonText } from "@/components/ui/buttons";
 import ArticleCard from "@/components/ui/cards/ArticleCard.vue";
 import ContextMenu from "../components/layout/navbar/ContextMenu.vue";
-import { useI18n }  from "@/composables/useI18n";
+import { useI18n } from "@/composables/useI18n";
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const quickLinks = [
   {
@@ -56,14 +56,13 @@ const quickLinksConfig = [
 ];
 
 const translatedLinks = computed(() =>
-  quickLinksConfig.map(link => ({
+  quickLinksConfig.map((link) => ({
     ...link,
     title: t(link.titleKey),
-    description: t(link.descriptionKey)
-  }))
+    description: t(link.descriptionKey),
+  })),
 );
 console.log(translatedLinks.value);
-
 </script>
 
 <template>

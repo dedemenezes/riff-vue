@@ -97,7 +97,7 @@
     @apply border-border;
   }
   body {
-    font-family: var(--body-font, 'Inter', sans-serif);
+    font-family: var(--body-font, "Inter", sans-serif);
     @apply bg-background text-foreground;
   }
 }

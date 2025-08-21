@@ -1,92 +1,92 @@
 // composables/ui/useNotifications.js
-import { ref, reactive } from 'vue'
+import { ref, reactive } from "vue";
 
 // Global notification state
-const notifications = ref([])
-let notificationId = 0
+const notifications = ref([]);
+let notificationId = 0;
 
 export const useNotifications = () => {
   const addNotification = (notification) => {
-    const id = ++notificationId
+    const id = ++notificationId;
     const newNotification = {
       id,
-      type: 'info',
+      type: "info",
       duration: 3000,
       ...notification,
-      timestamp: Date.now()
-    }
+      timestamp: Date.now(),
+    };
 
-    notifications.value.push(newNotification)
+    notifications.value.push(newNotification);
 
     // Auto-remove if duration is set
     if (newNotification.duration > 0) {
       setTimeout(() => {
-        removeNotification(id)
-      }, newNotification.duration)
+        removeNotification(id);
+      }, newNotification.duration);
     }
 
-    return id
-  }
+    return id;
+  };
 
   const removeNotification = (id) => {
-    const index = notifications.value.findIndex(n => n.id === id)
+    const index = notifications.value.findIndex((n) => n.id === id);
     if (index > -1) {
-      notifications.value.splice(index, 1)
+      notifications.value.splice(index, 1);
     }
-  }
+  };
 
   const clearAll = () => {
-    notifications.value = []
-  }
+    notifications.value = [];
+  };
 
   // Convenience methods
   const showSuccess = (message, options = {}) => {
     return addNotification({
-      type: 'success',
-      title: 'Success',
+      type: "success",
+      title: "Success",
       message,
-      ...options
-    })
-  }
+      ...options,
+    });
+  };
 
   const showError = (message, options = {}) => {
     return addNotification({
-      type: 'error',
-      title: 'Error',
+      type: "error",
+      title: "Error",
       message,
       duration: 5000, // Longer for errors
-      ...options
-    })
-  }
+      ...options,
+    });
+  };
 
   const showWarning = (message, options = {}) => {
     return addNotification({
-      type: 'warning',
-      title: 'Warning',
+      type: "warning",
+      title: "Warning",
       message,
       duration: 4000,
-      ...options
-    })
-  }
+      ...options,
+    });
+  };
 
   const showInfo = (message, options = {}) => {
     return addNotification({
-      type: 'info',
-      title: 'Info',
+      type: "info",
+      title: "Info",
       message,
-      ...options
-    })
-  }
+      ...options,
+    });
+  };
 
   const showLoading = (message, options = {}) => {
     return addNotification({
-      type: 'pending',
-      title: 'Loading',
+      type: "pending",
+      title: "Loading",
       message,
       duration: 0, // Don't auto-remove loading notifications
-      ...options
-    })
-  }
+      ...options,
+    });
+  };
 
   return {
     notifications,
@@ -97,6 +97,6 @@ export const useNotifications = () => {
     showError,
     showWarning,
     showInfo,
-    showLoading
-  }
-}
+    showLoading,
+  };
+};

@@ -1,24 +1,24 @@
-import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest'
-import { fetchMovies } from '@/services/api/endpoints/movies'
-import apiClient from '@/services/api/client/apiClient'
+import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
+import { fetchMovies } from "@/services/api/endpoints/movies";
+import apiClient from "@/services/api/client/apiClient";
 
-vi.mock('fast-xml-parser', () => {
-  const mockParseFn = vi.fn()
+vi.mock("fast-xml-parser", () => {
+  const mockParseFn = vi.fn();
   return {
     XMLParser: vi.fn().mockImplementation(() => ({
-      parse: mockParseFn
+      parse: mockParseFn,
     })),
-    __mockParseFn: mockParseFn
-  }
-})
+    __mockParseFn: mockParseFn,
+  };
+});
 
-vi.mock('@/services/api/client/apiClient', () => ({
+vi.mock("@/services/api/client/apiClient", () => ({
   default: {
-    get: vi.fn()
-  }
-}))
+    get: vi.fn(),
+  },
+}));
 
-globalThis.fetch = vi.fn()
+globalThis.fetch = vi.fn();
 
 describe("fetchMovies", () => {
   const mockXmlData = `<?xml version="1.0" encoding="UTF-8"?>
@@ -27,115 +27,112 @@ describe("fetchMovies", () => {
         <titulo>Test Movie</titulo>
         <horario>20:00</horario>
       </filme>
-    </programacao>`
+    </programacao>`;
 
   const mockParsedData = {
     programacao: {
       filme: {
-        titulo: 'Test Movie',
-        horario: '20:00'
-      }
-    }
-  }
+        titulo: "Test Movie",
+        horario: "20:00",
+      },
+    },
+  };
 
-  let mockParseFn
+  let mockParseFn;
   beforeEach(async () => {
-    vi.clearAllMocks()
-    vi.stubEnv('DEV', false)
+    vi.clearAllMocks();
+    vi.stubEnv("DEV", false);
 
-    const { __mockParseFn } = await import('fast-xml-parser')
-    mockParseFn = __mockParseFn
-  })
+    const { __mockParseFn } = await import("fast-xml-parser");
+    mockParseFn = __mockParseFn;
+  });
 
   afterEach(() => {
-    vi.unstubAllEnvs()
-  })
+    vi.unstubAllEnvs();
+  });
 
-  test('fetchMovies_should_parse_xml_response_successfully', async () => {
+  test("fetchMovies_should_parse_xml_response_successfully", async () => {
     apiClient.get.mockResolvedValue({
-      data: mockXmlData
-    })
+      data: mockXmlData,
+    });
 
-    mockParseFn.mockReturnValue(mockParsedData)
+    mockParseFn.mockReturnValue(mockParsedData);
 
-    const result = await fetchMovies()
+    const result = await fetchMovies();
 
-    expect(apiClient.get).toHaveBeenCalledWith(
-      '/schedules/xml/programacao',
-      { responseType: 'text' }
-    )
+    expect(apiClient.get).toHaveBeenCalledWith("/schedules/xml/programacao", {
+      responseType: "text",
+    });
 
-    expect(mockParseFn).toHaveBeenCalledWith(mockXmlData)
-    expect(result).toEqual(mockParsedData)
-  })
+    expect(mockParseFn).toHaveBeenCalledWith(mockXmlData);
+    expect(result).toEqual(mockParsedData);
+  });
 
-  test('fetchMovies_should_use_local_file_when_dev_mode_enabled', async () => {
-    vi.stubEnv('DEV', true)
+  test("fetchMovies_should_use_local_file_when_dev_mode_enabled", async () => {
+    vi.stubEnv("DEV", true);
 
     globalThis.fetch.mockResolvedValue({
-      text: () => Promise.resolve(mockXmlData)
-    })
+      text: () => Promise.resolve(mockXmlData),
+    });
 
-    mockParseFn.mockReturnValue(mockParsedData)
+    mockParseFn.mockReturnValue(mockParsedData);
 
     globalThis.fetch.mockResolvedValue({
-      text: () => Promise.resolve(mockXmlData)
-    })
+      text: () => Promise.resolve(mockXmlData),
+    });
 
-    const result = await fetchMovies()
+    const result = await fetchMovies();
 
-    expect(result).toEqual(mockParsedData)
-  })
+    expect(result).toEqual(mockParsedData);
+  });
 
-  test('fetchMovies_should_handle_api_request_failures', async () => {
-    const apiError = new Error('Network Error')
-    apiClient.get.mockRejectedValue(apiError)
+  test("fetchMovies_should_handle_api_request_failures", async () => {
+    const apiError = new Error("Network Error");
+    apiClient.get.mockRejectedValue(apiError);
 
-    await expect(fetchMovies()).rejects.toThrow('Network Error')
-    expect(apiClient.get).toHaveBeenCalledWith(
-      '/schedules/xml/programacao',
-      { responseType: 'text' }
-    )
-  })
+    await expect(fetchMovies()).rejects.toThrow("Network Error");
+    expect(apiClient.get).toHaveBeenCalledWith("/schedules/xml/programacao", {
+      responseType: "text",
+    });
+  });
 
-  test('fetchMovies_should_handle_xml_parsing_errors', async () => {
+  test("fetchMovies_should_handle_xml_parsing_errors", async () => {
     apiClient.get.mockResolvedValue({
-      data: 'invalid-xml-data'
-    })
+      data: "invalid-xml-data",
+    });
 
-    const parseError = new Error('XML parsing failed')
+    const parseError = new Error("XML parsing failed");
     mockParseFn.mockImplementation(() => {
-      throw parseError
-    })
+      throw parseError;
+    });
 
-    await expect(fetchMovies()).rejects.toThrow('XML parsing failed')
-  })
+    await expect(fetchMovies()).rejects.toThrow("XML parsing failed");
+  });
 
-  test('fetchMovies_should_handle_empty_xml_response', async () => {
+  test("fetchMovies_should_handle_empty_xml_response", async () => {
     apiClient.get.mockResolvedValue({
-      data: ''
-    })
+      data: "",
+    });
 
-    mockParseFn.mockReturnValue({})
+    mockParseFn.mockReturnValue({});
 
-    const result = await fetchMovies()
+    const result = await fetchMovies();
 
-    expect(mockParseFn).toHaveBeenCalledWith('')
-    expect(result).toEqual({})
-  })
+    expect(mockParseFn).toHaveBeenCalledWith("");
+    expect(result).toEqual({});
+  });
 
-  test('fetchMovies_should_use_correct_response_type_for_api_calls', async () => {
+  test("fetchMovies_should_use_correct_response_type_for_api_calls", async () => {
     apiClient.get.mockResolvedValue({
-      data: mockXmlData
-    })
+      data: mockXmlData,
+    });
 
-    mockParseFn.mockReturnValue(mockParsedData)
+    mockParseFn.mockReturnValue(mockParsedData);
 
-    await fetchMovies()
+    await fetchMovies();
 
-    expect(apiClient.get).toHaveBeenCalledWith(
-      '/schedules/xml/programacao',
-      { responseType: 'text' }
-    )
-  })
-})
+    expect(apiClient.get).toHaveBeenCalledWith("/schedules/xml/programacao", {
+      responseType: "text",
+    });
+  });
+});

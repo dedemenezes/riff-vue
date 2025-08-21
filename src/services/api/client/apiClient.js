@@ -24,12 +24,9 @@ apiClient.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
-apiClient.interceptors.response.use(
-  (response) => response,
-  handleApiError
-);
+apiClient.interceptors.response.use((response) => response, handleApiError);
 
 export default apiClient;

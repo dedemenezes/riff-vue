@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 import {
   Select,
   SelectContent,
@@ -8,15 +8,15 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
+} from "@/components/ui/select";
 
 const props = defineProps({
   options: { type: Array, required: true },
   placeholder: { type: String, default: "placeholder.select" },
-  label: { type: String, default: undefined }
-})
+  label: { type: String, default: undefined },
+});
 
-const value = ref()
+const value = ref();
 </script>
 
 <template>
@@ -27,7 +27,12 @@ const value = ref()
     <SelectContent>
       <SelectGroup>
         <SelectLabel>{{ props.label }}</SelectLabel>
-        <SelectItem v-for="option in props.options" :key="option.value" v-model="value" :value="option.value">
+        <SelectItem
+          v-for="option in props.options"
+          :key="option.value"
+          v-model="value"
+          :value="option.value"
+        >
           {{ option.label }}
         </SelectItem>
       </SelectGroup>

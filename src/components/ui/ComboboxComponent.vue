@@ -1,21 +1,21 @@
 <script setup>
-import { Check, ChevronsUpDown } from 'lucide-vue-next'
-import { watch, ref } from 'vue'
-import { Button } from '@/components/ui/buttons'
+import { Check, ChevronsUpDown } from "lucide-vue-next";
+import { watch, ref } from "vue";
+import { Button } from "@/components/ui/buttons";
 import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
-  CommandList
-} from '@/components/ui/command'
+  CommandList,
+} from "@/components/ui/command";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover'
-import { cn } from '@/lib/utils'
+} from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
 
 // const frameworks = [
 //   { value: 'next.js', label: 'Next.js' },
@@ -25,39 +25,43 @@ import { cn } from '@/lib/utils'
 //   { value: 'astro', label: 'Astro' },
 // ]
 
-const open = ref(false)
+const open = ref(false);
 
 // Props definition for v-model support
 const props = defineProps({
   collection: { type: Array, required: true },
-  modelValue: { type: String, default: '' }, // v-model prop
+  modelValue: { type: String, default: "" }, // v-model prop
   placeholder: { type: String, default: "placeholder.select" },
-  withIcon: { type: Boolean, default: false }
-})
+  withIcon: { type: Boolean, default: false },
+});
 
 // Emit definition for v-model support
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(["update:modelValue"]);
 
 // Internal value that syncs with modelValue
-const value = ref(props.modelValue)
+const value = ref(props.modelValue);
 
 // Watch external changes and update internal state
-watch(() => props.modelValue, (newValue) => {
-  value.value = newValue
-})
+watch(
+  () => props.modelValue,
+  (newValue) => {
+    value.value = newValue;
+  },
+);
 
 // Watch internal changes and notify parent
 watch(value, (newValue) => {
-  emit('update:modelValue', newValue)
-})
+  emit("update:modelValue", newValue);
+});
 
 const handleSelect = (selectedValue) => {
-  value.value = selectedValue  // Update internal value
-  open.value = false          // Close dropdown
+  value.value = selectedValue; // Update internal value
+  open.value = false; // Close dropdown
   // The watch will automatically emit the change to parent
-}
+};
 
-const iconColor = (value) => props.collection.find((item) => item.value === value)?.iconColor
+const iconColor = (value) =>
+  props.collection.find((item) => item.value === value)?.iconColor;
 </script>
 
 <template>
@@ -69,9 +73,20 @@ const iconColor = (value) => props.collection.find((item) => item.value === valu
         :aria-expanded="open"
         class="w-[-webkit-fill-available] justify-between m-100"
       >
-        <div class="flex gap-300 items-center" :class="value ? 'text-primary' : 'text-secondary-gray'">
-          <span v-if="withIcon && value" :class="iconColor(value)" style="width: 8px; height: 8px; border-radius: 50%;"></span>
-          {{ value ? props.collection.find((item) => item.value === value)?.label : $t(props.placeholder) }}
+        <div
+          class="flex gap-300 items-center"
+          :class="value ? 'text-primary' : 'text-secondary-gray'"
+        >
+          <span
+            v-if="withIcon && value"
+            :class="iconColor(value)"
+            style="width: 8px; height: 8px; border-radius: 50%"
+          ></span>
+          {{
+            value
+              ? props.collection.find((item) => item.value === value)?.label
+              : $t(props.placeholder)
+          }}
         </div>
         <ChevronsUpDown class="ml-2 h-4 w-4 shrink-0 opacity-50" />
       </Button>
@@ -89,10 +104,12 @@ const iconColor = (value) => props.collection.find((item) => item.value === valu
               @select="handleSelect(item.value)"
             >
               <Check
-                :class="cn(
-                  'mr-2 h-4 w-4',
-                  value === item.value ? 'opacity-100' : 'opacity-0',
-                )"
+                :class="
+                  cn(
+                    'mr-2 h-4 w-4',
+                    value === item.value ? 'opacity-100' : 'opacity-0',
+                  )
+                "
               />
               {{ item.label }}
             </CommandItem>

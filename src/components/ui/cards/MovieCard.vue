@@ -25,7 +25,7 @@ const mostraVariantName = computed(() => {
     .toLowerCase();
   return lowerCaseName;
 });
-const { getLocalizedTitle } = useMovieLocalization()
+const { getLocalizedTitle } = useMovieLocalization();
 </script>
 
 <template>

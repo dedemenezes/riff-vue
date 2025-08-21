@@ -14,9 +14,7 @@ const props = defineProps({
   <div class="bg-neutrals-200">
     <TwContainer>
       <div class="py-800 flex flex-col space-y-800">
-        <h3 class="text-header-base text-xl text-primary"
-          >Links Rápidos</h3
-        >
+        <h3 class="text-header-base text-xl text-primary">Links Rápidos</h3>
         <div class="flex flex-col gap-y-800 lg:flex-row">
           <QuickLinkCard
             v-for="link in props.links"

@@ -49,8 +49,8 @@ const icon = computed(() => {
   }
 });
 
-const styleDefault = "align-self: baseline; justify-self: anchor-center; bottom: 2rem;"
-
+const styleDefault =
+  "align-self: baseline; justify-self: anchor-center; bottom: 2rem;";
 </script>
 
 <template>
@@ -61,18 +61,22 @@ const styleDefault = "align-self: baseline; justify-self: anchor-center; bottom:
       class="absolute botom-800 right-800 flex items-center gap-3 p-4 bg-white rounded-lg shadow-lg border border-gray-200 w-full max-w-sm"
     >
       <!-- Icon -->
-      <div v-html="icon" class="flex-shrink-0 text-green-500 text-xl">
-      </div>
+      <div v-html="icon" class="flex-shrink-0 text-green-500 text-xl"></div>
 
       <!-- Message -->
       <div class="flex-1">
         <p class="font-semibold text-gray-800">{{ message }}</p>
-        <p v-if="description" class="text-sm text-gray-500">{{ description }}</p>
+        <p v-if="description" class="text-sm text-gray-500">
+          {{ description }}
+        </p>
       </div>
 
       <!-- Close Button -->
       <button
-        @click="visible = false; emit('close')"
+        @click="
+          visible = false;
+          emit('close');
+        "
         class="text-gray-400 hover:text-gray-600"
       >
         ✖
