@@ -31,7 +31,8 @@ const open = ref(false)
 const props = defineProps({
   collection: { type: Array, required: true },
   modelValue: { type: String, default: '' }, // v-model prop
-  placeholder: { type: String, default: 'Select item...' }
+  placeholder: { type: String, default: 'placeholder.select' },
+  withIcon: { type: Boolean, default: false }
 })
 
 // Emit definition for v-model support
@@ -55,6 +56,8 @@ const handleSelect = (selectedValue) => {
   open.value = false          // Close dropdown
   // The watch will automatically emit the change to parent
 }
+
+const iconColor = (value) => props.collection.find((item) => item.value === value)?.iconColor
 </script>
 
 <template>
@@ -66,7 +69,10 @@ const handleSelect = (selectedValue) => {
         :aria-expanded="open"
         class="w-[-webkit-fill-available] justify-between m-100"
       >
-        {{ value ? props.collection.find((item) => item.value === value)?.label : props.placeholder }}
+        <div class="flex gap-300 items-center">
+          <span v-if="withIcon && value" :class="iconColor(value)" style="width: 8px; height: 8px; border-radius: 50%;"></span>
+          {{ value ? props.collection.find((item) => item.value === value)?.label : $t(props.placeholder) }}
+        </div>
         <ChevronsUpDown class="ml-2 h-4 w-4 shrink-0 opacity-50" />
       </Button>
     </PopoverTrigger>

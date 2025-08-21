@@ -128,6 +128,12 @@ const collection = [
   {value: "Oliver Laxe", label: "Oliver Laxe"},
   {value: "Sven Bresser", label: "Sven Bresser"}
 ]
+
+const showcases = [
+  { label: "Première Brasil", value: "premiere-brasil", iconColor: "bg-laranja-600" },
+  { label: "Première Latina", value: "premiere-latina", iconColor: "bg-amarelo-800" },
+]
+
 // Controls menu visibility
 const isFilterMenuOpen = ref(false);
 
@@ -271,7 +277,11 @@ const hasActiveFilters = computed(() => {
           <AccordionGroup :text="$t('filter.mostra')">
             <template v-slot:content>
               <div class="pt-400 overflow-hidden">
-                <ComboboxComponent :collection="collection"/>
+                <ComboboxComponent
+                  :with-icon="true"
+                  :collection="showcases"
+                  v-model="filters.mostra"
+                />
               </div>
             </template>
           </AccordionGroup>
