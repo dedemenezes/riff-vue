@@ -5,6 +5,7 @@ import riffRouter from "./router/index.js";
 import i18n from "./i18n/index.js";
 import "./style.css";
 import "./assets/css/typography.css";
+import "./assets/css/animations.css";
 import App from "./App.vue";
 
 const app = createApp(App);
