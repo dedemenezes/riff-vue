@@ -61,7 +61,7 @@ const { filters, filtersQuery, filterSearch, clearSearchQuery, removeQuery } = u
         <!-- FilterMobileTrigger -->
         <button
           @click="openMenu"
-          class="p-100 flex items-center gap-200 text-body-strong-sm text-primary md:order-2"
+          class="p-100 flex items-center gap-200 text-body-strong-sm text-primary md:order-2 lg:hidden"
         >
           <IconFilter height="16px" width="16px" color="text-primary" />
           {{ $t("filter.title") }}
@@ -109,11 +109,11 @@ const { filters, filtersQuery, filterSearch, clearSearchQuery, removeQuery } = u
         @remove-filter="removeQuery"
       />
     </div>
-    <div class="grid grid-cols-3 gap-800">
-      <div class="col-span-2">
+    <div class="grid grid-cols-12 gap-800">
+      <div class="col-span-12 lg:col-span-7">
         <MovieList />
       </div>
-      <div class="col-span-1">
+      <div class="hidden lg:block lg:col-start-8 lg:col-end-13">
           <SearchFilter
             v-model="filters"
             @filtersApplied="filterSearch"
