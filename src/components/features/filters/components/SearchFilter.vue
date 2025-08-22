@@ -340,7 +340,7 @@ const {
           class="w-full md:w-96 pl-10 pr-8 py-2.5 border border-neutrals-300 rounded-[5px] font-body leading-[150%] text-sm text-neutrals-900 placeholder-neutrals-400 focus:outline-none focus:border-neutrals-600 disabled:bg-neutrals-300 disabled:placeholder-neutrals-600 disabled:text-neutrals-600 disabled:border-neutrals-300 disabled:shadow-none transition-all duration-200"
         />
         <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
-          <button @click="cleanInput"><IconClose /></button>
+          <button v-if="searchValue != ''" @click="cleanInput"><IconClose /></button>
         </div>
       </div>
     </div>
