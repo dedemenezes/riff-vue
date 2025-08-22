@@ -5,13 +5,13 @@ import { IconClose,  } from "@/components/common/icons";
 import TwContainer from "@/components/layout/TwContainer.vue";
 import AccordionGroup from "@/components/base/accordion/AccordionGroup.vue";
 import ComboboxComponent from "@/components/common/forms/components/ComboboxComponent.vue";
-import { BaseButton } from "@/components/common/buttons";
-import { ButtonText } from "@/components/common/buttons";
+
 import DatePickerComponent from "@/components/common/forms/components/DatePickerComponent.vue";
 import SelectComponent from "@/components/common/forms/components/SelectComponent.vue";
 import { generateTimeOptions } from "@/components/features/filters/composables/useTimeOptions";
 import { cleanObject } from "@/utils/helpers/objectHelpers";
 import { collection, showcases } from "@/lib/fakeData"
+import FilterActions from "@/components/features/filters/components/FilterActions.vue";
 
 
 const closeMenu = () => {
@@ -247,22 +247,7 @@ const hasActiveFilters = computed(() => {
       <div
         class="shrink-0 py-400 actions sticky bottom-0 bg-white-transp-1000 z-10"
       >
-        <div class="flex justify-between">
-          <!-- <button class="flex-1">Limpar tudo</button> -->
-          <ButtonText
-            tag="button"
-            text="Limpar tudo"
-            @click="clearAllFilters"
-            :disabled="!hasActiveFilters"
-          />
-          <!-- <button class="flex-1 bg-black text-white">Aplicar filtros</button> -->
-          <BaseButton
-            variant="dark"
-            @click="applyFilters"
-            :disabled="!hasActiveFilters"
-            >Aplicar filtros</BaseButton
-          >
-        </div>
+      <FilterActions @clear="clearAllFilters" @apply="applyFilters" :hasActiveFilters="hasActiveFilters" />
       </div>
     </div>
   </TwContainer>
