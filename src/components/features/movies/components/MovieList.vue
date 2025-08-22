@@ -11,7 +11,7 @@ const { isPending, isFetching, isError, data, error } = useMoviesQuery();
 
 <template>
   <section
-    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+    class="grid grid-cols-1 gap-6"
   >
     <p v-if="isFetching">{{ $t("loading.title") }}</p>
     <!-- Shows during background refresh -->

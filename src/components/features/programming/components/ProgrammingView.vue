@@ -109,7 +109,19 @@ const { filters, filtersQuery, filterSearch, clearSearchQuery, removeQuery } = u
         @remove-filter="removeQuery"
       />
     </div>
-    <MovieList />
+    <div class="grid grid-cols-3 gap-800">
+      <div class="col-span-2">
+        <MovieList />
+      </div>
+      <div class="col-span-1">
+          <SearchFilter
+            v-model="filters"
+            @filtersApplied="filterSearch"
+            @filtersCleared="clearSearchQuery"
+            @close-filter-menu="closeMenu"
+          />
+      </div>
+    </div>
   </TwContainer>
 </template>
 
