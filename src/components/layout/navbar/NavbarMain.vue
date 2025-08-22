@@ -1,8 +1,8 @@
 <script setup>
-import { BaseButton } from "@/components/ui/buttons";
+import { BaseButton } from "@/components/common/buttons";
 import LanguageSwitcher from "@/components/layout/navbar/LanguageSwitcher.vue";
 import MobileMenu from "@/components/layout/navbar/MobileMenu.vue";
-import { IconSearch } from "@/components/ui/icons";
+import { IconSearch } from "@/components/common/icons";
 </script>
 
 <template>
@@ -21,14 +21,14 @@ import { IconSearch } from "@/components/ui/icons";
       >
         <img
           class="py-200"
-          src="@assets/festival-logo.svg"
+          src="@assets/images/logos/festival-logo.svg"
           alt="Logo do Festival do Rio"
           width="221"
         />
       </router-link>
       <!-- divisor -->
       <div class="hidden md:block">
-        <img src="@assets/divisor.svg" alt="divisor" aria-hidden="true" />
+        <img src="@assets/icons/divisor.svg" alt="divisor" aria-hidden="true" />
       </div>
       <!-- festival header -->
       <div class="festival-dates py-100">
@@ -51,7 +51,7 @@ import { IconSearch } from "@/components/ui/icons";
       <LanguageSwitcher />
       <BaseButton as="button" size="md" variant="cta">
         RioMarket
-        <img src="@assets/Vector.svg" alt="carret" class="w-full ms-300" />
+        <img src="@assets/icons/Vector.svg" alt="carret" class="w-full ms-300" />
       </BaseButton>
     </div>
   </nav>

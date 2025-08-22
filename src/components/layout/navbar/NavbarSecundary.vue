@@ -1,5 +1,5 @@
 <script setup>
-import { BaseButton } from "@/components/ui/buttons";
+import { BaseButton } from "@/components/common/buttons";
 
 const mainItems = [
   "programming",

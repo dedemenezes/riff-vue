@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 
-import AccordionGroup from "@/components/ui/accordion/AccordionGroup.vue";
+import AccordionGroup from "@/components/base/accordion/AccordionGroup.vue";
 import LanguageSwitcher from "@/components/layout/navbar/LanguageSwitcher.vue";
 
 // Controls menu visibility
@@ -49,7 +49,7 @@ const closeMenu = () => {
         <!-- Close Button -->
         <div class="flex justify-between p-400">
           <img
-            src="@assets/festival-logo-mobile.svg"
+            src="@assets/images/logos/festival-logo-mobile.svg"
             alt="Logo Festival do Rio"
           />
 

@@ -41,7 +41,7 @@ const isActive = (lang) => locale.value === lang;
       </button>
       <img
         v-if="lang !== props.langs.at(-1)"
-        src="@assets/divisor.svg"
+        src="@assets/icons/divisor.svg"
         alt="Divisor"
         aria-hidden="true"
       />

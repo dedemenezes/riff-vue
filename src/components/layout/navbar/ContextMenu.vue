@@ -1,9 +1,9 @@
 <script setup>
-import { NavButtonContext } from "@/components/ui/buttons";
-import { IconChange } from "@/components/ui/icons";
-import { IconNewUser } from "@/components/ui/icons";
-import { IconClock } from "@/components/ui/icons";
-import { IconProgram } from "@/components/ui/icons";
+import { NavButtonContext } from "@/components/common/buttons";
+import { IconChange } from "@/components/common/icons";
+import { IconNewUser } from "@/components/common/icons";
+import { IconClock } from "@/components/common/icons";
+import { IconProgram } from "@/components/common/icons";
 
 const items = [
   { name: "programming", route: "/programming", component: IconProgram },

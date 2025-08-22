@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BaseButton } from "@/components/ui/buttons";
+import { BaseButton } from "@/components/common/buttons";
 </script>
 
 <template>
