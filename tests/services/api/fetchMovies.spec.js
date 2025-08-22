@@ -101,12 +101,12 @@ describe("fetchMovies", () => {
       data: "invalid-xml-data",
     });
 
-    const parseError = new Error("XML parsing failed");
+    const parseError = new Error("Invalid XML format");
     mockParseFn.mockImplementation(() => {
       throw parseError;
     });
 
-    await expect(fetchMovies()).rejects.toThrow("XML parsing failed");
+    await expect(fetchMovies()).rejects.toThrow("Invalid XML format");
   });
 
   test("fetchMovies_should_handle_empty_xml_response", async () => {
