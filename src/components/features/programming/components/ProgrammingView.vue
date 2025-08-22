@@ -6,8 +6,9 @@ import MovieList from "@/components/features/movies/components/MovieList.vue";
 import SearchFilter from "@/components/features/filters/components/SearchFilter.vue";
 import TagFilter from "@/components/common/tags/TagFilter.vue";
 import { IconFilter } from "@/components/common/icons";
-import SearchBar from "../../filters/components/SearchBar.vue";
-import { formatDate } from "@/utils/helpers/formatDateHelper";
+import SearchBar from "@/components/features/filters/components/SearchBar.vue";
+import { useFilters } from "@/components/features/filters/composables/useFilters";
+
 
 // text search input declaratives
 const searchValue = ref("");
@@ -41,60 +42,7 @@ const closeMenu = () => {
 };
 
 // Filter Behavior
-// Actual query object to submit to the api
-const filtersQuery = ref({});
-const filters = ref({
-  date: null,
-  startTime: null,
-  endTime: null,
-  mostra: null,
-  cinema: null,
-  genero: null,
-  pais: null,
-  direcao: null,
-  elenco: null,
-  selo: null,
-  festivais: null,
-  premios: null,
-  palavrasChaves: null,
-});
-
-const filterSearch = (submittedFilters) => {
-  // await refetchFilters();
-  console.log(submittedFilters);
-
-  if (submittedFilters.date) {
-    submittedFilters.date = formatDate(submittedFilters.date)
-  }
-  filtersQuery.value = submittedFilters
-  console.log("Applied filters:", filtersQuery.value);
-  console.warn("QUERY API/FILTER RESULT FROM API using:")
-  console.log(filtersQuery.value)
-  closeMenu();
-}
-
-const clearSearchQuery = (newValue) => {
-  filtersQuery.value = newValue;
-};
-
-const removeQuery = (queryValue) => {
-  for (const key in filters.value) {
-    if (filtersQuery.value[key] === queryValue) {
-      delete filtersQuery.value[key];
-      break;
-    }
-  }
-  // update filters to keep UI in sync
-  Object.keys(filters.value).forEach((key) => {
-    filters.value[key] = Object.prototype.hasOwnProperty.call(filtersQuery.value, key)
-      ? filtersQuery.value[key]
-      : null;
-  });
-
-  console.log("Applied filters:", filtersQuery.value);
-  console.warn("QUERY API/FILTER RESULT FROM API using:")
-  console.log(filtersQuery.value)
-};
+const { filters, filtersQuery, filterSearch, clearSearchQuery, removeQuery } = useFilters();
 </script>
 
 <template>

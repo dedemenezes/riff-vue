@@ -25,7 +25,7 @@ const props = defineProps({
   modelValue: { type: Object, required: true }
 })
 
-const emit = defineEmits(["filtersApplied", "filtersCleared", "close-filter-menu", "update:modelValue", "apply", "clear"]);
+const emit = defineEmits(["filtersApplied", "filtersCleared", "close-filter-menu", "update:modelValue"]);
 
 const updateField = (key, value) => {
   emit("update:modelValue", {...props.modelValue, [key]: value});
@@ -36,6 +36,7 @@ const applyFilters = () => {
   const cleanedFilters = cleanObject(rawFilters);
 
   emit("filtersApplied", cleanedFilters)
+  closeMenu()
 };
 
 const clearAllFilters = () => {
