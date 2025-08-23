@@ -41,7 +41,7 @@ export const fetchMovies = async () => {
   const parsed = parser.parse(xmlData);
 
   // Ideallu we shouod sanitize
-  console.log(parsed);
+  // console.log(parsed);
 
   return parsed;
 };
