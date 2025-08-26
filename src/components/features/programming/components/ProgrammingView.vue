@@ -147,7 +147,6 @@ const { isPending, isFetching, isError, data, error } = useMoviesQuery();
 
             <!-- Or skeleton loader -->
              <MovieCardSkeleton />
-             <MovieCardSkeleton />
           </template>
           <template v-else-if="isError">
             <p class="text-red-500">{{ console.log(error) }}</p>
