@@ -1,7 +1,7 @@
 <script setup>
 import SponsorHeader from "@/components/layout/headers/SponsorHeader.vue";
 import NavbarMain from "@/components/layout/navbar/NavbarMain.vue";
-import NavbarSecundary from "@/components/layout/navbar/NavbarSecundary.vue";
+import NavbarSecundary from "@/components/layout/navbar/NavbarSecondary.vue";
 import { useI18n } from "@/composables/useI18n";
 
 const { locale } = useI18n();
