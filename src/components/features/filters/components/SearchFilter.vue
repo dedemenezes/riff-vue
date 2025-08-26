@@ -38,29 +38,14 @@ const hasActiveFilters = computed(() => {
 </script>
 
 <template>
-  <TwContainer>
-    <div class="flex flex-col">
-      <div
-        class="shrink-0 flex justify-between items-center py-400 sticky top-0 bg-white-transp-1000 z-10"
-      >
-        <p class="text-header-sm text-primary uppercase">
-          {{ $t("filtro", 2) }}
-        </p>
-        <button @click="closeMenu" class="text-neutrals-900">
-          <IconClose height="32px" width="32px" />
-        </button>
-      </div>
+  <FilterForm
+    :modelValue="props.modelValue"
+    @update:modelValue="emit('update:modelValue', $event)"
+  />
 
-      <FilterForm
-        :modelValue="props.modelValue"
-        @update:modelValue="emit('update:modelValue', $event)"
-      />
-
-      <div
-        class="shrink-0 py-400 actions sticky bottom-0 bg-white-transp-1000 z-10"
-      >
-        <FilterActions @clear="clearAllFilters" @apply="applyFilters" :hasActiveFilters="hasActiveFilters" />
-      </div>
-    </div>
-  </TwContainer>
+  <div
+    class="shrink-0 py-400 actions sticky bottom-0 bg-white-transp-1000 z-10"
+  >
+    <FilterActions @clear="clearAllFilters" @apply="applyFilters" :hasActiveFilters="hasActiveFilters" />
+  </div>
 </template>

@@ -5,7 +5,7 @@ import TwContainer from "@/components/layout/TwContainer.vue";
 import MovieList from "@/components/features/movies/components/MovieList.vue";
 import SearchFilter from "@/components/features/filters/components/SearchFilter.vue";
 import TagFilter from "@/components/common/tags/TagFilter.vue";
-import { IconFilter } from "@/components/common/icons";
+import { IconFilter, IconClose } from "@/components/common/icons";
 import SearchBar from "@/components/features/filters/components/SearchBar.vue";
 import { useFilters } from "@/components/features/filters/composables/useFilters";
 
@@ -92,12 +92,29 @@ const { filters, filtersQuery, filterSearch, clearSearchQuery, removeQuery } = u
           style="margin-top: 0"
           class="fixed inset-0 z-50 bg-white flex flex-col w-full max-w-full h-[100vh] right-0 shadow-lg overflow-y-auto"
         >
-          <SearchFilter
-            v-model="filters"
-            @filtersApplied="filterSearch"
-            @filtersCleared="clearSearchQuery"
-            @close-filter-menu="closeMenu"
-          />
+          <TwContainer>
+            <div class="flex flex-col">
+              <!-- Filter header -->
+              <div
+              class="shrink-0 flex justify-between items-center py-400 sticky top-0 bg-white-transp-1000 z-10"
+              >
+                <p class="text-header-sm text-primary uppercase">
+                  {{ $t("filtro", 2) }}
+                </p>
+                <button @click="closeMenu" class="text-neutrals-900">
+                  <IconClose height="32px" width="32px" />
+                </button>
+              </div>
+              <!-- Filter header -->
+              <SearchFilter
+                v-model="filters"
+                @filtersApplied="filterSearch"
+                @filtersCleared="clearSearchQuery"
+                @close-filter-menu="closeMenu"
+              />
+            </div>
+          </TwContainer>
+
         </div>
       </transition>
     </div>
@@ -114,12 +131,12 @@ const { filters, filtersQuery, filterSearch, clearSearchQuery, removeQuery } = u
         <MovieList />
       </div>
       <div class="hidden lg:block lg:col-start-8 lg:col-end-13">
-          <SearchFilter
-            v-model="filters"
-            @filtersApplied="filterSearch"
-            @filtersCleared="clearSearchQuery"
-            @close-filter-menu="closeMenu"
-          />
+        <SearchFilter
+          v-model="filters"
+          @filtersApplied="filterSearch"
+          @filtersCleared="clearSearchQuery"
+          @close-filter-menu="closeMenu"
+        />
       </div>
     </div>
   </TwContainer>
