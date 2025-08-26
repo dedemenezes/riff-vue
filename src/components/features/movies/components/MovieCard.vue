@@ -63,7 +63,7 @@ const { getLocalizedTitle } = useMovieLocalization();
         :src="moviePoster"
         alt="movie-name poster"
         width="100%"
-        class="rounded-200"
+        class="rounded-200 aspect-ratio"
       />
       <!-- Overlay -->
       <div

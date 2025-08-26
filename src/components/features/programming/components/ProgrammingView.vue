@@ -43,6 +43,16 @@ const closeMenu = () => {
 
 // Filter Behavior
 const { filters, filtersQuery, filterSearch, clearSearchQuery, removeQuery } = useFilters();
+
+// Movies
+import { useMoviesQuery } from "@/components/features/movies/composables/useMovies";
+import ToastNotification from "@/components/common/notifications/ToastNotification.vue";
+import MovieCard from "@/components/features/movies/components/MovieCard.vue";
+import MovieCardSkeleton from "../../movies/components/MovieCardSkeleton.vue";
+
+const showToast = ref(true);
+const { isPending, isFetching, isError, data, error } = useMoviesQuery();
+
 </script>
 
 <template>
@@ -128,7 +138,33 @@ const { filters, filtersQuery, filterSearch, clearSearchQuery, removeQuery } = u
     </div>
     <div class="grid grid-cols-12 gap-800">
       <div class="col-span-12 lg:col-span-7">
-        <MovieList />
+        <section
+          class="grid grid-cols-1 gap-6"
+        >
+          <p v-if="isFetching">{{ $t("loading.title") }}</p>
+          <!-- Shows during background refresh -->
+          <template v-if="isPending">
+
+            <!-- Or skeleton loader -->
+             <MovieCardSkeleton />
+             <MovieCardSkeleton />
+          </template>
+          <template v-else-if="isError">
+            <p class="text-red-500">{{ console.log(error) }}</p>
+            <ToastNotification
+              :description="error.message"
+              :message="error.name"
+              type="error"
+            />
+          </template>
+          <template v-else>
+            <MovieCard
+              v-for="movie in data?.FMPDSORESULT?.ROW || []"
+              :key="movie.RECORDID"
+              :movie="movie"
+            />
+          </template>
+        </section>
       </div>
       <div class="hidden lg:block lg:col-start-8 lg:col-end-13">
         <SearchFilter

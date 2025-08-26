@@ -1,12 +1,12 @@
 <!-- src/components/layout/sections/MovieList.vue -->
 <script setup>
 import MovieCard from "@/components/features/movies/components/MovieCard.vue";
-import { useMoviesQuery } from "@/components/features/movies/composables/useMovies";
+// import { useMoviesQuery } from "@/components/features/movies/composables/useMovies";
 import ToastNotification from "@/components/common/notifications/ToastNotification.vue";
 import { ref } from "vue";
 
 const showToast = ref(true);
-const { isPending, isFetching, isError, data, error } = useMoviesQuery();
+// const { isPending, isFetching, isError, data, error } = useMoviesQuery();
 </script>
 
 <template>
