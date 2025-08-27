@@ -60,7 +60,7 @@ const props = defineProps({
     // validator: (value) => Object.keys(VARIANT_CLASSES).includes(value),
     default: "cinema-capacete",
   },
-  text: { type: String, default: "Cinema Capacete" },
+  text: { type: String, default: "TBD" },
   mode: {
     type: String,
     validator: (value) => ["filled", "outline"].includes(value),
@@ -80,7 +80,7 @@ const finalClass = computed(() => {
 
   return variantClass;
 });
-const displayText = computed(() => props.text?.trim() || "Cinema Capacete");
+const displayText = computed(() => props.text?.trim() || "TBD");
 </script>
 
 <template>

@@ -17,7 +17,53 @@ const updateField = (key, value) => {
   emit("update:modelValue", {...props.modelValue, [key]: value});
 }
 const timeOptions = computed(() => generateTimeOptions());
-
+const submostras = [
+  {
+    label: 'Clássicos & Cults',
+    value: 'Clássicos & Cults',
+    iconColor: 'bg-neutrals-900',
+  },
+  {
+    label: 'Première Latina',
+    value: 'Première Latina',
+    iconColor: 'bg-amarelo-800',
+  },
+  {
+    label: 'Itinerários Únicos',
+    value: 'Itinerários Únicos',
+    iconColor: 'bg-verde-600',
+  },
+  {
+    label: 'Première Brasil',
+    value: 'Première Brasil',
+    iconColor: 'bg-laranja-600',
+  },
+  {
+    label: 'Midnight Movies',
+    value: 'Midnight Movies',
+    iconColor: 'bg-violeta-600',
+  },
+  {
+    label: 'Expectativas',
+    value: 'Expectativas',
+    iconColor: 'bg-azul-600',
+  },
+  {
+    label: 'Especial COP 30',
+    value: 'Especial COP 30',
+    iconColor: 'bg-violeta-600',
+  },
+  {
+    label: 'Cinema Capacete',
+    value: 'Cinema Capacete',
+    iconColor: 'bg-laranja-600',
+  },
+  {
+    label: 'Panorama Mundial',
+    value: 'Panorama Mundial',
+    iconColor: 'bg-vermelho-600',
+  },
+]
 </script>
 
 <template>
@@ -64,29 +110,9 @@ const timeOptions = computed(() => generateTimeOptions());
     >
       <template v-slot:content>
         <div class="pt-400 overflow-hidden">
-          <!-- 'Panorama Mundial',
-          'Expectativas',
-          'Especial COP 30',
-          'Première Brasil',
-          'Forum des Images',
-          'Midnight Movies',
-          'Itinerários Únicos',
-          'Première Latina',
-          'Clássicos & Cults' -->
           <ComboboxComponent
             :with-icon="true"
-            :collection="[
-              {
-                label: 'Cinema Capacete',
-                value: 'Cinema Capacete',
-                iconColor: 'bg-laranja-600',
-              },
-              {
-                label: 'Panorama Mundial',
-                value: 'Panorama Mundial',
-                iconColor: 'bg-vermelho-600',
-              },
-            ]"
+            :collection="submostras"
             :modelValue="props.modelValue.submostra"
             @update:modelValue="val => updateField('submostra', val)"
           />

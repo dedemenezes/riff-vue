@@ -59,8 +59,21 @@ watch(
   data,
   (dataFetched) => {
     const newData = dataFetched?.FMPDSORESULT?.ROW;
+
     if (newData) {
-      programming.value = newData;
+      // 🧼 Normalize data once
+      const normalized = newData.map((movie) => ({
+        ...movie,
+        _normalized: {
+          titulo_original: movie.titulo_original?.DATA?.trim().toLowerCase() || "",
+          titulo_ingles: movie.titulo_ingles?.DATA?.trim().toLowerCase() || "",
+          titulo_portugues: movie.titulo_portugues?.DATA?.trim().toLowerCase() || "",
+          // You can normalize other keys too if needed for filter fields
+          // e.g., genero, pais, direcao, etc.
+        },
+      }));
+
+      programming.value = normalized;
       console.log("Programming stored: ", programming.value);
     }
   },

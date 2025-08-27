@@ -1,8 +1,10 @@
+import { useDebounce } from "@vueuse/core";
 import { ref, computed } from "vue";
 import { formatDate } from "@/utils/helpers/formatDateHelper";
 
 export function useFilters(allMovies = ref([])) {
   const searchValue = ref("");
+  const debouncedSearch = useDebounce(searchValue, 300);
 
   const handleClear = () => {
     searchValue.value = "";
@@ -74,7 +76,7 @@ export function useFilters(allMovies = ref([])) {
 
   // 🧠 Business logic - Filtering logic based on search text
   const filteredMovies = computed(() => {
-    const searchTerm = searchValue.value.toLowerCase();
+    const searchTerm = debouncedSearch.value.toLowerCase();
     const hasSearch = !!searchTerm;
     const hasFilters = Object.values(filtersQuery.value).some((v) => v !== null && v !== "");
 
@@ -85,14 +87,11 @@ export function useFilters(allMovies = ref([])) {
 
     // ✅ Step 1: filter by search
     const filteredBySearch = allMovies.value.filter((item) => {
-      const original = item.titulo_original?.DATA?.toLowerCase() || "";
-      const english = item.titulo_ingles?.DATA?.toLowerCase() || "";
-      const portuguese = item.titulo_portugues?.DATA?.toLowerCase() || "";
-
+      const normalized = item._normalized || {};
       return (
-        original.includes(searchTerm) ||
-        english.includes(searchTerm) ||
-        portuguese.includes(searchTerm)
+        normalized.titulo_original.includes(searchTerm) ||
+        normalized.titulo_ingles.includes(searchTerm) ||
+        normalized.titulo_portugues.includes(searchTerm)
       );
     });
 
@@ -100,8 +99,8 @@ export function useFilters(allMovies = ref([])) {
     return filteredBySearch.filter((movie) => {
       return Object.entries(filtersQuery.value).every(([key, value]) => {
         if (!value) return true;
+
         const movieValue = movie[key]?.DATA || movie[key];
-        console.log(movieValue);
 
         return normalize(movieValue).includes(normalize(value));
       });
