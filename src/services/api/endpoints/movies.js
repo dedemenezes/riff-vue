@@ -19,29 +19,35 @@ const parser = new XMLParser({
   parseNodeValue: true,          // Parse node values strictly
 });
 
-const USE_LOCAL_FILE = false; // Toggle for development
-
 export const fetchMovies = async () => {
-  let xmlData;
-  if (USE_LOCAL_FILE && import.meta.env.DEV) {
-    // Load from public folder
-    const response = await fetch("./public/dev-programacao-api.xml");
-
-    xmlData = await response.text();
-  } else {
+  try {
+    let xmlData;
     // Use API
     const endpoint = "/schedules/xml/programacao";
     const response = await apiClient.get(endpoint, { responseType: "text" });
     xmlData = response.data;
+
+    validateXMLStructure(xmlData);
+    validateXMLSize(xmlData);
+    validateXMLContent(xmlData);
+    const parsed = parser.parse(xmlData);
+
+    return parsed;
+  } catch (error) {
+    console.error('XML parsing error:', error.message);
+
+    if (error.message.includes("malicious")) {
+      throw new Error('Invalid XML format received');
+    }
+
+    if (error.message.includes("too large")) {
+      throw new Error('XML too large');
+    }
+
+    if (error.message.includes('data type') || error.message.includes("format")) {
+      throw new Error('Invalid XML data received');
+    }
+
+    throw new Error('Failed to fetch movie data');
   }
-
-  validateXMLStructure(xmlData)
-  validateXMLSize(xmlData);
-  validateXMLContent(xmlData);
-  const parsed = parser.parse(xmlData);
-
-  // Ideallu we shouod sanitize
-  // console.log(parsed);
-
-  return parsed;
 };
