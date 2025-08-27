@@ -13,7 +13,7 @@ const props = defineProps({
 });
 
 const moviePoster = computed(() => {
-  return props.movie.poster || "/public/poc-poster.jpg";
+  return props.movie.poster || "@assets/poc-poster.jpg";
 });
 
 const movieGenre = computed(() => {

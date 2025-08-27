@@ -21,7 +21,7 @@ const props = defineProps({
       <MovieCardSkeleton />
     </p>
     <!-- Shows during background refresh -->
-    <template v-if="isPending">
+    <!-- <template v-if="isPending">
       <ToastNotification
         v-if="showToast"
         :message="$t('loading.movies')"
@@ -29,7 +29,7 @@ const props = defineProps({
         type="info"
         :duration="5000"
         @close="showToast = false"
-      />
+      /> -->
       <!-- Or skeleton loader -->
     </template>
     <template v-else-if="isError">
