@@ -15,24 +15,8 @@ import SearchBar from "@/components/features/filters/components/SearchBar.vue";
 // ✅ Composables
 import { useFilters } from "@/components/features/filters/composables/useFilters";
 import { useMoviesQuery } from "@/components/features/movies/composables/useMovies";
-import { computed, ref, watch } from "vue";
+import { ref, watch } from "vue";
 
-
-// 📦 Search Text Input State (UI state + user input)
-const searchValue = ref("");
-
-// 👇 UI logic - clearing the search input
-const handleClear = () => {
-  searchValue.value = "";
-  // TODO: Trigger refetch or recompute
-};
-
-// 👇 UI logic - user hits search
-const handleSearch = () => {
-  console.log(`Query: ${searchValue.value}`);
-  console.warn(`QUERY API using ${searchValue.value}`);
-  // TODO: Trigger refetch or recompute
-};
 
 // 📦 UI state - mobile filter menu open/close
 const isFilterMenuOpen = ref(false);
@@ -49,30 +33,23 @@ const closeMenu = () => {
   document.body.style.overflow = "";
 };
 
-// 🧠 Business logic - Filter composable (source of truth for filters)
-const { filters, filtersQuery, filterSearch, clearSearchQuery, removeQuery } = useFilters();
-
 // 📦 UI state - holds original API response
 const programming = ref([]);
 
-// 🧠 Business logic - Filtering logic based on search text
-const filteredMovies = computed(() => {
-  const searchTerm = searchValue.value.toLowerCase();
+// 🧠 Business logic - Filter composable (source of truth for filters)
+const {
+  searchValue,
+  handleSearch,
+  handleClear,
+  filters,
+  filtersQuery,
+  filterSearch,
+  clearSearchQuery,
+  removeQuery,
+  filteredMovies
+} = useFilters(programming);
 
-  return programming.value.filter((item) => {
-    const original = item.titulo_original?.DATA?.toLowerCase() || "";
-    const english = item.titulo_ingles?.DATA?.toLowerCase() || "";
-    const portuguese = item.titulo_portugues?.DATA?.toLowerCase() || "";
 
-    const matchesTitle =
-      original.includes(searchTerm) ||
-      english.includes(searchTerm) ||
-      portuguese.includes(searchTerm);
-
-    // 🔧 TODO: apply filtersQuery (genre, date, etc.)
-    return matchesTitle;
-  });
-});
 
 // ⚙️ Data fetching - Movies from API
 const { data, isPending, isFetching, isError, error } = useMoviesQuery();
@@ -153,7 +130,9 @@ watch(
     </div>
     <div class="grid grid-cols-12 gap-800">
       <div class="col-span-12 lg:col-span-7">
-        <MovieList :movies="programming" :error="error" :is-error="isError" :is-fetching="isFetching" :is-pending="isPending"  />
+        {{ console.log(filteredMovies) }}
+        {{ console.log(filters) }}
+        <MovieList :movies="filteredMovies" :error="error" :is-error="isError" :is-fetching="isFetching" :is-pending="isPending"  />
       </div>
       <div class="hidden lg:block lg:col-start-8 lg:col-end-13">
         <SearchFilter

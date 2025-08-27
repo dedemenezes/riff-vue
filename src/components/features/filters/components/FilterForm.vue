@@ -59,16 +59,36 @@ const timeOptions = computed(() => generateTimeOptions());
       </template>
     </AccordionGroup>
     <AccordionGroup
-      :text="$t('filter.mostra')"
-      :isOpen="props.modelValue.mostra != null"
+      :text="$t('filter.submostra')"
+      :isOpen="props.modelValue.submostra != null"
     >
       <template v-slot:content>
         <div class="pt-400 overflow-hidden">
+          <!-- 'Panorama Mundial',
+          'Expectativas',
+          'Especial COP 30',
+          'Première Brasil',
+          'Forum des Images',
+          'Midnight Movies',
+          'Itinerários Únicos',
+          'Première Latina',
+          'Clássicos & Cults' -->
           <ComboboxComponent
             :with-icon="true"
-            :collection="showcases"
-            :modelValue="props.modelValue.mostra"
-            @update:modelValue="val => updateField('mostra', val)"
+            :collection="[
+              {
+                label: 'Cinema Capacete',
+                value: 'Cinema Capacete',
+                iconColor: 'bg-laranja-600',
+              },
+              {
+                label: 'Panorama Mundial',
+                value: 'Panorama Mundial',
+                iconColor: 'bg-vermelho-600',
+              },
+            ]"
+            :modelValue="props.modelValue.submostra"
+            @update:modelValue="val => updateField('submostra', val)"
           />
         </div>
       </template>

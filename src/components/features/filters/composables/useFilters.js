@@ -1,14 +1,27 @@
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { formatDate } from "@/utils/helpers/formatDateHelper";
 
-export function useFilters() {
-  // Actual query object to submit to the api
+export function useFilters(allMovies = ref([])) {
+  const searchValue = ref("");
+
+  const handleClear = () => {
+    searchValue.value = "";
+    // console.log("Clear filter by text?", searchValue.value == "");
+  };
+
+  const handleSearch = () => {
+    // console.log(`Query: ${searchValue.value}`);
+    // console.warn(`QUERY API using ${searchValue.value}`);
+    // TODO: Trigger refetch or recompute
+  };
+
+
   const filtersQuery = ref({});
   const filters = ref({
     date: null,
     startTime: null,
     endTime: null,
-    mostra: null,
+    submostra: null,
     cinema: null,
     genero: null,
     pais: null,
@@ -28,14 +41,15 @@ export function useFilters() {
       submittedFilters.date = formatDate(submittedFilters.date)
     }
     filtersQuery.value = submittedFilters
-    console.log("Applied filters:", filtersQuery.value);
-    console.warn("QUERY API/FILTER RESULT FROM API using:")
-    console.log(filtersQuery.value)
+    // console.log("Applied filters:", filtersQuery.value);
+    // console.warn("QUERY API/FILTER RESULT FROM API using:")
+    // console.log(filtersQuery.value)
   }
 
   const clearSearchQuery = (newValue) => {
     filtersQuery.value = newValue;
     Object.keys(filters.value).forEach((key) => (filters.value[key] = null));
+    // console.log("CLEAR FILTERING");
   };
 
   const removeQuery = (queryValue) => {
@@ -53,16 +67,60 @@ export function useFilters() {
         : null;
     });
 
-    console.log("Applied filters:", filtersQuery.value);
-    console.warn("QUERY API/FILTER RESULT FROM API using:")
-    console.log(filtersQuery.value)
+    // console.log("Applied filters:", filtersQuery.value);
+    // console.warn("QUERY API/FILTER RESULT FROM API using:")
+    // console.log(filtersQuery.value)
   };
 
+  // 🧠 Business logic - Filtering logic based on search text
+  const filteredMovies = computed(() => {
+    const searchTerm = searchValue.value.toLowerCase();
+    const hasSearch = !!searchTerm;
+    const hasFilters = Object.values(filtersQuery.value).some((v) => v !== null && v !== "");
+
+    // ⛔ Nothing to filter? Return everything.
+    if (!hasSearch && !hasFilters) {
+      return allMovies.value;
+    }
+
+    // ✅ Step 1: filter by search
+    const filteredBySearch = allMovies.value.filter((item) => {
+      const original = item.titulo_original?.DATA?.toLowerCase() || "";
+      const english = item.titulo_ingles?.DATA?.toLowerCase() || "";
+      const portuguese = item.titulo_portugues?.DATA?.toLowerCase() || "";
+
+      return (
+        original.includes(searchTerm) ||
+        english.includes(searchTerm) ||
+        portuguese.includes(searchTerm)
+      );
+    });
+
+    // ✅ Step 2: filter by active filters
+    return filteredBySearch.filter((movie) => {
+      return Object.entries(filtersQuery.value).every(([key, value]) => {
+        if (!value) return true;
+        const movieValue = movie[key]?.DATA || movie[key];
+        console.log(movieValue);
+
+        return normalize(movieValue).includes(normalize(value));
+      });
+    });
+  });
+
+
+  const normalize = (str) => String(str).toLowerCase().trim()
+
+
   return {
+    searchValue,
+    handleSearch,
+    handleClear,
     filtersQuery,
     filters,
     filterSearch,
     clearSearchQuery,
-    removeQuery
+    removeQuery,
+    filteredMovies
   }
 };
