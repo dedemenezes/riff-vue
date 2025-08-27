@@ -21,17 +21,17 @@ const props = defineProps({
       <MovieCardSkeleton />
     </p>
     <!-- Shows during background refresh -->
-    <!-- <template v-if="isPending">
-      <ToastNotification
-        v-if="showToast"
-        :message="$t('loading.movies')"
-        description="Very very soon."
-        type="info"
-        :duration="5000"
-        @close="showToast = false"
-      /> -->
+    <!-- <template v-if="isPending"> -->
+      <!-- <ToastNotification -->
+        <!-- v-if="showToast" -->
+        <!-- :message="$t('loading.movies')" -->
+        <!-- description="Very very soon." -->
+        <!-- type="info" -->
+        <!-- :duration="5000" -->
+        <!-- @close="showToast = false" -->
+      <!-- /> -->
       <!-- Or skeleton loader -->
-    </template>
+    <!-- </template> -->
     <template v-else-if="isError">
       <p class="text-red-500">{{ console.log(error) }}</p>
       <ToastNotification
