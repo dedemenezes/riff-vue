@@ -17,7 +17,6 @@ export function useFilters(allMovies = ref([])) {
     // TODO: Trigger refetch or recompute
   };
 
-
   const filtersQuery = ref({});
   const filters = ref({
     date: null,
@@ -40,13 +39,13 @@ export function useFilters(allMovies = ref([])) {
     console.log(submittedFilters);
 
     if (submittedFilters.date) {
-      submittedFilters.date = formatDate(submittedFilters.date)
+      submittedFilters.date = formatDate(submittedFilters.date);
     }
-    filtersQuery.value = submittedFilters
+    filtersQuery.value = submittedFilters;
     // console.log("Applied filters:", filtersQuery.value);
     // console.warn("QUERY API/FILTER RESULT FROM API using:")
     // console.log(filtersQuery.value)
-  }
+  };
 
   const clearSearchQuery = (newValue) => {
     filtersQuery.value = newValue;
@@ -64,7 +63,10 @@ export function useFilters(allMovies = ref([])) {
 
     // update filters to keep UI in sync
     Object.keys(filters.value).forEach((key) => {
-      filters.value[key] = Object.prototype.hasOwnProperty.call(filtersQuery.value, key)
+      filters.value[key] = Object.prototype.hasOwnProperty.call(
+        filtersQuery.value,
+        key,
+      )
         ? filtersQuery.value[key]
         : null;
     });
@@ -80,7 +82,9 @@ export function useFilters(allMovies = ref([])) {
 
     const searchTerm = debouncedSearch.value.toLowerCase();
     const hasSearch = !!searchTerm;
-    const hasFilters = Object.values(filtersQuery.value).some((v) => v !== null && v !== "");
+    const hasFilters = Object.values(filtersQuery.value).some(
+      (v) => v !== null && v !== "",
+    );
 
     // ⛔ Nothing to filter? Return everything.
     if (!hasSearch && !hasFilters) {
@@ -102,22 +106,21 @@ export function useFilters(allMovies = ref([])) {
       return Object.entries(filtersQuery.value).every(([key, value]) => {
         if (!value) return true;
 
-        if (key === 'startTime' || key === 'endTime') {
+        if (key === "startTime" || key === "endTime") {
           // debugger
           const sessionTimeStr = movie.sessao; // "18:30", etc.
           if (!sessionTimeStr) return false;
 
           // Convert to minutes since midnight for comparison
-          const [movieHour, movieMin] = sessionTimeStr.split(':').map(Number);
+          const [movieHour, movieMin] = sessionTimeStr.split(":").map(Number);
           const movieMinutes = movieHour * 60 + movieMin;
 
-          if (key === 'startTime') {
-            const [filterHour, filterMin] = value.split(':').map(Number);
+          if (key === "startTime") {
+            const [filterHour, filterMin] = value.split(":").map(Number);
             const filterMinutes = filterHour * 60 + filterMin;
             return movieMinutes >= filterMinutes;
           }
         }
-
 
         const movieValue = movie[key]?.DATA || movie[key];
 
@@ -126,9 +129,7 @@ export function useFilters(allMovies = ref([])) {
     });
   });
 
-
-  const normalize = (str) => String(str).toLowerCase().trim()
-
+  const normalize = (str) => String(str).toLowerCase().trim();
 
   return {
     searchValue,
@@ -139,6 +140,6 @@ export function useFilters(allMovies = ref([])) {
     filterSearch,
     clearSearchQuery,
     removeQuery,
-    filteredMovies
-  }
-};
+    filteredMovies,
+  };
+}

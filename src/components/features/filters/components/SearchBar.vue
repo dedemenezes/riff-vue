@@ -2,19 +2,19 @@
 import { IconSearch, IconClose } from "@/components/common/icons";
 
 defineProps({
-  modelValue: String
-})
+  modelValue: String,
+});
 
 const emit = defineEmits(["update:modelValue", "search", "clear"]);
 
 const handleInput = (event) => {
   emit("update:modelValue", event.target.value);
-}
+};
 
 const cleanInput = () => {
   emit("update:modelValue", "");
   emit("clear");
-}
+};
 </script>
 
 <template>

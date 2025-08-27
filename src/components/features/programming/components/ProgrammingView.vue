@@ -1,5 +1,4 @@
 <script setup>
-
 // 🔁 Reusable UI Components
 // import MovieCard from "@/components/features/movies/components/MovieCard.vue";
 // import ToastNotification from "@/components/common/notifications/ToastNotification.vue";
@@ -16,7 +15,6 @@ import SearchBar from "@/components/features/filters/components/SearchBar.vue";
 import { useFilters } from "@/components/features/filters/composables/useFilters";
 import { useMoviesQuery } from "@/components/features/movies/composables/useMovies";
 import { ref, watch } from "vue";
-
 
 // 📦 UI state - mobile filter menu open/close
 const isFilterMenuOpen = ref(false);
@@ -46,10 +44,8 @@ const {
   filterSearch,
   clearSearchQuery,
   removeQuery,
-  filteredMovies
+  filteredMovies,
 } = useFilters(programming);
-
-
 
 // ⚙️ Data fetching - Movies from API
 const { data, isPending, isFetching, isError, error } = useMoviesQuery();
@@ -65,9 +61,11 @@ watch(
       const normalized = newData.map((movie) => ({
         ...movie,
         _normalized: {
-          titulo_original: movie.titulo_original?.DATA?.trim().toLowerCase() || "",
+          titulo_original:
+            movie.titulo_original?.DATA?.trim().toLowerCase() || "",
           titulo_ingles: movie.titulo_ingles?.DATA?.trim().toLowerCase() || "",
-          titulo_portugues: movie.titulo_portugues?.DATA?.trim().toLowerCase() || "",
+          titulo_portugues:
+            movie.titulo_portugues?.DATA?.trim().toLowerCase() || "",
           // You can normalize other keys too if needed for filter fields
           // e.g., genero, pais, direcao, etc.
         },
@@ -77,10 +75,9 @@ watch(
       console.log("Programming stored: ", programming.value);
     }
   },
-  { immediate: true }
+  { immediate: true },
 );
 </script>
-
 
 <template>
   <ContextMenu />
@@ -91,7 +88,11 @@ watch(
     <div
       class="w-full flex flex-col gap-400 md:flex-row md:justify-between md:gap-600"
     >
-      <SearchBar v-model="searchValue" @search="handleSearch" @clear="handleClear" />
+      <SearchBar
+        v-model="searchValue"
+        @search="handleSearch"
+        @clear="handleClear"
+      />
       <div
         class="filter flex items-center justify-between md:gap-800 lg:gap-1200"
       >
@@ -108,20 +109,19 @@ watch(
         <!-- Ordering -->
         <div class="flex items-center gap-300">
           <span class="text-body-strong-sm uppercase text-secondary-gray"
-          >A - Z</span
+            >A - Z</span
           >
           <img
-          src="@assets/icons/divisor.svg"
-          alt="divisor"
-          height="16px"
-          width="1px"
+            src="@assets/icons/divisor.svg"
+            alt="divisor"
+            height="16px"
+            width="1px"
           />
           <span class="text-body-strong-sm uppercase text-primary">{{
             $t("filter_by.date")
           }}</span>
         </div>
         <!-- Ordering -->
-
       </div>
       <transition name="slide-left">
         <MobileFilterMenu
@@ -133,7 +133,10 @@ watch(
         />
       </transition>
     </div>
-    <div class="flex gap-300" v-if="Object.values(filtersQuery).some((item) => item !== null)">
+    <div
+      class="flex gap-300"
+      v-if="Object.values(filtersQuery).some((item) => item !== null)"
+    >
       <TagFilter
         v-for="(value, key) in filtersQuery"
         :key="key"
@@ -143,7 +146,13 @@ watch(
     </div>
     <div class="grid grid-cols-12 gap-800">
       <div class="col-span-12 lg:col-span-6">
-        <MovieList :movies="filteredMovies" :error="error" :is-error="isError" :is-fetching="isFetching" :is-pending="isPending"  />
+        <MovieList
+          :movies="filteredMovies"
+          :error="error"
+          :is-error="isError"
+          :is-fetching="isFetching"
+          :is-pending="isPending"
+        />
       </div>
       <div class="hidden lg:block lg:col-start-8 lg:col-end-13">
         <SearchFilter

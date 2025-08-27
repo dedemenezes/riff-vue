@@ -2,10 +2,10 @@
 import { BaseButton } from "@/components/common/buttons";
 import { ButtonText } from "@/components/common/buttons";
 
-const emit = defineEmits(["clear", "apply"])
+const emit = defineEmits(["clear", "apply"]);
 const props = defineProps({
-  hasActiveFilters: { type: Boolean, default: false }
-})
+  hasActiveFilters: { type: Boolean, default: false },
+});
 </script>
 
 <template>

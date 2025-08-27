@@ -12,14 +12,11 @@ const props = defineProps({
   isFetching: { required: false },
   isError: { required: false },
   error: { required: false },
-})
-
+});
 </script>
 
 <template>
-  <section
-    class="grid grid-cols-1 gap-800"
-  >
+  <section class="grid grid-cols-1 gap-800">
     <p v-if="isFetching">{{ $t("loading.title") }}</p>
     <!-- Shows during background refresh -->
     <template v-if="isPending">

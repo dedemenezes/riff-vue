@@ -1,10 +1,7 @@
 <script setup>
-import { useLanguageSwitcher } from '@/components/app/useLanguageSwitcher';
-const {
-  availableLanguages,
-  switchLanguage,
-  currentLanguage
-} = useLanguageSwitcher()
+import { useLanguageSwitcher } from "@/components/app/useLanguageSwitcher";
+const { availableLanguages, switchLanguage, currentLanguage } =
+  useLanguageSwitcher();
 </script>
 
 <template>
@@ -14,7 +11,10 @@ const {
   >
     <template v-for="language in availableLanguages" :key="language.code">
       <button
-        :class="['text-body-strong-sm uppercase', { 'text-neutrals-900': language.code === currentLanguage }]"
+        :class="[
+          'text-body-strong-sm uppercase',
+          { 'text-neutrals-900': language.code === currentLanguage },
+        ]"
         @click="switchLanguage(language.code)"
         :aria-label="`Alterar para ${language.name}`"
         :aria-pressed="language.code === currentLanguage"

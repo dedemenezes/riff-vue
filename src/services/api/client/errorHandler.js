@@ -13,18 +13,21 @@ class ApiErrorHandler {
       504: "Gateway Timeout - Request took too long",
     };
 
-    this.errorCount = new Map()
+    this.errorCount = new Map();
   }
 
   handleError(error) {
-    const errorContext = this.buildErrorContext(error)
+    const errorContext = this.buildErrorContext(error);
 
     const errorKey = `${errorContext.status}-${errorContext.url}`;
     this.errorCount.set(errorKey, (this.errorCount.get(errorKey) || 0) + 1);
 
-    console.group('API Error');
-    console.error('Error Details:', errorContext);
-    console.error('Error Count for this endpoint:', this.errorCount.get(errorKey));
+    console.group("API Error");
+    console.error("Error Details:", errorContext);
+    console.error(
+      "Error Count for this endpoint:",
+      this.errorCount.get(errorKey),
+    );
     console.groupEnd();
 
     // Network error (no response)
@@ -43,10 +46,10 @@ class ApiErrorHandler {
 
     // Don't log sensitive data in production
     if (import.meta.env.DEV) {
-      console.group('Full Error Details (DEV)');
-      console.error('Full axios error:', error);
-      console.error('Request config:', error.config);
-      console.error('Response data:', error.response?.data);
+      console.group("Full Error Details (DEV)");
+      console.error("Full axios error:", error);
+      console.error("Request config:", error.config);
+      console.error("Response data:", error.response?.data);
       console.groupEnd();
     }
 
@@ -54,11 +57,11 @@ class ApiErrorHandler {
   }
 
   buildErrorContext(error) {
-    return  {
+    return {
       status: error.response?.status || 0,
-      statusText: error.response?.statusText || 'Network Error',
-      url: error.config?.url || 'Unknown',
-      method: error.config?.method?.toUpperCase() || 'Unknown',
+      statusText: error.response?.statusText || "Network Error",
+      url: error.config?.url || "Unknown",
+      method: error.config?.method?.toUpperCase() || "Unknown",
 
       timestamp: new Date().toISOString(),
 
@@ -69,12 +72,14 @@ class ApiErrorHandler {
       // viewport: `${window.innerWidth}x${window.innerHeight}`,
 
       timeout: error.config?.timeout,
-      responseTime: error.config?.metadata?.endTime - error.config?.metadata?.startTime,
+      responseTime:
+        error.config?.metadata?.endTime - error.config?.metadata?.startTime,
 
       isNetworkError: !error.response,
-      isTimeoutError: error.code === 'ECONNABORTED',
+      isTimeoutError: error.code === "ECONNABORTED",
       isServerError: error.response?.status >= 500,
-      isClientError: error.response?.status >= 400 && error.response?.status < 500,
+      isClientError:
+        error.response?.status >= 400 && error.response?.status < 500,
     };
   }
 
@@ -95,9 +100,12 @@ class ApiErrorHandler {
   // Easy migration path for future monitoring
   getErrorStats() {
     return {
-      totalErrors: Array.from(this.errorCount.values()).reduce((a, b) => a + b, 0),
+      totalErrors: Array.from(this.errorCount.values()).reduce(
+        (a, b) => a + b,
+        0,
+      ),
       uniqueErrors: this.errorCount.size,
-      errorBreakdown: Object.fromEntries(this.errorCount)
+      errorBreakdown: Object.fromEntries(this.errorCount),
     };
   }
 }

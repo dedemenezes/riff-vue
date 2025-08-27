@@ -13,26 +13,26 @@ const props = defineProps({
 });
 
 const moviePoster = computed(() => {
-  return props.movie.poster || "/public/poc-poster.jpg"
-})
+  return props.movie.poster || "/public/poc-poster.jpg";
+});
 
 const movieGenre = computed(() => {
-  return props.movie.genero || "TBD"
-})
+  return props.movie.genero || "TBD";
+});
 
 const screenings = computed(() => {
   if (props.movie.sessao) {
     return [
       { time: "08h30", state: "disabled" },
-      { time: props.movie.sessao.replace(":", "h"), state: "active" }
-    ]
+      { time: props.movie.sessao.replace(":", "h"), state: "active" },
+    ];
   } else {
     return [
       { time: "08h30", state: "disabled" },
-      { time: "21h00", state: "active" }
-    ]
+      { time: "21h00", state: "active" },
+    ];
   }
-})
+});
 
 const normalizeString = (str) =>
   str
@@ -97,7 +97,9 @@ const { getLocalizedTitle } = useMovieLocalization();
             height="16px"
             width="1px"
           />
-          <span class="text-overline text-on-dark-secondary">{{ movieGenre }}</span>
+          <span class="text-overline text-on-dark-secondary">{{
+            movieGenre
+          }}</span>
           <img
             src="@assets/icons/divisor.svg"
             alt="divisor"

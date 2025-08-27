@@ -51,7 +51,11 @@ import { IconSearch } from "@/components/common/icons";
       <LanguageSwitcher />
       <BaseButton as="button" size="md" variant="cta">
         RioMarket
-        <img src="@assets/icons/Vector.svg" alt="carret" class="w-full ms-300" />
+        <img
+          src="@assets/icons/Vector.svg"
+          alt="carret"
+          class="w-full ms-300"
+        />
       </BaseButton>
     </div>
   </nav>
