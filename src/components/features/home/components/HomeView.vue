@@ -8,8 +8,8 @@ import { ButtonText } from "@/components/common/buttons";
 import ArticleCard from "@/components/common/cards/ArticleCard.vue";
 import ContextMenu from "@/components/layout/navbar/ContextMenu.vue";
 import { useI18n } from "@/composables/useI18n";
-
-import noticiaOneImage from "@/assets/poc-poster.jpg";
+import banneImagePath from "@assets/images/mobile-banner.png"
+import noticiaOneImage from "@assets/poc-poster.jpg";
 
 const { t } = useI18n();
 
@@ -69,7 +69,7 @@ const translatedLinks = computed(() =>
 <template>
   <ContextMenu />
   <HomeBanner
-    imagePath="/src/assets/images/mobile-banner.png"
+    :imagePath="banneImagePath"
     alt="Banner promocional"
   >
     <h1 class="text-header-base text-2xl lg:text-3xl mb-200 text-primary">
@@ -116,7 +116,7 @@ const translatedLinks = computed(() =>
         >
           <ArticleCard
             variant="secondary"
-            background-image="../src/assets/images/noticia-two.png"
+            background-image="@assets/images/noticia-two.png"
             title="Talents Rio 2025: Projeto Paradiso renova apoio ao programa de formação de profissionais do audiovisual"
             date="22.07.2025"
             category="talents rio"
