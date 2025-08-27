@@ -76,6 +76,8 @@ export function useFilters(allMovies = ref([])) {
 
   // 🧠 Business logic - Filtering logic based on search text
   const filteredMovies = computed(() => {
+    console.log(filtersQuery.value);
+
     const searchTerm = debouncedSearch.value.toLowerCase();
     const hasSearch = !!searchTerm;
     const hasFilters = Object.values(filtersQuery.value).some((v) => v !== null && v !== "");

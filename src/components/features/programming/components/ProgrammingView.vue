@@ -143,8 +143,6 @@ watch(
     </div>
     <div class="grid grid-cols-12 gap-800">
       <div class="col-span-12 lg:col-span-7">
-        {{ console.log(filteredMovies) }}
-        {{ console.log(filters) }}
         <MovieList :movies="filteredMovies" :error="error" :is-error="isError" :is-fetching="isFetching" :is-pending="isPending"  />
       </div>
       <div class="hidden lg:block lg:col-start-8 lg:col-end-13">
