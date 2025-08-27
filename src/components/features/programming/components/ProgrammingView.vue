@@ -1,57 +1,62 @@
 <script setup>
-import MovieCard from "@/components/features/movies/components/MovieCard.vue";
-import ToastNotification from "@/components/common/notifications/ToastNotification.vue";
-import { computed, ref, watch } from "vue";
+
+// 🔁 Reusable UI Components
+// import MovieCard from "@/components/features/movies/components/MovieCard.vue";
+// import ToastNotification from "@/components/common/notifications/ToastNotification.vue";
 import ContextMenu from "@/components/layout/navbar/ContextMenu.vue";
 import TwContainer from "@/components/layout/TwContainer.vue";
+import FilterMenu from "@/components/features/filters/components/FilterMenu.vue";
 import MovieList from "@/components/features/movies/components/MovieList.vue";
 import SearchFilter from "@/components/features/filters/components/SearchFilter.vue";
 import TagFilter from "@/components/common/tags/TagFilter.vue";
 import { IconFilter, IconClose } from "@/components/common/icons";
 import SearchBar from "@/components/features/filters/components/SearchBar.vue";
+
+// ✅ Composables
 import { useFilters } from "@/components/features/filters/composables/useFilters";
+import { useMoviesQuery } from "@/components/features/movies/composables/useMovies";
+import { computed, ref, watch } from "vue";
 
 
-// text search input declaratives
+// 📦 Search Text Input State (UI state + user input)
 const searchValue = ref("");
 
+// 👇 UI logic - clearing the search input
 const handleClear = () => {
   searchValue.value = "";
-  // make request again
+  // TODO: Trigger refetch or recompute
 };
 
+// 👇 UI logic - user hits search
 const handleSearch = () => {
   console.log(`Query: ${searchValue.value}`);
-
-  console.warn(`QUERY API using ${searchValue.value}`)
-  // debugger
+  console.warn(`QUERY API using ${searchValue.value}`);
+  // TODO: Trigger refetch or recompute
 };
 
-///////////
-
-// menu behavior
+// 📦 UI state - mobile filter menu open/close
 const isFilterMenuOpen = ref(false);
+
+// 👇 DOM side effect - lock scroll when menu is open
 const openMenu = () => {
   isFilterMenuOpen.value = true;
-  console.log(isFilterMenuOpen.value);
-
   document.body.style.overflow = "hidden";
 };
 
+// 👇 DOM side effect - unlock scroll when menu closes
 const closeMenu = () => {
   isFilterMenuOpen.value = false;
   document.body.style.overflow = "";
 };
 
-// Filter Behavior
+// 🧠 Business logic - Filter composable (source of truth for filters)
 const { filters, filtersQuery, filterSearch, clearSearchQuery, removeQuery } = useFilters();
 
-// Movies
-import { useMoviesQuery } from "@/components/features/movies/composables/useMovies";
+// 📦 UI state - holds original API response
+const programming = ref([]);
 
-const programming = ref([])
+// 🧠 Business logic - Filtering logic based on search text
 const filteredMovies = computed(() => {
-  // Text search
   const searchTerm = searchValue.value.toLowerCase();
 
   return programming.value.filter((item) => {
@@ -64,25 +69,32 @@ const filteredMovies = computed(() => {
       english.includes(searchTerm) ||
       portuguese.includes(searchTerm);
 
-    // TODO: add other filters like date, genre, etc. from filtersQuery.value
-
+    // 🔧 TODO: apply filtersQuery (genre, date, etc.)
     return matchesTitle;
-  })
-})
+  });
+});
 
+// ⚙️ Data fetching - Movies from API
 const { data, isPending, isFetching, isError, error } = useMoviesQuery();
-watch(data, (dataFetched) => {
-  const newData = dataFetched?.FMPDSORESULT?.ROW
-  if(newData) {
-    programming.value = dataFetched?.FMPDSORESULT?.ROW
-    console.log("Programming stored: ", programming.value);
-  }
-}, { immediate: true })
 
+// 🧠 Watcher - on API data change, update local state
+watch(
+  data,
+  (dataFetched) => {
+    const newData = dataFetched?.FMPDSORESULT?.ROW;
+    if (newData) {
+      programming.value = newData;
+      console.log("Programming stored: ", programming.value);
+    }
+  },
+  { immediate: true }
+);
 
-const showToast = ref(true);
+// 📦 UI state - toast toggle (for error display or alerts)
+// const showToast = ref(true);
 
 </script>
+
 
 <template>
   <ContextMenu />
