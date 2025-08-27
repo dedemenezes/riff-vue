@@ -1,4 +1,3 @@
-// services/api/client/errorHandler.js
 class ApiErrorHandler {
   constructor() {
     this.errorMap = {
@@ -13,9 +12,24 @@ class ApiErrorHandler {
       503: "Service Unavailable - Please try again later",
       504: "Gateway Timeout - Request took too long",
     };
+
+    this.errorCount = new Map();
   }
 
   handleError(error) {
+    const errorContext = this.buildErrorContext(error);
+
+    const errorKey = `${errorContext.status}-${errorContext.url}`;
+    this.errorCount.set(errorKey, (this.errorCount.get(errorKey) || 0) + 1);
+
+    console.group("API Error");
+    console.error("Error Details:", errorContext);
+    console.error(
+      "Error Count for this endpoint:",
+      this.errorCount.get(errorKey),
+    );
+    console.groupEnd();
+
     // Network error (no response)
     if (!error.response) {
       if (error.code === "ECONNABORTED") {
@@ -30,20 +44,43 @@ class ApiErrorHandler {
     const status = error.response.status;
     const message = this.errorMap[status] || "An unexpected error occurred";
 
-    // Log error details for debugging (but don't expose to user)
-    console.error("API Error Details:", {
-      status,
-      url: error.config?.url,
-      method: error.config?.method,
-      timestamp: new Date().toISOString(),
-    });
-
     // Don't log sensitive data in production
-    if (import.meta.env.NODE_ENV === "development") {
-      console.error("Full error:", error);
+    if (import.meta.env.DEV) {
+      console.group("Full Error Details (DEV)");
+      console.error("Full axios error:", error);
+      console.error("Request config:", error.config);
+      console.error("Response data:", error.response?.data);
+      console.groupEnd();
     }
 
     return this.createSafeError(message, status);
+  }
+
+  buildErrorContext(error) {
+    return {
+      status: error.response?.status || 0,
+      statusText: error.response?.statusText || "Network Error",
+      url: error.config?.url || "Unknown",
+      method: error.config?.method?.toUpperCase() || "Unknown",
+
+      timestamp: new Date().toISOString(),
+
+      // userAgent: navigator.userAgent,
+      // language: navigator.language,
+      // online: navigator.onLine,
+
+      // viewport: `${window.innerWidth}x${window.innerHeight}`,
+
+      timeout: error.config?.timeout,
+      responseTime:
+        error.config?.metadata?.endTime - error.config?.metadata?.startTime,
+
+      isNetworkError: !error.response,
+      isTimeoutError: error.code === "ECONNABORTED",
+      isServerError: error.response?.status >= 500,
+      isClientError:
+        error.response?.status >= 400 && error.response?.status < 500,
+    };
   }
 
   createSafeError(message, status) {
@@ -59,6 +96,18 @@ class ApiErrorHandler {
     // For example: toast.error(error.message)
     console.warn("User Error:", error.message);
   }
+
+  // Easy migration path for future monitoring
+  getErrorStats() {
+    return {
+      totalErrors: Array.from(this.errorCount.values()).reduce(
+        (a, b) => a + b,
+        0,
+      ),
+      uniqueErrors: this.errorCount.size,
+      errorBreakdown: Object.fromEntries(this.errorCount),
+    };
+  }
 }
 
 // Create singleton instance
@@ -73,6 +122,9 @@ export const handleApiError = (error) => {
 
   return Promise.reject(safeError);
 };
+
+// Export for future monitoring
+export const getErrorStats = () => errorHandler.getErrorStats();
 
 // Export the class for testing or advanced usage
 export default errorHandler;

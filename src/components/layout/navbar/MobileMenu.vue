@@ -2,7 +2,7 @@
 import { ref } from "vue";
 
 import AccordionGroup from "@/components/base/accordion/AccordionGroup.vue";
-import LanguageSwitcher from "@/components/layout/navbar/LanguageSwitcher.vue";
+import LanguageSwitcher from "@/components/app/TheLanguageSwitcher.vue";
 
 // Controls menu visibility
 const isMobileMenuOpen = ref(false);

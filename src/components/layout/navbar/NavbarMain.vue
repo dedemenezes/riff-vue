@@ -1,6 +1,6 @@
 <script setup>
 import { BaseButton } from "@/components/common/buttons";
-import LanguageSwitcher from "@/components/layout/navbar/LanguageSwitcher.vue";
+import LanguageSwitcher from "@/components/app/TheLanguageSwitcher.vue";
 import MobileMenu from "@/components/layout/navbar/MobileMenu.vue";
 import { IconSearch } from "@/components/common/icons";
 </script>
@@ -51,7 +51,11 @@ import { IconSearch } from "@/components/common/icons";
       <LanguageSwitcher />
       <BaseButton as="button" size="md" variant="cta">
         RioMarket
-        <img src="@assets/icons/Vector.svg" alt="carret" class="w-full ms-300" />
+        <img
+          src="@assets/icons/Vector.svg"
+          alt="carret"
+          class="w-full ms-300"
+        />
       </BaseButton>
     </div>
   </nav>

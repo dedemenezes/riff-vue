@@ -44,13 +44,6 @@ describe("errorHandler", () => {
       expect(error.message).toBe("Bad Request - Invalid data sent");
     }
 
-    expect(mockConsoleError).toHaveBeenCalledWith("API Error Details:", {
-      status: 400,
-      url: "/api/movies",
-      method: "GET",
-      timestamp: expect.any(String),
-    });
-
     expect(mockConsoleWarn).toHaveBeenCalledWith(
       "User Error:",
       "Bad Request - Invalid data sent",

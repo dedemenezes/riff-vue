@@ -2,7 +2,6 @@
 import { computed } from "vue";
 import TwContainer from "@/components/layout/TwContainer.vue";
 
-
 const props = defineProps({
   imagePath: {
     type: String,

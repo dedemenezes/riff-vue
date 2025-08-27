@@ -87,10 +87,10 @@ describe("fetchMovies", () => {
   });
 
   test("fetchMovies_should_handle_api_request_failures", async () => {
-    const apiError = new Error("Network Error");
+    const apiError = new Error("Failed to fetch movie data");
     apiClient.get.mockRejectedValue(apiError);
 
-    await expect(fetchMovies()).rejects.toThrow("Network Error");
+    await expect(fetchMovies()).rejects.toThrow("Failed to fetch movie data");
     expect(apiClient.get).toHaveBeenCalledWith("/schedules/xml/programacao", {
       responseType: "text",
     });
@@ -101,12 +101,12 @@ describe("fetchMovies", () => {
       data: "invalid-xml-data",
     });
 
-    const parseError = new Error("Invalid XML format");
+    const parseError = new Error("Invalid XML data received");
     mockParseFn.mockImplementation(() => {
       throw parseError;
     });
 
-    await expect(fetchMovies()).rejects.toThrow("Invalid XML format");
+    await expect(fetchMovies()).rejects.toThrow("Invalid XML data received");
   });
 
   test("fetchMovies_should_handle_empty_xml_response", async () => {

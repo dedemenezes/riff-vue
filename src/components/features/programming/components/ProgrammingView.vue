@@ -1,58 +1,80 @@
 <script setup>
-import { ref } from "vue";
+// 🔁 Reusable UI Components
 import ContextMenu from "@/components/layout/navbar/ContextMenu.vue";
 import TwContainer from "@/components/layout/TwContainer.vue";
+import MobileFilterMenu from "@/components/features/filters/components/MobileFilterMenu.vue";
 import MovieList from "@/components/features/movies/components/MovieList.vue";
 import SearchFilter from "@/components/features/filters/components/SearchFilter.vue";
 import TagFilter from "@/components/common/tags/TagFilter.vue";
-import { IconFilter, IconClose } from "@/components/common/icons";
+import { IconFilter } from "@/components/common/icons";
 import SearchBar from "@/components/features/filters/components/SearchBar.vue";
+
+// ✅ Composables
 import { useFilters } from "@/components/features/filters/composables/useFilters";
+import { useMoviesQuery } from "@/components/features/movies/composables/useMovies";
+import { ref, watch } from "vue";
 
-
-// text search input declaratives
-const searchValue = ref("");
-
-const handleClear = () => {
-  searchValue.value = "";
-  // make request again
-};
-
-const handleSearch = () => {
-  console.log(`Query: ${searchValue.value}`);
-
-  console.warn(`QUERY API using ${searchValue.value}`)
-  // debugger
-};
-
-///////////
-
-// menu behavior
+// 📦 UI state - mobile filter menu open/close
 const isFilterMenuOpen = ref(false);
+
+// 👇 DOM side effect - lock scroll when menu is open
 const openMenu = () => {
   isFilterMenuOpen.value = true;
-  console.log(isFilterMenuOpen.value);
-
   document.body.style.overflow = "hidden";
 };
 
+// 👇 DOM side effect - unlock scroll when menu closes
 const closeMenu = () => {
   isFilterMenuOpen.value = false;
   document.body.style.overflow = "";
 };
 
-// Filter Behavior
-const { filters, filtersQuery, filterSearch, clearSearchQuery, removeQuery } = useFilters();
+// 📦 UI state - holds original API response
+const programming = ref([]);
 
-// Movies
-import { useMoviesQuery } from "@/components/features/movies/composables/useMovies";
-import ToastNotification from "@/components/common/notifications/ToastNotification.vue";
-import MovieCard from "@/components/features/movies/components/MovieCard.vue";
-import MovieCardSkeleton from "../../movies/components/MovieCardSkeleton.vue";
+// 🧠 Business logic - Filter composable (source of truth for filters)
+const {
+  searchValue,
+  handleSearch,
+  handleClear,
+  filters,
+  filtersQuery,
+  filterSearch,
+  clearSearchQuery,
+  removeQuery,
+  filteredMovies,
+} = useFilters(programming);
 
-const showToast = ref(true);
-const { isPending, isFetching, isError, data, error } = useMoviesQuery();
+// ⚙️ Data fetching - Movies from API
+const { data, isPending, isFetching, isError, error } = useMoviesQuery();
 
+// 🧠 Watcher - on API data change, update local state
+watch(
+  data,
+  (dataFetched) => {
+    const newData = dataFetched?.FMPDSORESULT?.ROW;
+
+    if (newData) {
+      // 🧼 Normalize data once
+      const normalized = newData.map((movie) => ({
+        ...movie,
+        _normalized: {
+          titulo_original:
+            movie.titulo_original?.DATA?.trim().toLowerCase() || "",
+          titulo_ingles: movie.titulo_ingles?.DATA?.trim().toLowerCase() || "",
+          titulo_portugues:
+            movie.titulo_portugues?.DATA?.trim().toLowerCase() || "",
+          // You can normalize other keys too if needed for filter fields
+          // e.g., genero, pais, direcao, etc.
+        },
+      }));
+
+      programming.value = normalized;
+      console.log("Programming stored: ", programming.value);
+    }
+  },
+  { immediate: true },
+);
 </script>
 
 <template>
@@ -64,7 +86,11 @@ const { isPending, isFetching, isError, data, error } = useMoviesQuery();
     <div
       class="w-full flex flex-col gap-400 md:flex-row md:justify-between md:gap-600"
     >
-      <SearchBar v-model="searchValue" @search="handleSearch" @clear="handleClear" />
+      <SearchBar
+        v-model="searchValue"
+        @search="handleSearch"
+        @clear="handleClear"
+      />
       <div
         class="filter flex items-center justify-between md:gap-800 lg:gap-1200"
       >
@@ -81,54 +107,34 @@ const { isPending, isFetching, isError, data, error } = useMoviesQuery();
         <!-- Ordering -->
         <div class="flex items-center gap-300">
           <span class="text-body-strong-sm uppercase text-secondary-gray"
-          >A - Z</span
+            >A - Z</span
           >
           <img
-          src="@assets/icons/divisor.svg"
-          alt="divisor"
-          height="16px"
-          width="1px"
+            src="@assets/icons/divisor.svg"
+            alt="divisor"
+            height="16px"
+            width="1px"
           />
           <span class="text-body-strong-sm uppercase text-primary">{{
             $t("filter_by.date")
           }}</span>
         </div>
         <!-- Ordering -->
-
       </div>
       <transition name="slide-left">
-        <div
-          v-if="isFilterMenuOpen"
-          style="margin-top: 0"
-          class="fixed inset-0 z-50 bg-white flex flex-col w-full max-w-full h-[100vh] right-0 shadow-lg overflow-y-auto"
-        >
-          <TwContainer>
-            <div class="flex flex-col">
-              <!-- Filter header -->
-              <div
-              class="shrink-0 flex justify-between items-center py-400 sticky top-0 bg-white-transp-1000 z-10"
-              >
-                <p class="text-header-sm text-primary uppercase">
-                  {{ $t("filtro", 2) }}
-                </p>
-                <button @click="closeMenu" class="text-neutrals-900">
-                  <IconClose height="32px" width="32px" />
-                </button>
-              </div>
-              <!-- Filter header -->
-              <SearchFilter
-                v-model="filters"
-                @filtersApplied="filterSearch"
-                @filtersCleared="clearSearchQuery"
-                @close-filter-menu="closeMenu"
-              />
-            </div>
-          </TwContainer>
-
-        </div>
+        <MobileFilterMenu
+          :is-open="isFilterMenuOpen"
+          :model-value="filters"
+          @filtersApplied="filterSearch"
+          @filtersCleared="clearSearchQuery"
+          @close-filter-menu="closeMenu"
+        />
       </transition>
     </div>
-    <div class="flex gap-300" v-if="Object.values(filtersQuery).some((item) => item !== null)">
+    <div
+      class="flex gap-300"
+      v-if="Object.values(filtersQuery).some((item) => item !== null)"
+    >
       <TagFilter
         v-for="(value, key) in filtersQuery"
         :key="key"
@@ -137,33 +143,14 @@ const { isPending, isFetching, isError, data, error } = useMoviesQuery();
       />
     </div>
     <div class="grid grid-cols-12 gap-800">
-      <div class="col-span-12 lg:col-span-7">
-        <section
-          class="grid grid-cols-1 gap-6"
-        >
-          <p v-if="isFetching">{{ $t("loading.title") }}</p>
-          <!-- Shows during background refresh -->
-          <template v-if="isPending">
-
-            <!-- Or skeleton loader -->
-             <MovieCardSkeleton />
-          </template>
-          <template v-else-if="isError">
-            <p class="text-red-500">{{ console.log(error) }}</p>
-            <ToastNotification
-              :description="error.message"
-              :message="error.name"
-              type="error"
-            />
-          </template>
-          <template v-else>
-            <MovieCard
-              v-for="movie in data?.FMPDSORESULT?.ROW || []"
-              :key="movie.RECORDID"
-              :movie="movie"
-            />
-          </template>
-        </section>
+      <div class="col-span-12 lg:col-span-6">
+        <MovieList
+          :movies="filteredMovies"
+          :error="error"
+          :is-error="isError"
+          :is-fetching="isFetching"
+          :is-pending="isPending"
+        />
       </div>
       <div class="hidden lg:block lg:col-start-8 lg:col-end-13">
         <SearchFilter

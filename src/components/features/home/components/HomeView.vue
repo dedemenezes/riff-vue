@@ -9,7 +9,7 @@ import ArticleCard from "@/components/common/cards/ArticleCard.vue";
 import ContextMenu from "@/components/layout/navbar/ContextMenu.vue";
 import { useI18n } from "@/composables/useI18n";
 
-import noticiaOneImage from '@/assets/poc-poster.jpg'
+import noticiaOneImage from "@/assets/poc-poster.jpg";
 
 const { t } = useI18n();
 

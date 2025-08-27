@@ -5,3 +5,8 @@ export function cleanObject(obj) {
     ),
   );
 }
+
+export function toHHMM(timeStr) {
+  const [hh = "00", mm = "00"] = timeStr.split(":");
+  return `${hh}:${mm}`;
+}
