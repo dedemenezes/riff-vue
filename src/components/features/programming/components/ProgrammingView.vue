@@ -1,5 +1,7 @@
 <script setup>
-import { ref } from "vue";
+import MovieCard from "@/components/features/movies/components/MovieCard.vue";
+import ToastNotification from "@/components/common/notifications/ToastNotification.vue";
+import { computed, ref, watch } from "vue";
 import ContextMenu from "@/components/layout/navbar/ContextMenu.vue";
 import TwContainer from "@/components/layout/TwContainer.vue";
 import MovieList from "@/components/features/movies/components/MovieList.vue";
@@ -43,6 +45,43 @@ const closeMenu = () => {
 
 // Filter Behavior
 const { filters, filtersQuery, filterSearch, clearSearchQuery, removeQuery } = useFilters();
+
+// Movies
+import { useMoviesQuery } from "@/components/features/movies/composables/useMovies";
+
+const programming = ref([])
+const filteredMovies = computed(() => {
+  // Text search
+  const searchTerm = searchValue.value.toLowerCase();
+
+  return programming.value.filter((item) => {
+    const original = item.titulo_original?.DATA?.toLowerCase() || "";
+    const english = item.titulo_ingles?.DATA?.toLowerCase() || "";
+    const portuguese = item.titulo_portugues?.DATA?.toLowerCase() || "";
+
+    const matchesTitle =
+      original.includes(searchTerm) ||
+      english.includes(searchTerm) ||
+      portuguese.includes(searchTerm);
+
+    // TODO: add other filters like date, genre, etc. from filtersQuery.value
+
+    return matchesTitle;
+  })
+})
+
+const { data, isPending, isFetching, isError, error } = useMoviesQuery();
+watch(data, (dataFetched) => {
+  const newData = dataFetched?.FMPDSORESULT?.ROW
+  if(newData) {
+    programming.value = dataFetched?.FMPDSORESULT?.ROW
+    console.log("Programming stored: ", programming.value);
+  }
+}, { immediate: true })
+
+
+const showToast = ref(true);
+
 </script>
 
 <template>
@@ -128,7 +167,7 @@ const { filters, filtersQuery, filterSearch, clearSearchQuery, removeQuery } = u
     </div>
     <div class="grid grid-cols-12 gap-800">
       <div class="col-span-12 lg:col-span-7">
-        <MovieList />
+        <MovieList :movies="programming" :error="error" :is-error="isError" :is-fetching="isFetching" :is-pending="isPending"  />
       </div>
       <div class="hidden lg:block lg:col-start-8 lg:col-end-13">
         <SearchFilter

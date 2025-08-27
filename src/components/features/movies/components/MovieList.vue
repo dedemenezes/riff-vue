@@ -1,12 +1,19 @@
 <!-- src/components/layout/sections/MovieList.vue -->
 <script setup>
 import MovieCard from "@/components/features/movies/components/MovieCard.vue";
-import { useMoviesQuery } from "@/components/features/movies/composables/useMovies";
 import ToastNotification from "@/components/common/notifications/ToastNotification.vue";
 import { ref } from "vue";
 
 const showToast = ref(true);
-const { isPending, isFetching, isError, data, error } = useMoviesQuery();
+
+const props = defineProps({
+  movies: { required: false },
+  isPending: { required: false },
+  isFetching: { required: false },
+  isError: { required: false },
+  error: { required: false },
+})
+
 </script>
 
 <template>
@@ -36,7 +43,7 @@ const { isPending, isFetching, isError, data, error } = useMoviesQuery();
     </template>
     <template v-else>
       <MovieCard
-        v-for="movie in data?.FMPDSORESULT?.ROW || []"
+        v-for="movie in props.movies || []"
         :key="movie.RECORDID"
         :movie="movie"
       />
