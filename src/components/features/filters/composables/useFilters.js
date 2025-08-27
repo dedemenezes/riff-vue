@@ -102,6 +102,23 @@ export function useFilters(allMovies = ref([])) {
       return Object.entries(filtersQuery.value).every(([key, value]) => {
         if (!value) return true;
 
+        if (key === 'startTime' || key === 'endTime') {
+          // debugger
+          const sessionTimeStr = movie.sessao; // "18:30", etc.
+          if (!sessionTimeStr) return false;
+
+          // Convert to minutes since midnight for comparison
+          const [movieHour, movieMin] = sessionTimeStr.split(':').map(Number);
+          const movieMinutes = movieHour * 60 + movieMin;
+
+          if (key === 'startTime') {
+            const [filterHour, filterMin] = value.split(':').map(Number);
+            const filterMinutes = filterHour * 60 + filterMin;
+            return movieMinutes >= filterMinutes;
+          }
+        }
+
+
         const movieValue = movie[key]?.DATA || movie[key];
 
         return normalize(movieValue).includes(normalize(value));
