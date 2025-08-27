@@ -1,11 +1,11 @@
 <!-- src/components/layout/sections/MovieList.vue -->
 <script setup>
-import MovieCardSkeleton from "@/components/features/movies/components/MovieCardSkeleton.vue"
+import MovieCardSkeleton from "@/components/features/movies/components/MovieCardSkeleton.vue";
 import MovieCard from "@/components/features/movies/components/MovieCard.vue";
 import ToastNotification from "@/components/common/notifications/ToastNotification.vue";
-import { ref } from "vue";
+// import { ref } from "vue";
 
-const showToast = ref(true);
+// const showToast = ref(true);
 const props = defineProps({
   movies: { required: false },
   isPending: { required: false },
@@ -22,15 +22,15 @@ const props = defineProps({
     </p>
     <!-- Shows during background refresh -->
     <!-- <template v-if="isPending"> -->
-      <!-- <ToastNotification -->
-        <!-- v-if="showToast" -->
-        <!-- :message="$t('loading.movies')" -->
-        <!-- description="Very very soon." -->
-        <!-- type="info" -->
-        <!-- :duration="5000" -->
-        <!-- @close="showToast = false" -->
-      <!-- /> -->
-      <!-- Or skeleton loader -->
+    <!-- <ToastNotification -->
+    <!-- v-if="showToast" -->
+    <!-- :message="$t('loading.movies')" -->
+    <!-- description="Very very soon." -->
+    <!-- type="info" -->
+    <!-- :duration="5000" -->
+    <!-- @close="showToast = false" -->
+    <!-- /> -->
+    <!-- Or skeleton loader -->
     <!-- </template> -->
     <template v-else-if="isError">
       <p class="text-red-500">{{ console.log(error) }}</p>

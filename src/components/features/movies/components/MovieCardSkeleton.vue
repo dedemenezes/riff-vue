@@ -19,7 +19,9 @@
       ></div>
 
       <!-- Bottom content -->
-      <div class="content absolute bottom-250 left-250 flex flex-col gap-[5px] w-3/4">
+      <div
+        class="content absolute bottom-250 left-250 flex flex-col gap-[5px] w-3/4"
+      >
         <div class="h-5 bg-skeleton rounded w-2/4"></div>
         <div class="flex items-center gap-200">
           <div class="h-4 bg-skeleton-light rounded w-[30px]"></div>

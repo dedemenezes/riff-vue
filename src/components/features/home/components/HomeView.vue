@@ -8,7 +8,7 @@ import { ButtonText } from "@/components/common/buttons";
 import ArticleCard from "@/components/common/cards/ArticleCard.vue";
 import ContextMenu from "@/components/layout/navbar/ContextMenu.vue";
 import { useI18n } from "@/composables/useI18n";
-import banneImagePath from "@assets/images/mobile-banner.png"
+import banneImagePath from "@assets/images/mobile-banner.png";
 import noticiaOneImage from "@assets/poc-poster.jpg";
 
 const { t } = useI18n();
@@ -68,10 +68,7 @@ const translatedLinks = computed(() =>
 
 <template>
   <ContextMenu />
-  <HomeBanner
-    :imagePath="banneImagePath"
-    alt="Banner promocional"
-  >
+  <HomeBanner :imagePath="banneImagePath" alt="Banner promocional">
     <h1 class="text-header-base text-2xl lg:text-3xl mb-200 text-primary">
       {{ $t("home.banner_title") }}
     </h1>
