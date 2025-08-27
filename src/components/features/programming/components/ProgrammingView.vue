@@ -5,11 +5,11 @@
 // import ToastNotification from "@/components/common/notifications/ToastNotification.vue";
 import ContextMenu from "@/components/layout/navbar/ContextMenu.vue";
 import TwContainer from "@/components/layout/TwContainer.vue";
-import FilterMenu from "@/components/features/filters/components/FilterMenu.vue";
+import MobileFilterMenu from "@/components/features/filters/components/MobileFilterMenu.vue";
 import MovieList from "@/components/features/movies/components/MovieList.vue";
 import SearchFilter from "@/components/features/filters/components/SearchFilter.vue";
 import TagFilter from "@/components/common/tags/TagFilter.vue";
-import { IconFilter, IconClose } from "@/components/common/icons";
+import { IconFilter } from "@/components/common/icons";
 import SearchBar from "@/components/features/filters/components/SearchBar.vue";
 
 // ✅ Composables
@@ -89,10 +89,6 @@ watch(
   },
   { immediate: true }
 );
-
-// 📦 UI state - toast toggle (for error display or alerts)
-// const showToast = ref(true);
-
 </script>
 
 
@@ -138,7 +134,7 @@ watch(
 
       </div>
       <transition name="slide-left">
-        <FilterMenu
+        <MobileFilterMenu
           :is-open="isFilterMenuOpen"
           :model-value="filters"
           @filtersApplied="filterSearch"
