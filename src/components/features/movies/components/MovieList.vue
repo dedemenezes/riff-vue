@@ -1,11 +1,11 @@
 <!-- src/components/layout/sections/MovieList.vue -->
 <script setup>
+import MovieCardSkeleton from "@/components/features/movies/components/MovieCardSkeleton.vue"
 import MovieCard from "@/components/features/movies/components/MovieCard.vue";
 import ToastNotification from "@/components/common/notifications/ToastNotification.vue";
 import { ref } from "vue";
 
 const showToast = ref(true);
-
 const props = defineProps({
   movies: { required: false },
   isPending: { required: false },
@@ -17,7 +17,9 @@ const props = defineProps({
 
 <template>
   <section class="grid grid-cols-1 gap-800">
-    <p v-if="isFetching">{{ $t("loading.title") }}</p>
+    <p v-if="isFetching">
+      <MovieCardSkeleton />
+    </p>
     <!-- Shows during background refresh -->
     <template v-if="isPending">
       <ToastNotification

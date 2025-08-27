@@ -1,7 +1,5 @@
 <script setup>
 // 🔁 Reusable UI Components
-// import MovieCard from "@/components/features/movies/components/MovieCard.vue";
-// import ToastNotification from "@/components/common/notifications/ToastNotification.vue";
 import ContextMenu from "@/components/layout/navbar/ContextMenu.vue";
 import TwContainer from "@/components/layout/TwContainer.vue";
 import MobileFilterMenu from "@/components/features/filters/components/MobileFilterMenu.vue";
