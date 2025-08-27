@@ -58,7 +58,7 @@ const { getLocalizedTitle } = useMovieLocalization();
     @mouseleave="isHovered = false"
   >
     <!-- image -->
-    <div class="relative w-[697px]">
+    <div class="relative w-full">
       <img
         :src="moviePoster"
         alt="movie-name poster"
