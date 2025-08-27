@@ -10,15 +10,15 @@ const props = defineProps({
 
 <template>
   <div class="flex justify-between">
-    <!-- <button class="flex-1">Limpar tudo</button> -->
     <ButtonText
+      size="sm"
       tag="button"
       text="Limpar tudo"
       @click="emit('clear')"
       :disabled="!props.hasActiveFilters"
     />
-    <!-- <button class="flex-1 bg-black text-white">Aplicar filtros</button> -->
     <BaseButton
+      size="sm"
       variant="dark"
       @click="emit('apply')"
       :disabled="!props.hasActiveFilters"

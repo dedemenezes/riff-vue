@@ -18,7 +18,7 @@ const props = defineProps({
 
 <template>
   <section
-    class="grid grid-cols-1 gap-6"
+    class="grid grid-cols-1 gap-800"
   >
     <p v-if="isFetching">{{ $t("loading.title") }}</p>
     <!-- Shows during background refresh -->

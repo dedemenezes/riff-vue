@@ -67,7 +67,7 @@ const submostras = [
 </script>
 
 <template>
-  <div class="flex-grow flex flex-col space-y-800 overflow-y-auto">
+  <div class="flex-grow flex flex-col space-y-600 overflow-y-auto">
     <AccordionGroup
       :text="$t('filter.date')"
       :isOpen="props.modelValue.date != null"
