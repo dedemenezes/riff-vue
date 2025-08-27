@@ -3,7 +3,7 @@ import { computed } from "vue";
 import { toRaw } from "vue";
 // import { IconClose,  } from "@/components/common/icons";
 // import TwContainer from "@/components/layout/TwContainer.vue";
-import { cleanObject } from "@/utils/helpers/objectHelpers";
+import { cleanObject, toHHMM } from "@/utils/helpers/objectHelpers";
 import FilterActions from "@/components/features/filters/components/FilterActions.vue";
 import FilterForm from "./FilterForm.vue";
 
@@ -21,7 +21,14 @@ const emit = defineEmits(["filtersApplied", "filtersCleared", "close-filter-menu
 const applyFilters = () => {
   const rawFilters = toRaw(props.modelValue);
   const cleanedFilters = cleanObject(rawFilters);
-
+  if (cleanedFilters.startTime) {
+    // debugger
+    cleanedFilters.startTime = toHHMM(cleanedFilters.startTime)
+  }
+  if (cleanedFilters.endTime) {
+    // debugger
+    cleanedFilters.endTime = toHHMM(cleanedFilters.endTime)
+  }
   emit("filtersApplied", cleanedFilters)
   closeMenu()
 };
