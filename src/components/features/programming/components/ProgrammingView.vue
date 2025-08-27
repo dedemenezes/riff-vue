@@ -126,35 +126,13 @@ const showToast = ref(true);
 
       </div>
       <transition name="slide-left">
-        <div
-          v-if="isFilterMenuOpen"
-          style="margin-top: 0"
-          class="fixed inset-0 z-50 bg-white flex flex-col w-full max-w-full h-[100vh] right-0 shadow-lg overflow-y-auto"
-        >
-          <TwContainer>
-            <div class="flex flex-col">
-              <!-- Filter header -->
-              <div
-              class="shrink-0 flex justify-between items-center py-400 sticky top-0 bg-white-transp-1000 z-10"
-              >
-                <p class="text-header-sm text-primary uppercase">
-                  {{ $t("filtro", 2) }}
-                </p>
-                <button @click="closeMenu" class="text-neutrals-900">
-                  <IconClose height="32px" width="32px" />
-                </button>
-              </div>
-              <!-- Filter header -->
-              <SearchFilter
-                v-model="filters"
-                @filtersApplied="filterSearch"
-                @filtersCleared="clearSearchQuery"
-                @close-filter-menu="closeMenu"
-              />
-            </div>
-          </TwContainer>
-
-        </div>
+        <FilterMenu
+          :is-open="isFilterMenuOpen"
+          :model-value="filters"
+          @filtersApplied="filterSearch"
+          @filtersCleared="clearSearchQuery"
+          @close-filter-menu="closeMenu"
+        />
       </transition>
     </div>
     <div class="flex gap-300" v-if="Object.values(filtersQuery).some((item) => item !== null)">
